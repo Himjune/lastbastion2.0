@@ -16,27 +16,26 @@
 
 <body>
     <div id="playerContainer">
-        <div id="mainVideoContainer" class="video-16-9-container">
-            <div class="video-16-9">
+        <div id="playPauseButton"></div>
+
+        <div  class="video-16-9-container">
+            <div class="video-16-9 centered-block">
                 Some text
             </div>
+        </div>
 
-            <div id="playPauseButton"></div>
+        <div id="midScreenControlsContainer">
 
+        </div>
 
-            <div id="midScreenControlsContainer">
-
-            </div>
-            <div id="subVideoContainer" class="video-16-9-container">
-                <div class="video-16-9">
-                    Some text
-                </div>
-
+        <div  class="video-16-9-container" style="position: absolute; width: 400px; height: 225px;">
+            <div class="video-16-9 centered-block">
+                Some text
             </div>
         </div>
 
         <div id="controlsContainer">
-
+        
         </div>
 
         <div id="chatContainer">
@@ -44,6 +43,7 @@
         </div>
     </div>
 
-  <script src="js/common.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/ratios.js"></script>
 </body>
 </html>
