@@ -266,3 +266,18 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 /*
     END MINIMIZED
 */
+
+document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    let ytContainer = document.querySelector('#YtContainer');
+    let ytParent = ytContainer.parentNode;
+    let ytNode = ytParent.removeChild(ytContainer);
+
+    let twContainer = document.querySelector('#TwContainer');
+    let twParent = twContainer.parentNode;
+    let twNode = twParent.removeChild(twContainer);
+
+    ytParent.appendChild(twNode);
+    twParent.appendChild(ytNode);
+})
