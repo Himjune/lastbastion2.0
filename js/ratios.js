@@ -90,6 +90,13 @@ function subContainerResize (e) {
     const MINPOS = 50;
 
     let targetX = e.clientX;
+    let targetY = e.clientY;
+
+    if (e.touches) {
+        targetX = e.touches[0].clientX;
+        targetY = e.touches[0].clientY;
+    }
+
     if (targetX < MINPOS) targetX = MINPOS;
     if (targetX > MAIN_VIDEO_POS.width-2) targetX = MAIN_VIDEO_POS.width-2;
     
@@ -98,7 +105,6 @@ function subContainerResize (e) {
     relativeWidth = relativeWidth/MAIN_VIDEO_POS.width;
     if (relativeWidth > 1) relativeWidth = 1;
 
-    let targetY = e.clientY;
     if (targetY < MINPOS) targetY = MINPOS;
     if (targetY > MAIN_VIDEO_POS.height-2) targetY = MAIN_VIDEO_POS.height-2;
 
@@ -115,15 +121,25 @@ function subContainerResize (e) {
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
 
-function stopResize() {
-    window.removeEventListener('mousemove', subContainerResize)
-}
-
-document.querySelector('#subResizeBtn').addEventListener('mousedown', function(e) {
+function startResize(e) {
     e.preventDefault()
+    
+    let container = document.querySelector('.sub-video-container');
+
     window.addEventListener('mousemove', subContainerResize)
     window.addEventListener('mouseup', stopResize)
-})
+    
+    container.addEventListener('touchmove', subContainerResize)
+    container.addEventListener('touchend', stopResize)
+}
+
+function stopResize() {
+    window.removeEventListener('mousemove', subContainerResize)
+    window.removeEventListener('touchstart', subContainerResize)
+}
+
+document.querySelector('#subResizeBtn').addEventListener('mousedown', startResize)
+document.querySelector('#subResizeBtn').addEventListener('touchstart', startResize)
 
 /*
     END SUB RESIZE
@@ -187,6 +203,7 @@ function stopMove(e) {
     }
 
     window.removeEventListener('mousemove', subContainerMove)
+    container.removeEventListener('touchmove', subContainerMove)
 }
 
 function startMove(e) {
