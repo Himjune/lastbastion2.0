@@ -97,16 +97,16 @@ function subContainerResize (e) {
         targetY = e.touches[0].clientY;
     }
 
-    if (targetX < MINPOS) targetX = MINPOS;
-    if (targetX > MAIN_VIDEO_POS.width-2) targetX = MAIN_VIDEO_POS.width-2;
+    if (targetX < MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.left+2;
+    if (targetX > MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left;
     
     let relativeWidth = (targetX-MAIN_VIDEO_POS.left-SUB_VIDEO_POS.left*MAIN_VIDEO_POS.width);
     if (relativeWidth < MINSIZE) relativeWidth = MINSIZE;
     relativeWidth = relativeWidth/MAIN_VIDEO_POS.width;
     if (relativeWidth > 1) relativeWidth = 1;
 
-    if (targetY < MINPOS) targetY = MINPOS;
-    if (targetY > MAIN_VIDEO_POS.height-2) targetY = MAIN_VIDEO_POS.height-2;
+    if (targetY < MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.top+2;
+    if (targetY > MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top;
 
     let relativeHeight = (targetY-MAIN_VIDEO_POS.top-SUB_VIDEO_POS.top*MAIN_VIDEO_POS.height);
     if (relativeHeight < MINSIZE) relativeHeight = MINSIZE;
@@ -134,8 +134,10 @@ function startResize(e) {
 }
 
 function stopResize() {
+    let container = document.querySelector('.sub-video-container');
+
     window.removeEventListener('mousemove', subContainerResize)
-    window.removeEventListener('touchstart', subContainerResize)
+    container.removeEventListener('touchmove', subContainerResize)
 }
 
 document.querySelector('#subResizeBtn').addEventListener('mousedown', startResize)
@@ -236,6 +238,7 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
     function removeMinimization() {
         let container = document.querySelector('.sub-video-container');
         container.removeEventListener('mousedown', startMove);
+        container.removeEventListener('touchstart', startMove);
 
         toggleClass(container, 'sub-minimized');
 
@@ -255,6 +258,7 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
         if (SUB_VIDEO_POS.top > 0.999) SUB_VIDEO_POS.top = 0.999;
 
         container.addEventListener('mousedown', startMove);
+        container.addEventListener('touchstart', startMove);
         placeSubVideoContainer(container);
         makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
     })
