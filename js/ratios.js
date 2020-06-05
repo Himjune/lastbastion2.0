@@ -139,21 +139,27 @@ const LAST_MOVEMENT = {
 };
 
 function subContainerMove (e) {
-    hadMovements = true;
+    console.log('mv',e);
 
     let container = document.querySelector('.sub-video-container');
 
     let targetX = e.clientX;
-    if (targetX < 0) targetX = 2;
-    if (targetX > MAIN_VIDEO_POS.width-2) targetX = MAIN_VIDEO_POS.width-2;
-    
-    let relativeLeft = (targetX-0.5*container.offsetWidth)/MAIN_VIDEO_POS.width;
-
     let targetY = e.clientY;
-    if (targetY < 0) targetY = 2;
-    if (targetY > MAIN_VIDEO_POS.height-2) targetY = MAIN_VIDEO_POS.height-2;
 
-    let relativeTop = (targetY-0.5*container.offsetHeight)/MAIN_VIDEO_POS.height;
+    if (e.touches) {
+        targetX = e.touches[0].clientX;
+        targetY = e.touches[0].clientY;
+    }
+
+    if (targetX < MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.left+2;
+    if (targetX > MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left;
+    
+    let relativeLeft = (targetX-0.5*container.offsetWidth-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
+
+    if (targetY < MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.top+2;
+    if (targetY > MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top;
+
+    let relativeTop = (targetY-0.5*container.offsetHeight-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
 
     console.log('t',targetX,targetY);
     console.log('r',relativeTop,relativeLeft);
@@ -183,11 +189,25 @@ function stopMove(e) {
     window.removeEventListener('mousemove', subContainerMove)
 }
 
-document.querySelector('#subMoveBtn').addEventListener('mousedown', function(e) {
+function startMove(e) {
     e.preventDefault()
+    
+    let container = document.querySelector('.sub-video-container');
+
+    LAST_MOVEMENT.top = SUB_VIDEO_POS.top;
+    LAST_MOVEMENT.left = SUB_VIDEO_POS.left;
+
     window.addEventListener('mousemove', subContainerMove)
     window.addEventListener('mouseup', stopMove)
-})
+
+    container.addEventListener('touchmove', subContainerMove)
+    container.addEventListener('touchend', stopMove)
+
+    makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
+}
+
+document.querySelector('#subMoveBtn').addEventListener('mousedown', startMove);
+document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 
 /*
     END SUB MOVE
@@ -198,23 +218,10 @@ document.querySelector('#subMoveBtn').addEventListener('mousedown', function(e) 
 */
     function removeMinimization() {
         let container = document.querySelector('.sub-video-container');
-        container.removeEventListener('mousedown', startMinimizedMove);
+        container.removeEventListener('mousedown', startMove);
 
         toggleClass(container, 'sub-minimized');
 
-        makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
-    }
-
-    function startMinimizedMove(e) {
-        e.preventDefault()
-
-        LAST_MOVEMENT.top = SUB_VIDEO_POS.top;
-        LAST_MOVEMENT.left = SUB_VIDEO_POS.left;
-
-        window.addEventListener('mousemove', subContainerMove)
-        window.addEventListener('mouseup', stopMove)
-        
-        let container = document.querySelector('.sub-video-container');
         makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
     }
     
@@ -225,7 +232,13 @@ document.querySelector('#subMoveBtn').addEventListener('mousedown', function(e) 
 
         toggleClass(container, 'sub-minimized')
 
-        container.addEventListener('mousedown', startMinimizedMove);
+        if (SUB_VIDEO_POS.left < 0.001) SUB_VIDEO_POS.left = 0.001;
+        if (SUB_VIDEO_POS.top < 0.001) SUB_VIDEO_POS.top = 0.001;
+        if (SUB_VIDEO_POS.left > 0.999) SUB_VIDEO_POS.left = 0.999;
+        if (SUB_VIDEO_POS.top > 0.999) SUB_VIDEO_POS.top = 0.999;
+
+        container.addEventListener('mousedown', startMove);
+        placeSubVideoContainer(container);
         makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
     })
 

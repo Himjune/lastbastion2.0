@@ -26,6 +26,8 @@ body {
     background-color: red;
     position: absolute;
     width: 100%;
+
+    z-index: 0;
 }
 
 .sub-video-container {
@@ -33,6 +35,8 @@ body {
     position: absolute;
 
     overflow: hidden;
+
+    z-index: 1;
 }
 .sub-video-container.sub-minimized {
     width: 3rem !important;
