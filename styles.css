@@ -97,7 +97,19 @@ body {
     height: 2rem;
 }
 
+.move-btn-container {
+    width: 20%;
+    border: 2px solid red;
+}
+
+.move-btn-container:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
 #subMoveBtn {
-    width: 28%;
-    height: 50%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
