@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="styles.css?v=1.0">
 
+  <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 </head>
 
 <body>
@@ -20,20 +21,25 @@
 
         <div class="video-16-9-container main-video-container">
             <div class="video-16-9">
-                <div id="YtContainer">YouTube</div> 
-                
-                
-                <div id="controlsContainer">
-                
-                </div>
+                <div id="ytContainer">YouTube</div> 
             </div>
-
+            <div class="screen-saver" style="background-color: lightsalmon;"></div>
+                
+                
+            <div id="controlsContainer">
+            
+            </div>
         </div>
 
         <div class="video-16-9-container sub-video-container">
             <div class="video-16-9">
-                <div id="TwContainer">Twitch</div>
+                <div id="twContainer">
+                    <div id="twPlayer">
+
+                    </div>
+                </div>
             </div>
+            <div class="screen-saver"></div>
 
             <div class="container-top-right-buttons">
                 <button id="subMinimizeBtn" class="sub-container-buttons">M</button>
@@ -60,5 +66,6 @@
 
     <script src="js/common.js"></script>
     <script src="js/ratios.js"></script>
+    <script src="js/players.js"></script>
 </body>
 </html>

@@ -318,11 +318,11 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     e.preventDefault();
 
-    let ytContainer = document.querySelector('#YtContainer');
+    let ytContainer = document.querySelector('#ytContainer');
     let ytParent = ytContainer.parentNode;
     let ytNode = ytParent.removeChild(ytContainer);
 
-    let twContainer = document.querySelector('#TwContainer');
+    let twContainer = document.querySelector('#twContainer');
     let twParent = twContainer.parentNode;
     let twNode = twParent.removeChild(twContainer);
 
