@@ -25,6 +25,7 @@ body {
 .main-video-container {
     background-color: red;
     position: absolute;
+    border: 1px solid darkred;
     width: 100%;
 
     z-index: 0;
@@ -33,6 +34,8 @@ body {
 .sub-video-container {
     background-color: blue;
     position: absolute;
+
+    border: 1px solid darkblue;
 
     overflow: hidden;
 
@@ -62,7 +65,8 @@ body {
 
 .video-16-9 {
     position: absolute;
-    background-color: green;
+    background-color: lime;
+    border: 1px solid limegreen;
 }
 
 .centered-block {
