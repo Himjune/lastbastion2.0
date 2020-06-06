@@ -41,10 +41,6 @@ body {
 
     z-index: 1;
 }
-.sub-video-container.sub-minimized {
-    width: 3rem !important;
-    height: 3rem !important;
-}
 .sub-video-container.sub-minimized .sub-container-buttons{
     visibility: hidden;
 }

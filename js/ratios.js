@@ -19,13 +19,84 @@ const SUB_SYNC_VIDEO_POS = {
     left: 0
 }
 
-function placeSubVideoContainer(subContainerElement) {
+function correctRelativeWidth(width) {
+    SUB_SYNC_VIDEO_POS.width = width/MAIN_VIDEO_POS.width;
+}
+function correctRelativeHeight(height) {
+    SUB_SYNC_VIDEO_POS.height = height/MAIN_VIDEO_POS.height;
+}
+function correctRelativeLeft(left) {
+    SUB_SYNC_VIDEO_POS.left = (left-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
+}
+function correctRelativeTop(top) {
+    SUB_SYNC_VIDEO_POS.top = (top-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
+}
+
+function placeSubVideoContainer(subContainerElement, isResizing=false) {
     let targetWidth = Math.floor(MAIN_VIDEO_POS.width*SUB_VIDEO_POS.width);
     let targetHeight = Math.floor(MAIN_VIDEO_POS.height*SUB_VIDEO_POS.height);
 
     let targetTop = Math.floor(MAIN_VIDEO_POS.top+MAIN_VIDEO_POS.height*SUB_VIDEO_POS.top);
     let targetLeft = Math.floor(MAIN_VIDEO_POS.left+MAIN_VIDEO_POS.width*SUB_VIDEO_POS.left);
 
+    let parent = subContainerElement.parentElement;
+    const MIN_WIDTH = 192;
+    const MIN_HEIGHT = 108;
+    const MINIMIZED = 50;
+
+    if (checkClass(subContainerElement,'sub-minimized')) {
+        targetWidth = MINIMIZED;
+        correctRelativeWidth(MINIMIZED);
+
+        targetHeight = MINIMIZED;
+        correctRelativeHeight(MINIMIZED);
+    } else {
+        if (targetWidth < MIN_WIDTH) {
+            targetWidth = MIN_WIDTH;
+            correctRelativeWidth(MIN_WIDTH);
+        }
+
+        if (targetHeight < MIN_HEIGHT) {
+            targetHeight = MIN_HEIGHT;
+            correctRelativeHeight(MIN_HEIGHT);
+        }
+    }
+
+    if (targetLeft < 0) {
+        targetLeft = 0;
+        correctRelativeLeft(0);
+    }
+    if (targetTop < 0) {
+        targetTop = 0;
+        correctRelativeTop(0);
+    }
+    
+    if (isResizing) {
+
+        if (targetLeft + targetWidth > parent.offsetWidth) {
+            targetWidth = parent.offsetWidth-targetLeft;
+            correctRelativeWidth(targetWidth);
+        }
+
+        if (targetTop + targetHeight > parent.offsetHeight) {
+            targetHeight = parent.offsetHeight-targetTop;
+            correctRelativeHeight(targetHeight);
+        }
+
+    } else {
+
+        if (targetLeft + targetWidth > parent.offsetWidth) {
+            targetLeft = parent.offsetWidth-targetWidth;
+            correctRelativeLeft(targetLeft);
+        }
+
+        if (targetTop + targetHeight > parent.offsetHeight) {
+            targetTop = parent.offsetHeight-targetHeight;
+            correctRelativeTop(targetTop);
+        }
+
+    }
+    
     subContainerElement.style.width = targetWidth+'px';
     subContainerElement.style.height = targetHeight+'px';
     subContainerElement.style.top = targetTop+'px';
@@ -104,7 +175,7 @@ function subContainerResize (e) {
     SUB_VIDEO_POS.height = relativeHeight;
 
     let container = document.querySelector('.sub-video-container');
-    placeSubVideoContainer(container);
+    placeSubVideoContainer(container, true);
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
 
@@ -216,6 +287,7 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 
         toggleClass(container, 'sub-minimized');
 
+        placeSubVideoContainer(container);
         makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
     }
     
@@ -241,6 +313,10 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
     END MINIMIZED
 */
 
+/*
+    SWITCH
+*/
+
 document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     e.preventDefault();
 
@@ -255,3 +331,7 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     ytParent.appendChild(twNode);
     twParent.appendChild(ytNode);
 })
+
+/*
+    END SWITCH
+*/
