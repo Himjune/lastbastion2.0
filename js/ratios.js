@@ -86,9 +86,6 @@ handleRatioContainers();
 */
 
 function subContainerResize (e) {
-    const MINSIZE = 175;
-    const MINPOS = 50;
-
     let targetX = e.clientX;
     let targetY = e.clientY;
 
@@ -96,22 +93,12 @@ function subContainerResize (e) {
         targetX = e.touches[0].clientX;
         targetY = e.touches[0].clientY;
     }
-
-    if (targetX < MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.left+2;
-    if (targetX > MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left;
     
     let relativeWidth = (targetX-MAIN_VIDEO_POS.left-SUB_VIDEO_POS.left*MAIN_VIDEO_POS.width);
-    if (relativeWidth < MINSIZE) relativeWidth = MINSIZE;
     relativeWidth = relativeWidth/MAIN_VIDEO_POS.width;
-    if (relativeWidth > 1) relativeWidth = 1;
-
-    if (targetY < MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.top+2;
-    if (targetY > MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top;
 
     let relativeHeight = (targetY-MAIN_VIDEO_POS.top-SUB_VIDEO_POS.top*MAIN_VIDEO_POS.height);
-    if (relativeHeight < MINSIZE) relativeHeight = MINSIZE;
     relativeHeight = relativeHeight/MAIN_VIDEO_POS.height;
-    if (relativeHeight > 1) relativeHeight = 1;
 
     SUB_VIDEO_POS.width = relativeWidth;
     SUB_VIDEO_POS.height = relativeHeight;
@@ -168,20 +155,9 @@ function subContainerMove (e) {
         targetX = e.touches[0].clientX;
         targetY = e.touches[0].clientY;
     }
-
-    if (targetX < MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.left+2;
-    if (targetX > MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left) targetX = MAIN_VIDEO_POS.width-2+MAIN_VIDEO_POS.left;
     
     let relativeLeft = (targetX-0.5*container.offsetWidth-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
-
-    if (targetY < MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.top+2;
-    if (targetY > MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top) targetY = MAIN_VIDEO_POS.height-2+MAIN_VIDEO_POS.top;
-
     let relativeTop = (targetY-0.5*container.offsetHeight-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
-
-    console.log('t',targetX,targetY);
-    console.log('r',relativeTop,relativeLeft);
-
 
     SUB_VIDEO_POS.top = relativeTop;
     SUB_VIDEO_POS.left = relativeLeft;
@@ -197,9 +173,7 @@ function stopMove(e) {
     
     let diffX = Math.abs(LAST_MOVEMENT.left - SUB_VIDEO_POS.left);
     let diffY = Math.abs(LAST_MOVEMENT.top - SUB_VIDEO_POS.top);
-    console.log('st', SUB_VIDEO_POS.left, SUB_VIDEO_POS.top);
-    console.log('sd', diffX, diffY)
-    
+
     if (checkClass(container,'sub-minimized') && diffX < MOVE_OFFSET && diffY < MOVE_OFFSET) {
         removeMinimization();
     }
