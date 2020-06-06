@@ -20,16 +20,16 @@ const SUB_SYNC_VIDEO_POS = {
 }
 
 function correctRelativeWidth(width) {
-    SUB_SYNC_VIDEO_POS.width = width/MAIN_VIDEO_POS.width;
+    SUB_VIDEO_POS.width = width/MAIN_VIDEO_POS.width;
 }
 function correctRelativeHeight(height) {
-    SUB_SYNC_VIDEO_POS.height = height/MAIN_VIDEO_POS.height;
+    SUB_VIDEO_POS.height = height/MAIN_VIDEO_POS.height;
 }
 function correctRelativeLeft(left) {
-    SUB_SYNC_VIDEO_POS.left = (left-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
+    SUB_VIDEO_POS.left = (left-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
 }
 function correctRelativeTop(top) {
-    SUB_SYNC_VIDEO_POS.top = (top-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
+    SUB_VIDEO_POS.top = (top-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
 }
 
 function placeSubVideoContainer(subContainerElement, isResizing=false) {
@@ -214,9 +214,7 @@ const LAST_MOVEMENT = {
     left: SUB_VIDEO_POS.left
 };
 
-function subContainerMove (e) {
-    console.log('mv',e);
-
+function subContainerMove (e) {    
     let container = document.querySelector('.sub-video-container');
 
     let targetX = e.clientX;
