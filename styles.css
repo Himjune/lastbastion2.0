@@ -29,6 +29,9 @@ body {
     width: 100%;
 
     z-index: 0;
+
+    background-image: url(img/sombra_pattern.png);
+    background-repeat: repeat;
 }
 
 .sub-video-container {
@@ -40,6 +43,9 @@ body {
     overflow: hidden;
 
     z-index: 1;
+    
+    background-image: url(img/sombra_pattern.png);
+    background-repeat: repeat;
 }
 .sub-video-container.sub-minimized .sub-container-buttons{
     visibility: hidden;
