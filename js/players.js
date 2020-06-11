@@ -9,7 +9,19 @@ const tw_def_props = {
     parent: ["himjune.github.io"]
 }
 
-var tw_player = new Twitch.Player("twPlayer", tw_def_props);
+const yt_def_props = {
+    height: '360',
+    width: '640',
+    playerVars: { 'autoplay': 1, 'controls': 0, 'playsinline': 1 },
+    videoId: 'Qpdd6OrPFAM',
+    events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+    }
+}
+
+var yt_player;
+var tw_player = new Twitch.Player('twContainer', tw_def_props);
 
 tw_player.addEventListener(Twitch.Player.READY, () => {
     tw_player.setVolume(1.0);
@@ -27,20 +39,8 @@ tw_player.addEventListener(Twitch.Player.PAUSE, () => {
     console.log('PAUSE');
 });
 
-var yt_player;
 function onYouTubeIframeAPIReady() {
-  let videoId = 'Qpdd6OrPFAM';
-
-  yt_player = new YT.Player('ytContainer', {
-    height: '360',
-    width: '640',
-    playerVars: { 'autoplay': 1, 'controls': 0, 'playsinline': 1 },
-    videoId: videoId,
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
+    yt_player = new YT.Player('ytPlayer', yt_def_props);
 }
 function onPlayerReady(event) {
     yt_player.setVolume(10);
@@ -48,4 +48,4 @@ function onPlayerReady(event) {
     console.log('GOgoGo');
 }
 function onPlayerStateChange(event) {
-  }
+}

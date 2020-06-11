@@ -125,7 +125,11 @@ body {
     height: 100%;
 }
 
-#twContainer {
+.iframe-container {
+    width: 100%;
+    height: 100%;
+}
+.iframe-container iframe {
     width: 100%;
     height: 100%;
 }
@@ -140,13 +144,4 @@ body {
     position: absolute;
 
     z-index: 99999;
-}
-
-#twPlayer {
-    width: 100%;
-    height: 100%;
-}
-#twPlayer iframe {
-    width: 100% !important;
-    height: 100% !important;
 }
