@@ -1,7 +1,7 @@
 const tw_def_props = {
     width: 400,
     height: 300,
-    channel: "fitzyhere",
+    channel: "himukee",
     //channel: "himukee",
     layout: "video",
     theme: "dark",
@@ -26,3 +26,19 @@ tw_player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, () => {
 tw_player.addEventListener(Twitch.Player.PAUSE, () => {
     console.log('PAUSE');
 });
+
+
+var embed = new Twitch.Embed("ytContainer", {
+    width: 854,
+    height: 480,
+    channel: "pavelbratok",
+    layout: "video",
+    autoplay: true,
+    // only needed if your site is also embedded on embed.example.com and othersite.example.com 
+    parent: ["himjune.github.io"]
+  });
+
+  embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+    var player = embed.getPlayer();
+    player.play();
+  });
