@@ -29,7 +29,7 @@ tw_player.addEventListener(Twitch.Player.PAUSE, () => {
 
 var yt_player;
 function onYouTubeIframeAPIReady() {
-  let videoId = '8Q_DG_M6vLk';
+  let videoId = 'Qpdd6OrPFAM';
 
   yt_player = new YT.Player('ytContainer', {
     height: '360',
