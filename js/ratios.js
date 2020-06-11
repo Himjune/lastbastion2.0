@@ -6,8 +6,8 @@ const MAIN_VIDEO_POS = {
 }
 
 const SUB_VIDEO_POS = {
-    width: 0.3,
-    height: 0.25,
+    width: 0.4,
+    height: 0.3,
     top: 0.4,
     left: 0
 }
@@ -328,6 +328,13 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
 
     ytParent.appendChild(twNode);
     twParent.appendChild(ytNode);
+
+    let containers = document.querySelectorAll('.video-16-9-container');
+    for (let index = 0; index < containers.length; index++) {
+        const container = containers[index];
+        toggleClass(container,'tw-video-container');
+        toggleClass(container,'yt-video-container');
+    }
 })
 
 /*

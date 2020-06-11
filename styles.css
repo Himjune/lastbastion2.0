@@ -23,30 +23,34 @@ body {
 }
 
 .main-video-container {
-    background-color: red;
     position: absolute;
-    border: 1px solid darkred;
     width: 100%;
 
     z-index: 0;
-
-    background-image: url(img/sombra_pattern.png);
-    background-repeat: repeat;
 }
 
 .sub-video-container {
-    background-color: blue;
     position: absolute;
 
-    border: 1px solid darkblue;
 
     overflow: hidden;
 
     z-index: 1;
     
+}
+.tw-video-container {
+    background-color: darkslateblue;
+    border: 1px solid darkslateblue;
     background-image: url(img/sombra_pattern.png);
     background-repeat: repeat;
 }
+.yt-video-container {
+    background-color: darkred;
+    border: 1px solid darkred;
+    background-image: url(img/emp_pattern.png);
+    background-repeat: repeat;
+}
+
 .sub-video-container.sub-minimized .sub-container-buttons{
     visibility: hidden;
 }
@@ -70,8 +74,6 @@ body {
 
 .video-16-9 {
     position: absolute;
-    background-color: lime;
-    border: 1px solid limegreen;
 }
 
 .centered-block {
@@ -107,7 +109,7 @@ body {
 
 .move-btn-container {
     width: 20%;
-    border: 2px solid red;
+    border: 1px solid red;
     z-index: 999999;
 }
 
@@ -133,7 +135,7 @@ body {
     height: 100%;
 
     background-color: mediumpurple;
-    opacity: 0.6;
+    opacity: 0.1;
 
     position: absolute;
 
