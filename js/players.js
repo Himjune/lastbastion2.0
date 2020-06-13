@@ -7,7 +7,7 @@ const state = {
 const tw_def_props = {
     width: 400,
     height: 300,
-    channel: "himukee",
+    channel: "emmathemercymain",
     //channel: "himukee",
     layout: "video",
     theme: "dark",
@@ -19,7 +19,7 @@ const yt_def_props = {
     height: '360',
     width: '640',
     playerVars: { 'autoplay': 1, 'controls': 0, 'playsinline': 1 },
-    videoId: 'Qpdd6OrPFAM',
+    videoId: '5qap5aO4i9A',
     events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
