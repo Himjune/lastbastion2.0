@@ -20,16 +20,16 @@ const SUB_SYNC_VIDEO_POS = {
 }
 
 function correctRelativeWidth(width) {
-    SUB_VIDEO_POS.width = width/MAIN_VIDEO_POS.width;
+    SUB_VIDEO_POS.width = width / MAIN_VIDEO_POS.width;
 }
 function correctRelativeHeight(height) {
-    SUB_VIDEO_POS.height = height/MAIN_VIDEO_POS.height;
+    SUB_VIDEO_POS.height = height / MAIN_VIDEO_POS.height;
 }
 function correctRelativeLeft(left) {
-    SUB_VIDEO_POS.left = (left-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
+    SUB_VIDEO_POS.left = (left - MAIN_VIDEO_POS.left) / MAIN_VIDEO_POS.width;
 }
 function correctRelativeTop(top) {
-    SUB_VIDEO_POS.top = (top-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
+    SUB_VIDEO_POS.top = (top - MAIN_VIDEO_POS.top) / MAIN_VIDEO_POS.height;
 }
 
 function placeMainVideoContainer(mainContainerElement) {
@@ -39,12 +39,12 @@ function placeMainVideoContainer(mainContainerElement) {
     mainContainerElement.style.height = "100%";
 }
 
-function placeSubVideoContainer(subContainerElement, isResizing=false) {
-    let targetWidth = Math.floor(MAIN_VIDEO_POS.width*SUB_VIDEO_POS.width);
-    let targetHeight = Math.floor(MAIN_VIDEO_POS.height*SUB_VIDEO_POS.height);
+function placeSubVideoContainer(subContainerElement, isResizing = false) {
+    let targetWidth = Math.floor(MAIN_VIDEO_POS.width * SUB_VIDEO_POS.width);
+    let targetHeight = Math.floor(MAIN_VIDEO_POS.height * SUB_VIDEO_POS.height);
 
-    let targetTop = Math.floor(MAIN_VIDEO_POS.top+MAIN_VIDEO_POS.height*SUB_VIDEO_POS.top);
-    let targetLeft = Math.floor(MAIN_VIDEO_POS.left+MAIN_VIDEO_POS.width*SUB_VIDEO_POS.left);
+    let targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * SUB_VIDEO_POS.top);
+    let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * SUB_VIDEO_POS.left);
 
     let parent = subContainerElement.parentElement;
     const MIN_WIDTH = 300;
@@ -52,7 +52,7 @@ function placeSubVideoContainer(subContainerElement, isResizing=false) {
     const MINIMIZED = 50;
     const MOVE_BTN_MULT = 0.6;
 
-    if (checkClass(subContainerElement,'sub-minimized')) {
+    if (checkClass(subContainerElement, 'sub-minimized')) {
         targetWidth = MINIMIZED;
         targetHeight = MINIMIZED;
     } else {
@@ -75,62 +75,62 @@ function placeSubVideoContainer(subContainerElement, isResizing=false) {
         targetTop = 0;
         correctRelativeTop(0);
     }
-    
+
     if (isResizing) {
 
         if (targetLeft + targetWidth > parent.offsetWidth) {
-            targetWidth = parent.offsetWidth-targetLeft;
+            targetWidth = parent.offsetWidth - targetLeft;
             correctRelativeWidth(targetWidth);
         }
 
         if (targetTop + targetHeight > parent.offsetHeight) {
-            targetHeight = parent.offsetHeight-targetTop;
+            targetHeight = parent.offsetHeight - targetTop;
             correctRelativeHeight(targetHeight);
         }
 
     } else {
 
         if (targetLeft + targetWidth > parent.offsetWidth) {
-            targetLeft = parent.offsetWidth-targetWidth;
+            targetLeft = parent.offsetWidth - targetWidth;
             correctRelativeLeft(targetLeft);
         }
 
         if (targetTop + targetHeight > parent.offsetHeight) {
-            targetTop = parent.offsetHeight-targetHeight;
+            targetTop = parent.offsetHeight - targetHeight;
             correctRelativeTop(targetTop);
         }
 
     }
-    
-    subContainerElement.style.width = targetWidth+'px';
-    subContainerElement.style.height = targetHeight+'px';
 
-    let moveBtnSide = Math.floor(targetWidth*MOVE_BTN_MULT);
-    if (targetHeight*MOVE_BTN_MULT < moveBtnSide) moveBtnSide = Math.floor(targetHeight*MOVE_BTN_MULT);
-    document.querySelector('#moveBtnContainer').style.width = moveBtnSide+'px';
+    subContainerElement.style.width = targetWidth + 'px';
+    subContainerElement.style.height = targetHeight + 'px';
 
-    subContainerElement.style.top = targetTop+'px';
-    subContainerElement.style.left = targetLeft+'px';
+    let moveBtnSide = Math.floor(targetWidth * MOVE_BTN_MULT);
+    if (targetHeight * MOVE_BTN_MULT < moveBtnSide) moveBtnSide = Math.floor(targetHeight * MOVE_BTN_MULT);
+    document.querySelector('#moveBtnContainer').style.width = moveBtnSide + 'px';
+
+    subContainerElement.style.top = targetTop + 'px';
+    subContainerElement.style.left = targetLeft + 'px';
 }
 
-function makeRatioSize (element, ratio, isMain) {
+function makeRatioSize(element, ratio, isMain) {
     let parent = element.parentElement;
 
     let isFullWidth = true;
     let targetWidth = parent.offsetWidth;
-    let targetHeight = Math.floor(targetWidth*ratio);
+    let targetHeight = Math.floor(targetWidth * ratio);
     let targetLeft = 0;
-    let targetTop = Math.floor((parent.offsetHeight - targetHeight)/2);
+    let targetTop = Math.floor((parent.offsetHeight - targetHeight) / 2);
 
     if (parent.offsetHeight > 0 && targetHeight > parent.offsetHeight) {
         isFullWidth = false;
         targetHeight = parent.offsetHeight
 
-        ratio = 1/ratio;
-        targetWidth = Math.floor(targetHeight*ratio);
+        ratio = 1 / ratio;
+        targetWidth = Math.floor(targetHeight * ratio);
 
         targetTop = 0;
-        targetLeft =  Math.floor((parent.offsetWidth - targetWidth)/2);
+        targetLeft = Math.floor((parent.offsetWidth - targetWidth) / 2);
     }
 
     if (isMain) {
@@ -139,18 +139,18 @@ function makeRatioSize (element, ratio, isMain) {
         MAIN_VIDEO_POS.top = targetTop;
         MAIN_VIDEO_POS.left = targetLeft;
 
-        document.querySelector('#controlsContainer').style.bottom = targetTop+'px';
+        document.querySelector('#controlsContainer').style.bottom = targetTop + 'px';
     }
 
-    element.style.width = targetWidth+'px';
-    element.style.height = targetHeight+'px';
-    element.style.top = targetTop+'px';
-    element.style.left = targetLeft+'px';
+    element.style.width = targetWidth + 'px';
+    element.style.height = targetHeight + 'px';
+    element.style.top = targetTop + 'px';
+    element.style.left = targetLeft + 'px';
 
     return isFullWidth;
-}  
+}
 
-function handleRatioContainers () {
+function handleRatioContainers() {
     console.log('handleM');
     // MAIN
     let container = document.querySelector('.main-video-container');
@@ -173,7 +173,7 @@ handleRatioContainers();
     SUB RESIZE
 */
 
-function subContainerResize (e) {
+function subContainerResize(e) {
     let targetX = e.clientX;
     let targetY = e.clientY;
 
@@ -181,12 +181,12 @@ function subContainerResize (e) {
         targetX = e.touches[0].clientX;
         targetY = e.touches[0].clientY;
     }
-    
-    let relativeWidth = (targetX-MAIN_VIDEO_POS.left-SUB_VIDEO_POS.left*MAIN_VIDEO_POS.width);
-    relativeWidth = relativeWidth/MAIN_VIDEO_POS.width;
 
-    let relativeHeight = (targetY-MAIN_VIDEO_POS.top-SUB_VIDEO_POS.top*MAIN_VIDEO_POS.height);
-    relativeHeight = relativeHeight/MAIN_VIDEO_POS.height;
+    let relativeWidth = (targetX - MAIN_VIDEO_POS.left - SUB_VIDEO_POS.left * MAIN_VIDEO_POS.width);
+    relativeWidth = relativeWidth / MAIN_VIDEO_POS.width;
+
+    let relativeHeight = (targetY - MAIN_VIDEO_POS.top - SUB_VIDEO_POS.top * MAIN_VIDEO_POS.height);
+    relativeHeight = relativeHeight / MAIN_VIDEO_POS.height;
 
     SUB_VIDEO_POS.width = relativeWidth;
     SUB_VIDEO_POS.height = relativeHeight;
@@ -198,13 +198,13 @@ function subContainerResize (e) {
 
 function startResize(e) {
     e.preventDefault()
-    
+
     let container = document.querySelector('#playerContainer');
 
     container.addEventListener('mousemove', subContainerResize);
     container.addEventListener('mouseup', stopResize);
     container.addEventListener('mouseleave', stopResize);
-    
+
     container.addEventListener('touchmove', subContainerResize);
     container.addEventListener('touchend', stopResize);
 }
@@ -232,7 +232,7 @@ const LAST_MOVEMENT = {
     left: SUB_VIDEO_POS.left
 };
 
-function subContainerMove (e) {    
+function subContainerMove(e) {
     let container = document.querySelector('.sub-video-container');
 
     let targetX = e.clientX;
@@ -242,9 +242,9 @@ function subContainerMove (e) {
         targetX = e.touches[0].clientX;
         targetY = e.touches[0].clientY;
     }
-    
-    let relativeLeft = (targetX-0.5*container.offsetWidth-MAIN_VIDEO_POS.left)/MAIN_VIDEO_POS.width;
-    let relativeTop = (targetY-0.5*container.offsetHeight-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
+
+    let relativeLeft = (targetX - 0.5 * container.offsetWidth - MAIN_VIDEO_POS.left) / MAIN_VIDEO_POS.width;
+    let relativeTop = (targetY - 0.5 * container.offsetHeight - MAIN_VIDEO_POS.top) / MAIN_VIDEO_POS.height;
 
     SUB_VIDEO_POS.top = relativeTop;
     SUB_VIDEO_POS.left = relativeLeft;
@@ -257,11 +257,11 @@ function stopMove(e) {
     let container = document.querySelector('.sub-video-container');
 
     const MOVE_OFFSET = 0.001;
-    
+
     let diffX = Math.abs(LAST_MOVEMENT.left - SUB_VIDEO_POS.left);
     let diffY = Math.abs(LAST_MOVEMENT.top - SUB_VIDEO_POS.top);
 
-    if (checkClass(container,'sub-minimized') && diffX < MOVE_OFFSET && diffY < MOVE_OFFSET) {
+    if (checkClass(container, 'sub-minimized') && diffX < MOVE_OFFSET && diffY < MOVE_OFFSET) {
         removeMinimization();
     }
 
@@ -272,7 +272,7 @@ function stopMove(e) {
 
 function startMove(e) {
     e.preventDefault()
-    
+
     let container = document.querySelector('#playerContainer');
 
     LAST_MOVEMENT.top = SUB_VIDEO_POS.top;
@@ -298,34 +298,34 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 /*
     MINIMIZED
 */
-    function removeMinimization() {
-        let container = document.querySelector('.sub-video-container');
-        container.removeEventListener('mousedown', startMove);
-        container.removeEventListener('touchstart', startMove);
+function removeMinimization() {
+    let container = document.querySelector('.sub-video-container');
+    container.removeEventListener('mousedown', startMove);
+    container.removeEventListener('touchstart', startMove);
 
-        toggleClass(container, 'sub-minimized');
+    toggleClass(container, 'sub-minimized');
 
-        placeSubVideoContainer(container);
-        makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
-    }
-    
-    document.querySelector('#subMinimizeBtn').addEventListener('click', function(e) {
-        e.preventDefault();
+    placeSubVideoContainer(container);
+    makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
+}
 
-        let container = document.querySelector('.sub-video-container');
+document.querySelector('#subMinimizeBtn').addEventListener('click', function (e) {
+    e.preventDefault();
 
-        toggleClass(container, 'sub-minimized')
+    let container = document.querySelector('.sub-video-container');
 
-        if (SUB_VIDEO_POS.left < 0.001) SUB_VIDEO_POS.left = 0.001;
-        if (SUB_VIDEO_POS.top < 0.001) SUB_VIDEO_POS.top = 0.001;
-        if (SUB_VIDEO_POS.left > 0.999) SUB_VIDEO_POS.left = 0.999;
-        if (SUB_VIDEO_POS.top > 0.999) SUB_VIDEO_POS.top = 0.999;
+    toggleClass(container, 'sub-minimized')
 
-        container.addEventListener('mousedown', startMove);
-        container.addEventListener('touchstart', startMove);
-        placeSubVideoContainer(container);
-        makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
-    })
+    if (SUB_VIDEO_POS.left < 0.001) SUB_VIDEO_POS.left = 0.001;
+    if (SUB_VIDEO_POS.top < 0.001) SUB_VIDEO_POS.top = 0.001;
+    if (SUB_VIDEO_POS.left > 0.999) SUB_VIDEO_POS.left = 0.999;
+    if (SUB_VIDEO_POS.top > 0.999) SUB_VIDEO_POS.top = 0.999;
+
+    container.addEventListener('mousedown', startMove);
+    container.addEventListener('touchstart', startMove);
+    placeSubVideoContainer(container);
+    makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
+})
 
 /*
     END MINIMIZED
@@ -335,7 +335,7 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
     SWITCH
 */
 
-document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
+document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
     let subControlsContainer = document.querySelector('#subControlsContainer');
@@ -345,8 +345,8 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     for (let index = 0; index < containers.length; index++) {
         const container = containers[index];
 
-        toggleClass(container,'main-video-container');
-        toggleClass(container,'sub-video-container');
+        toggleClass(container, 'main-video-container');
+        toggleClass(container, 'sub-video-container');
     }
 
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
@@ -361,13 +361,13 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     CHAT
 */
 
-document.querySelector('#chatBtn').addEventListener('click', function(e) {
+document.querySelector('#chatBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
     toggleClass(document.querySelector('#playerContainer'), 'chat-opened');
     toggleClass(document.querySelector('#chatContainer'), 'chat-opened');
     toggleClass(document.querySelector('#chatBtn'), 'chat-opened');
-    
+
     handleRatioContainers();
 })
 
@@ -379,61 +379,49 @@ document.querySelector('#chatBtn').addEventListener('click', function(e) {
     CONTROLS
 */
 
-document.querySelector('#fullMainBtn').addEventListener('click', function(e) {
+var is_fullscreen = false;
+document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
     e.preventDefault();
-    
 
-    
+    let elem = document.getElementById("fullContainer");
+
+    if (!is_fullscreen) {
+        is_fullscreen = true;
+
+        if (elem.requestFullscreen) {
+            console.log('fs-general');
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+            console.log('fs-ff');
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            console.log('fs-wk');
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            console.log('fs-ms');
+            elem.msRequestFullscreen();
+        } else {
+            is_fullscreen = false;
+        }
+    } else {
+        is_fullscreen = false;
+
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        } else {
+            is_fullscreen = true;
+        }
+    }
+
     handleRatioContainers();
 })
 
 /*
     END CONTROLS
-*/
-
-/*
-    FULLSCREEN
-*/
-
-var is_fullscreen = false;
-function toggle_fullscreen() {
-  var elem = document.getElementById("fullContainer");
-
-  if (!is_fullscreen) {
-    is_fullscreen = true;
-
-    if (elem.requestFullscreen) {
-        console.log('fs-general');
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-        console.log('fs-ff');
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        console.log('fs-wk');
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-        console.log('fs-ms');
-      elem.msRequestFullscreen();
-    } else {
-      is_fullscreen = false;
-    }
-  } else {
-    is_fullscreen = false;
-
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { /* Firefox */
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE/Edge */
-      document.msExitFullscreen();
-    } else {
-      is_fullscreen = true;
-    }
-  }
-}
-
-/*
-    END FULLSCREEN
 */
