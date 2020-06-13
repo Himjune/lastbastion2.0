@@ -113,10 +113,13 @@ body {
 
 #controlsContainer {
     position: absolute;
-    background-color: gray;
     bottom: 0;
+
     width: 100%;
     height: 2rem;
+    
+    background-color: gray;
+    opacity: 0.5;
 }
 
 .main-buttons-group {
@@ -141,6 +144,14 @@ body {
     width: 2rem;
     height: 2rem;
 }
+
+#syncDelayMainBtn {
+    display: inline-block;
+    height: 100%;
+    width: 5rem;
+    background-color: lightgray;
+}
+
 
 .video-16-9-container {
     width: 100%;
