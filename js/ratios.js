@@ -55,10 +55,7 @@ function placeSubVideoContainer(subContainerElement, isResizing=false) {
 
     if (checkClass(subContainerElement,'sub-minimized')) {
         targetWidth = MINIMIZED;
-        correctRelativeWidth(MINIMIZED);
-
         targetHeight = MINIMIZED;
-        correctRelativeHeight(MINIMIZED);
     } else {
         if (targetWidth < MIN_WIDTH) {
             targetWidth = MIN_WIDTH;
