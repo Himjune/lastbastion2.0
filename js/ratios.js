@@ -195,19 +195,20 @@ function subContainerResize (e) {
 function startResize(e) {
     e.preventDefault()
     
-    let container = document.querySelector('.sub-video-container');
+    let container = document.querySelector('#playerContainer');
 
-    window.addEventListener('mousemove', subContainerResize)
-    window.addEventListener('mouseup', stopResize)
+    container.addEventListener('mousemove', subContainerResize);
+    container.addEventListener('mouseup', stopResize);
+    container.addEventListener('mouseout', stopResize);
     
-    container.addEventListener('touchmove', subContainerResize)
-    container.addEventListener('touchend', stopResize)
+    container.addEventListener('touchmove', subContainerResize);
+    container.addEventListener('touchend', stopResize);
 }
 
 function stopResize() {
-    let container = document.querySelector('.sub-video-container');
+    let container = document.querySelector('#playerContainer');
 
-    window.removeEventListener('mousemove', subContainerResize)
+    container.removeEventListener('mousemove', subContainerResize)
     container.removeEventListener('touchmove', subContainerResize)
 }
 
@@ -249,7 +250,7 @@ function subContainerMove (e) {
 }
 
 function stopMove(e) {
-    let container = document.querySelector('.sub-video-container');
+    let container = document.querySelector('#playerContainer');
 
     const MOVE_OFFSET = 0.001;
     
@@ -260,23 +261,24 @@ function stopMove(e) {
         removeMinimization();
     }
 
-    window.removeEventListener('mousemove', subContainerMove)
+    container.removeEventListener('mousemove', subContainerMove)
     container.removeEventListener('touchmove', subContainerMove)
 }
 
 function startMove(e) {
     e.preventDefault()
     
-    let container = document.querySelector('.sub-video-container');
+    let container = document.querySelector('#playerContainer');
 
     LAST_MOVEMENT.top = SUB_VIDEO_POS.top;
     LAST_MOVEMENT.left = SUB_VIDEO_POS.left;
 
-    window.addEventListener('mousemove', subContainerMove)
-    window.addEventListener('mouseup', stopMove)
+    container.addEventListener('mousemove', subContainerMove);
+    container.addEventListener('mouseup', stopMove);
+    container.addEventListener('mouseout', stopMove);
 
-    container.addEventListener('touchmove', subContainerMove)
-    container.addEventListener('touchend', stopMove)
+    container.addEventListener('touchmove', subContainerMove);
+    container.addEventListener('touchend', stopMove);
 
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
