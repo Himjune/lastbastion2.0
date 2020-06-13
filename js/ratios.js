@@ -33,8 +33,9 @@ function correctRelativeTop(top) {
 }
 
 function placeMainVideoContainer(mainContainerElement) {
-    mainContainerElement.style.left = "0";
-    mainContainerElement.style.top = "0";
+    console.log('placeMain');
+    mainContainerElement.style.left = "0px";
+    mainContainerElement.style.top = "0px";
     mainContainerElement.style.width = "100%";
     mainContainerElement.style.height = "100%";
     
