@@ -32,6 +32,14 @@ function correctRelativeTop(top) {
     SUB_VIDEO_POS.top = (top-MAIN_VIDEO_POS.top)/MAIN_VIDEO_POS.height;
 }
 
+function placeMainVideoContainer(mainContainerElement) {
+    mainContainerElement.style.left = "0";
+    mainContainerElement.style.top = "0";
+    mainContainerElement.style.width = "100%";
+    mainContainerElement.style.height = "100%";
+    
+}
+
 function placeSubVideoContainer(subContainerElement, isResizing=false) {
     let targetWidth = Math.floor(MAIN_VIDEO_POS.width*SUB_VIDEO_POS.width);
     let targetHeight = Math.floor(MAIN_VIDEO_POS.height*SUB_VIDEO_POS.height);
@@ -148,6 +156,7 @@ function handleRatioContainers () {
     console.log('handleM');
     // MAIN
     let container = document.querySelector('.main-video-container');
+    placeMainVideoContainer(container);
     makeRatioSize(container.querySelector('.video-16-9'), 0.5625, true);
 
     // SUB
