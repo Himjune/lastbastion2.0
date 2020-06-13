@@ -330,7 +330,7 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     let containers = document.querySelectorAll('.video-16-9-container');
     for (let index = 0; index < containers.length; index++) {
         const container = containers[index];
-        
+
         toggleClass(container,'main-video-container');
         toggleClass(container,'sub-video-container');
         toggleClass(container,'tw-video-container');
@@ -338,6 +338,7 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     }
 
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
+    handleRatioContainers();
 })
 
 /*
