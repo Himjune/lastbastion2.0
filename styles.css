@@ -108,7 +108,7 @@ body {
 }
 
 .move-btn-container {
-    width: 20%;
+    height: 20%;
     border: 1px solid red;
     z-index: 999999;
 }
@@ -116,7 +116,7 @@ body {
 .move-btn-container:after {
     content: "";
     display: block;
-    padding-bottom: 100%;
+    padding-right: 100%;
 }
 
 #subMoveBtn {
