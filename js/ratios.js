@@ -199,7 +199,7 @@ function startResize(e) {
 
     container.addEventListener('mousemove', subContainerResize);
     container.addEventListener('mouseup', stopResize);
-    container.addEventListener('mouseout', stopResize);
+    container.addEventListener('mouseleave', stopResize);
     
     container.addEventListener('touchmove', subContainerResize);
     container.addEventListener('touchend', stopResize);
@@ -275,7 +275,7 @@ function startMove(e) {
 
     container.addEventListener('mousemove', subContainerMove);
     container.addEventListener('mouseup', stopMove);
-    container.addEventListener('mouseout', stopMove);
+    container.addEventListener('mouseleave', stopMove);
 
     container.addEventListener('touchmove', subContainerMove);
     container.addEventListener('touchend', stopMove);
