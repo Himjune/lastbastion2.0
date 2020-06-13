@@ -31,16 +31,36 @@ body {
     width: calc(100% - 23rem);
     height: 100%;
 }
+#playerContainer.chat-opened {
+    width: 100%;
+}
+
+#chatBtn {
+    position: absolute;
+
+    top: 0.5rem;
+    right: 0.5rem;
+
+    width: 2rem;
+    height: 2rem;
+}
+#chatBtn.chat-opened {
+    left: calc(100% - 22.5rem);
+}
 
 #chatContainer {
     position: absolute;
     
+    width: 0px;
+
     top: 0px;
     right: 0px;
 
-    width: 23rem;
     height: 100%;
     overflow: hidden;
+}
+#chatContainer.chat-opened {
+    width: 23rem;
 }
 #chat_embed {
     width: 100%;

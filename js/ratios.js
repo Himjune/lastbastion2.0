@@ -352,3 +352,21 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
 /*
     END SWITCH
 */
+
+/*
+    CHAT
+*/
+
+document.querySelector('#chatBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    toggleClass(document.querySelector('#playerContainer'), 'chat-opened');
+    toggleClass(document.querySelector('#chatContainer'), 'chat-opened');
+    toggleClass(document.querySelector('#chatBtn'), 'chat-opened');
+    
+    handleRatioContainers();
+})
+
+/*
+    END CHAT
+*/
