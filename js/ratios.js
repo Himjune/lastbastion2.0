@@ -145,14 +145,15 @@ function makeRatioSize (element, ratio, isMain) {
 }  
 
 function handleRatioContainers () {
+    console.log('handleM');
     // MAIN
-    let container = document.querySelectorAll('.main-video-container')[0];
-    makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, true);
+    let container = document.querySelector('.main-video-container');
+    makeRatioSize(container.querySelector('.video-16-9'), 0.5625, true);
 
     // SUB
-    container = document.querySelectorAll('.sub-video-container')[0];
+    container = document.querySelector('.sub-video-container');
     placeSubVideoContainer(container);
-    makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
+    makeRatioSize(container.querySelector('.video-16-9'), 0.5625, false);
 }
 
 window.addEventListener("resize", handleRatioContainers);
