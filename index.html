@@ -16,57 +16,63 @@
 </head>
 
 <body>
-    <div id="playerContainer">
-        <div id="playPauseButton"></div>
-
-        <div class="video-16-9-container main-video-container yt-video-container">
-            <div class="video-16-9">
-                <div id="ytContainer" class="iframe-container">
-                    <div id="ytPlayer"></div>
-                </div>
-            </div>
-            <div class="screen-saver"></div>
-                
-        </div>
-
-        <div class="video-16-9-container sub-video-container tw-video-container">
-            <div class="video-16-9">
-                <div id="twContainer" class="iframe-container">
-
-                </div>
-            </div>
-            <div class="screen-saver"></div>
-
-            <div id="subControlsContainer">
-                <div class="container-top-right-buttons">
-                    <button id="subMinimizeBtn" class="sub-container-buttons">M</button>
-                    <button id="subSwitchBtn" class="sub-container-buttons">S</button>
-                </div>
-                
-                <div class="container-bottom-right-buttons">
-                    <button id="subResizeBtn" class="sub-container-buttons">R</button>
-                </div>
+    <div id="fullContainer">
+        <div id="playerContainer">
+            <div id="playPauseButton"></div>
     
-                <div id="moveBtnContainer" class="centered-block">
-                    <button id="subMoveBtn" class="sub-container-buttons">T</button>
+            <div class="video-16-9-container main-video-container yt-video-container">
+                <div class="video-16-9">
+                    <div id="ytContainer" class="iframe-container">
+                        <div id="ytPlayer"></div>
+                    </div>
+                </div>
+                <div class="screen-saver"></div>
+                    
+            </div>
+    
+            <div class="video-16-9-container sub-video-container tw-video-container">
+                <div class="video-16-9">
+                    <div id="twContainer" class="iframe-container">
+    
+                    </div>
+                </div>
+                <div class="screen-saver"></div>
+    
+                <div id="subControlsContainer">
+                    <div class="container-top-right-buttons">
+                        <button id="subMinimizeBtn" class="sub-container-buttons">M</button>
+                        <button id="subSwitchBtn" class="sub-container-buttons">S</button>
+                    </div>
+                    
+                    <div class="container-bottom-right-buttons">
+                        <button id="subResizeBtn" class="sub-container-buttons">R</button>
+                    </div>
+        
+                    <div id="moveBtnContainer" class="centered-block">
+                        <button id="subMoveBtn" class="sub-container-buttons">T</button>
+                    </div>
                 </div>
             </div>
+    
+            <div id="midScreenControlsContainer">
+    
+            </div>
+                    
+            <div id="controlsContainer">
+            
+            </div>
         </div>
-
-        <div id="midScreenControlsContainer">
-
-        </div>
-                
-        <div id="controlsContainer">
-        
+    
+        <div id="chatContainer">
+            <iframe frameborder="0" scrolling="no" id="chat_embed" src="https://www.twitch.tv/embed/gamelifeow/chat?darkpopout"
+              height="1440" width="360">
+            </iframe>
         </div>
     </div>
-    <div id="chatContainer">
 
-    </div>
+    <script src="js/common.js"></script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="js/common.js"></script>
     <script src="js/ratios.js"></script>
     <script src="js/players.js"></script>
 </body>

@@ -7,8 +7,7 @@ const state = {
 const tw_def_props = {
     width: 400,
     height: 300,
-    channel: "emmathemercymain",
-    //channel: "himukee",
+    channel: "gamelifeow",
     layout: "video",
     theme: "dark",
     autoplay: true,

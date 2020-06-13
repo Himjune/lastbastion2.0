@@ -8,7 +8,13 @@ body {
     background-color: black !important;
     overflow-x: hidden;
 }
-  
+
+#fullContainer {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
 
 #playerContainer {
     position: relative;
