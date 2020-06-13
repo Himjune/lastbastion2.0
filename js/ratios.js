@@ -334,8 +334,6 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
 
         toggleClass(container,'main-video-container');
         toggleClass(container,'sub-video-container');
-        toggleClass(container,'tw-video-container');
-        toggleClass(container,'yt-video-container');
     }
 
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
