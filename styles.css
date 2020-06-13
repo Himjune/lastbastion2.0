@@ -43,6 +43,8 @@ body {
 
     width: 2rem;
     height: 2rem;
+
+    z-index: 30000;
 }
 #chatBtn.chat-opened {
     left: calc(100% - 22.5rem);
