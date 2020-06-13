@@ -379,14 +379,61 @@ document.querySelector('#chatBtn').addEventListener('click', function(e) {
     CONTROLS
 */
 
-document.querySelector('#chatBtn').addEventListener('click', function(e) {
+document.querySelector('#fullMainBtn').addEventListener('click', function(e) {
     e.preventDefault();
     
-    
+
     
     handleRatioContainers();
 })
 
 /*
     END CONTROLS
+*/
+
+/*
+    FULLSCREEN
+*/
+
+var is_fullscreen = false;
+function toggle_fullscreen() {
+  var elem = document.getElementById("fullContainer");
+
+  if (!is_fullscreen) {
+    is_fullscreen = true;
+
+    if (elem.requestFullscreen) {
+        console.log('fs-general');
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+        console.log('fs-ff');
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        console.log('fs-wk');
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        console.log('fs-ms');
+      elem.msRequestFullscreen();
+    } else {
+      is_fullscreen = false;
+    }
+  } else {
+    is_fullscreen = false;
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE/Edge */
+      document.msExitFullscreen();
+    } else {
+      is_fullscreen = true;
+    }
+  }
+}
+
+/*
+    END FULLSCREEN
 */
