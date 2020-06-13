@@ -107,13 +107,11 @@ body {
     height: 2rem;
 }
 
-.move-btn-container {
-    width: 20%;
+#moveBtnContainer {
     border: 1px solid red;
     z-index: 999999;
 }
-
-.move-btn-container:after {
+#moveBtnContainer:after {
     content: "";
     display: block;
     padding-bottom: 100%;

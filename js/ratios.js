@@ -40,10 +40,9 @@ function placeSubVideoContainer(subContainerElement, isResizing=false) {
     let targetLeft = Math.floor(MAIN_VIDEO_POS.left+MAIN_VIDEO_POS.width*SUB_VIDEO_POS.left);
 
     let parent = subContainerElement.parentElement;
-    const MIN_WIDTH = 192;
-    const MIN_HEIGHT = 108;
+    const MIN_WIDTH = 300;
+    const MIN_HEIGHT = 168;
     const MINIMIZED = 50;
-
     if (checkClass(subContainerElement,'sub-minimized')) {
         targetWidth = MINIMIZED;
         correctRelativeWidth(MINIMIZED);
@@ -99,6 +98,11 @@ function placeSubVideoContainer(subContainerElement, isResizing=false) {
     
     subContainerElement.style.width = targetWidth+'px';
     subContainerElement.style.height = targetHeight+'px';
+
+    let moveBtnSide = Math.floor(targetWidth*0.8);
+    if (targetHeight*0.8 < moveBtnSide) moveBtnSide = Math.floor(targetHeight*0.8);
+    document.querySelector('#moveBtnContainer').style.width = moveBtnSide+'px'
+
     subContainerElement.style.top = targetTop+'px';
     subContainerElement.style.left = targetLeft+'px';
 }
