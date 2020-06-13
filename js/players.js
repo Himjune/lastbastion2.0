@@ -1,3 +1,9 @@
+const state = {
+    sub: 0,             // 0 - tw and 1 - yt
+    tw_quality: "",
+    yt_quality: ""
+}
+
 const tw_def_props = {
     width: 400,
     height: 300,
