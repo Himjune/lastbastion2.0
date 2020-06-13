@@ -119,6 +119,29 @@ body {
     height: 2rem;
 }
 
+.main-buttons-group {
+    position: absolute;
+    height: 100%;
+}
+.left-main-buttons {
+    left: 0.5rem;
+}
+.center-main-buttons {
+    left: 50%;
+    transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+}
+.right-main-buttons {
+    right: 0.5rem;
+}
+.main-controls-buttons {
+    width: 2rem;
+    height: 2rem;
+}
+
 .video-16-9-container {
     width: 100%;
     height: 100%;
