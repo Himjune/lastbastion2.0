@@ -28,7 +28,7 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     
-    width: calc(100% - 34rem);
+    width: calc(100% - 30%);
     height: 100%;
 }
 
@@ -38,7 +38,7 @@ body {
     top: 0px;
     right: 0px;
 
-    width: 34rem;
+    width: 30%;
     height: 100%;
     overflow: hidden;
 }
