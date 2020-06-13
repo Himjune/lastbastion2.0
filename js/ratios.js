@@ -324,16 +324,8 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
     e.preventDefault();
 
-    let ytContainer = document.querySelector('#ytContainer');
-    let ytParent = ytContainer.parentNode;
-    let ytNode = ytParent.removeChild(ytContainer);
-
-    let twContainer = document.querySelector('#twContainer');
-    let twParent = twContainer.parentNode;
-    let twNode = twParent.removeChild(twContainer);
-
-    ytParent.appendChild(twNode);
-    twParent.appendChild(ytNode);
+    let subControlsContainer = document.querySelector('#subControlsContainer');
+    subControlsContainer = subControlsContainer.parentNode.removeChild(subControlsContainer);
 
     let containers = document.querySelectorAll('.video-16-9-container');
     for (let index = 0; index < containers.length; index++) {
@@ -341,6 +333,8 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function(e) {
         toggleClass(container,'tw-video-container');
         toggleClass(container,'yt-video-container');
     }
+
+    document.querySelector('.sub-video-container').appendChild(subControlsContainer);
 })
 
 /*
