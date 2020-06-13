@@ -37,7 +37,6 @@ function placeMainVideoContainer(mainContainerElement) {
     mainContainerElement.style.top = "0px";
     mainContainerElement.style.width = "100%";
     mainContainerElement.style.height = "100%";
-    
 }
 
 function placeSubVideoContainer(subContainerElement, isResizing=false) {
@@ -139,6 +138,8 @@ function makeRatioSize (element, ratio, isMain) {
         MAIN_VIDEO_POS.height = targetHeight;
         MAIN_VIDEO_POS.top = targetTop;
         MAIN_VIDEO_POS.left = targetLeft;
+
+        document.querySelector('#controlsContainer').style.bottom = targetTop+'px';
     }
 
     element.style.width = targetWidth+'px';
@@ -160,6 +161,9 @@ function handleRatioContainers () {
     container = document.querySelector('.sub-video-container');
     placeSubVideoContainer(container);
     makeRatioSize(container.querySelector('.video-16-9'), 0.5625, false);
+
+    // CONTROLS
+
 }
 
 window.addEventListener("resize", handleRatioContainers);
@@ -377,10 +381,8 @@ document.querySelector('#chatBtn').addEventListener('click', function(e) {
 
 document.querySelector('#chatBtn').addEventListener('click', function(e) {
     e.preventDefault();
-
-    toggleClass(document.querySelector('#playerContainer'), 'chat-opened');
-    toggleClass(document.querySelector('#chatContainer'), 'chat-opened');
-    toggleClass(document.querySelector('#chatBtn'), 'chat-opened');
+    
+    
     
     handleRatioContainers();
 })
