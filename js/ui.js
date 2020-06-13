@@ -379,11 +379,26 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
     CONTROLS
 */
 
-var is_fullscreen = false;
 document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
+    toggleFullScreen();
+
+    handleRatioContainers();
+})
+
+/*
+    END CONTROLS
+*/
+
+/*
+    FULLSCREEN
+*/
+
+function toggleFullScreen() {
+
     let elem = document.getElementById("fullContainer");
+    let is_fullscreen = checkFullscreen();
 
     if (!is_fullscreen) {
         is_fullscreen = true;
@@ -400,12 +415,9 @@ document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
             console.log('fs-ms');
             elem.msRequestFullscreen();
-        } else {
-            is_fullscreen = false;
         }
-    } else {
-        is_fullscreen = false;
 
+    } else {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.mozCancelFullScreen) { /* Firefox */
@@ -414,14 +426,22 @@ document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
             document.webkitExitFullscreen();
         } else if (document.msExitFullscreen) { /* IE/Edge */
             document.msExitFullscreen();
-        } else {
-            is_fullscreen = true;
         }
     }
+    
+    is_fullscreen = checkFullscreen();
 
-    handleRatioContainers();
-})
+    if (is_fullscreen && !checkClass(elem, 'fullscreen')) {
+        toggleClass(elem, 'fullscreen');
+    } else if (!is_fullscreen && checkClass(elem, 'fullscreen')) {
+        toggleClass(elem, 'fullscreen');
+    }
+ 
+    return is_fullscreen;
+}
+
 
 /*
-    END CONTROLS
+    END FULLSCREEN
 */
+
