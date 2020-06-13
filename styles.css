@@ -43,8 +43,6 @@ body {
 
     width: 2rem;
     height: 2rem;
-
-    z-index: 30000;
 }
 #chatBtn.chat-opened {
     left: calc(100% - 22.5rem);
@@ -105,13 +103,16 @@ body {
     visibility: hidden;
 }
 
+.controls {
+    z-index: 30000;
+}
+
 #controlsContainer {
     position: absolute;
     background-color: gray;
     bottom: 0;
     width: 100%;
     height: 3rem;
-    z-index: 30000;
 }
 
 .video-16-9-container {
@@ -140,7 +141,6 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    z-index: 30000;
 }
 .container-top-right-buttons {
     position: absolute;
