@@ -250,7 +250,7 @@ function subContainerMove (e) {
 }
 
 function stopMove(e) {
-    let container = document.querySelector('#playerContainer');
+    let container = document.querySelector('.sub-video-container');
 
     const MOVE_OFFSET = 0.001;
     
@@ -261,6 +261,7 @@ function stopMove(e) {
         removeMinimization();
     }
 
+    container = document.querySelector('#playerContainer');
     container.removeEventListener('mousemove', subContainerMove)
     container.removeEventListener('touchmove', subContainerMove)
 }
