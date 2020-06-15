@@ -64,6 +64,7 @@ tw_player.addEventListener(Twitch.Player.READY, () => {
     tw_player.setMuted(false);
 
     state.tw_is_ready = true;
+    try_ready_players();
 
     console.log('readyEvent');
 });
@@ -83,6 +84,7 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
     yt_player.setVolume(5);
     state.yt_is_ready = true;
+    try_ready_players();
 }
 function onPlayerStateChange(event) {
 }
