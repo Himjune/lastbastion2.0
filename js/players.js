@@ -1,7 +1,22 @@
 const state = {
     sub: 0,             // 0 - tw and 1 - yt
+
+    tw_is_ready = false,
+    yt_is_ready = false,
+
     tw_quality: "",
     yt_quality: ""
+}
+
+function switchSubPlayer () {
+    if (state.sub) state.sub = 1;
+    else state.sub = 0;
+}
+
+function try_ready_players () {
+    if (state.yt_is_ready && state.tw_is_ready) {
+        playersAreReadyNow();
+    }
 }
 
 const tw_def_props = {
@@ -47,7 +62,9 @@ var tw_player = new Twitch.Player('twContainer', tw_def_props);
 tw_player.addEventListener(Twitch.Player.READY, () => {
     tw_player.setVolume(1.0);
     tw_player.setMuted(false);
-    tw_player.play();
+
+    state.tw_is_ready = true;
+
     console.log('readyEvent');
 });
 tw_player.addEventListener(Twitch.Player.PLAYING, () => {
@@ -64,9 +81,15 @@ function onYouTubeIframeAPIReady() {
     yt_player = new YT.Player('ytPlayer', yt_def_props);
 }
 function onPlayerReady(event) {
-    yt_player.setVolume(10);
-    yt_player.playVideo();
-    console.log('GOgoGo');
+    yt_player.setVolume(5);
+    state.yt_is_ready = true;
 }
 function onPlayerStateChange(event) {
+}
+
+
+
+function startPlayers () {
+    tw_player.play();
+    yt_player.playVideo();
 }

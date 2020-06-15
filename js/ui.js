@@ -349,6 +349,8 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
         toggleClass(container, 'sub-video-container');
     }
 
+    switchSubPlayer();
+
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
     handleRatioContainers();
 })
@@ -378,6 +380,22 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 /*
     CONTROLS
 */
+var players_ready = false;
+function playersAreReadyNow() {
+    document.querySelector('#playMainBtn').innerText = 'P';
+
+    players_ready = true;
+}
+
+document.querySelector('#playMainBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (players_ready) {
+        startPlayers();
+    }
+})
+
+
 
 document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
     e.preventDefault();
