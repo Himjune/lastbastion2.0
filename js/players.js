@@ -15,7 +15,7 @@ function switchSubPlayer () {
     else state.sub = 0;
 }
 
-function try_ready_players () {
+function tryReadyPlayers () {
     if (state.yt_is_ready && state.tw_is_ready) {
         playersAreReadyNow();
     }
@@ -66,7 +66,7 @@ tw_player.addEventListener(Twitch.Player.READY, () => {
     tw_player.setMuted(false);
 
     state.tw_is_ready = true;
-    try_ready_players();
+    tryReadyPlayers();
 
     console.log('readyEvent');
 });
@@ -80,13 +80,20 @@ tw_player.addEventListener(Twitch.Player.PAUSE, () => {
     console.log('PAUSE');
 });
 
-function onYouTubeIframeAPIReady() {
+function startYt() {
     yt_player = new YT.Player('ytPlayer', yt_def_props);
 }
+
+function onYouTubeIframeAPIReady() {
+    clearTimeout(timer);
+    startYt();
+}
+let timer = setTimeout(startYt, 500);
+
 function onPlayerReady(event) {
     yt_player.setVolume(5);
     state.yt_is_ready = true;
-    try_ready_players();
+    tryReadyPlayers();
 }
 function onPlayerStateChange(event) {
 }
