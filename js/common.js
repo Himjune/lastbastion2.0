@@ -1,6 +1,6 @@
 function toggleClass(element, className) {
     let isAdded = false;
-    
+
     if (element.classList) {
         isAdded = element.classList.toggle(className);
     } else {
@@ -17,7 +17,7 @@ function toggleClass(element, className) {
         element.className = classes.join(" ");
     }
 
-    return added;
+    return isAdded;
 }
 
 function checkClass(element, className) {
