@@ -401,6 +401,7 @@ function playersAreReadyNow() {
 function playPause() {
 
     if (players_ready) {
+        toggleClass(document.querySelector('#playerContainer','playing'));
         startPlayers();
     }
 
