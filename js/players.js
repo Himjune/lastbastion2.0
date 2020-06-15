@@ -25,14 +25,14 @@ const tw_def_props = {
     channel: "outbreak",
     layout: "video",
     theme: "dark",
-    autoplay: true,
+    autoplay: false,
     parent: ["himjune.github.io"]
 }
 
 const yt_def_props = {
     height: '360',
     width: '640',
-    playerVars: { 'autoplay': 1, 'controls': 0, 'playsinline': 1 },
+    playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1 },
     videoId: 'e1ayB3iFCS8',
     events: {
         'onReady': onPlayerReady,
