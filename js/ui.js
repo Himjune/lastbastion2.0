@@ -406,8 +406,8 @@ function playPause() {
 
 }
 
-document.querySelector('#playMainBtn').addEventListener('click', playPause())
-document.querySelector('#playMidBtn').addEventListener('click', playPause())
+document.querySelector('#playMainBtn').addEventListener('click', playPause);
+document.querySelector('#playMidBtn').addEventListener('click', playPause);
 
 document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
     e.preventDefault();
