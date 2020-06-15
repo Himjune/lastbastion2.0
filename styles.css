@@ -34,9 +34,7 @@ body {
     z-index: 0;
 }
 #playerContainer.chat-opened {
-    width: 100%;
-    min-width: 568px;
-    max-width: calc(100% - 23rem);
+    width: calc(100% - 23rem);
 }
 
 #chatBtn {

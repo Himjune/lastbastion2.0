@@ -365,10 +365,18 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
 
 document.querySelector('#chatBtn').addEventListener('click', function (e) {
     e.preventDefault();
+    let playerContainer = document.querySelector('#playerContainer');
 
-    toggleClass(document.querySelector('#playerContainer'), 'chat-opened');
+    let isOpening = toggleClass(playerContainer, 'chat-opened');
     toggleClass(document.querySelector('#chatContainer'), 'chat-opened');
     toggleClass(document.querySelector('#chatBtn'), 'chat-opened');
+
+    const SCREEN_PART_MIN_FOR_PLAYER = 0.6;
+    if (isOpening && playerContainer.clientWidth < document.clientWidth*SCREEN_PART_MIN_FOR_PLAYER) {
+        playerContainer.style.width = "100%";
+    } else {
+        playerContainer.removeAttribute('style');
+    }
 
     handleRatioContainers();
 })

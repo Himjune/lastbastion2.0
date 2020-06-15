@@ -1,6 +1,8 @@
 function toggleClass(element, className) {
+    let isAdded = false;
+    
     if (element.classList) {
-        element.classList.toggle(className);
+        isAdded = element.classList.toggle(className);
     } else {
         // For IE9
         var classes = element.className.split(" ");
@@ -8,10 +10,14 @@ function toggleClass(element, className) {
 
         if (i >= 0)
             classes.splice(i, 1);
-        else
+        else {
+            isAdded = true;
             classes.push(className);
+        }
         element.className = classes.join(" ");
     }
+
+    return added;
 }
 
 function checkClass(element, className) {
