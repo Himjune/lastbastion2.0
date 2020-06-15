@@ -204,9 +204,9 @@ body {
     width: 40%;
     height: 40%;
 }
-#playMidBtn {
-    width: 6rem;
-    height: 6rem;
+.mid-screen-btns {
+    width: 12rem;
+    height: 12rem;
 }
 
 #moveBtnContainer {
