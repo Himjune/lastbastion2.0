@@ -1,6 +1,8 @@
 const state = {
     sub: 0,             // 0 - tw and 1 - yt
 
+    playing: false,
+
     tw_is_ready: false,
     yt_is_ready: false,
 
@@ -92,6 +94,15 @@ function onPlayerStateChange(event) {
 
 
 function startPlayers () {
-    tw_player.play();
-    yt_player.playVideo();
+    if (state.playing) {
+        tw_player.pause();
+        yt_player.pauseVideo();
+        
+        state.playing = false;
+    } else {
+        tw_player.play();
+        yt_player.playVideo();
+        
+        state.playing = true;
+    }
 }
