@@ -12,7 +12,9 @@
 
   <link rel="stylesheet" href="styles.css?v=1.0">
 
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+  <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 </head>
 
 <body>
@@ -40,16 +42,24 @@
     
                 <div id="subControlsContainer">
                     <div class="container-top-right-buttons">
-                        <button id="subMinimizeBtn" class="sub-container-buttons">M</button>
-                        <button id="subSwitchBtn" class="sub-container-buttons">S</button>
+                        <button id="subMinimizeBtn" class="sub-container-buttons">
+                            <span class="iconify" data-icon="websymbol:minus-circle" data-inline="false" data-width="100%"></span>
+                        </button>
+                        <button id="subSwitchBtn" class="sub-container-buttons">
+                            <span class="iconify" data-icon="websymbol:updown-circle" data-inline="false" data-width="100%"></span>
+                        </button>
                     </div>
                     
                     <div class="container-bottom-right-buttons">
-                        <button id="subResizeBtn" class="sub-container-buttons">R</button>
+                        <div id="subResizeBtn" class="sub-container-buttons">
+                            <span class="iconify" data-icon="si-glyph:angle-1" data-inline="false" data-width="100%"></span>
+                        </div>
                     </div>
         
                     <div id="moveBtnContainer" class="centered-block">
-                        <button id="subMoveBtn" class="sub-container-buttons">T</button>
+                        <button id="subMoveBtn" class="sub-container-buttons">
+                            <span class="iconify" data-icon="si-glyph:arrow-move" data-inline="false" data-width="100%"></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -95,8 +105,6 @@
     </div>
 
     <script src="js/common.js"></script>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="js/ui.js"></script>
     <script src="js/players.js"></script>
     <script src="js/keys.js"></script>

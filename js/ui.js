@@ -50,7 +50,7 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     const MIN_WIDTH = 192;
     const MIN_HEIGHT = 108;
     const MINIMIZED = 40;
-    const MOVE_BTN_MULT = 0.6;
+    const MOVE_BTN_MULT = 0.5;
 
     if (checkClass(subContainerElement, 'sub-minimized')) {
         targetWidth = MINIMIZED;
