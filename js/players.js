@@ -1,8 +1,8 @@
 const state = {
     sub: 0,             // 0 - tw and 1 - yt
 
-    tw_is_ready = false,
-    yt_is_ready = false,
+    tw_is_ready: false,
+    yt_is_ready: false,
 
     tw_quality: "",
     yt_quality: ""
