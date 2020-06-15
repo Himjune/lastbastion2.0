@@ -47,9 +47,9 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * SUB_VIDEO_POS.left);
 
     let parent = subContainerElement.parentElement;
-    const MIN_WIDTH = 300;
-    const MIN_HEIGHT = 168;
-    const MINIMIZED = 50;
+    const MIN_WIDTH = 192;
+    const MIN_HEIGHT = 108;
+    const MINIMIZED = 40;
     const MOVE_BTN_MULT = 0.6;
 
     if (checkClass(subContainerElement, 'sub-minimized')) {
