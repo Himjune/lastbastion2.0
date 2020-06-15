@@ -235,12 +235,12 @@ const LAST_MOVEMENT = {
 function subContainerMove(e) {
     let container = document.querySelector('.sub-video-container');
 
-    let targetX = e.clientX;
-    let targetY = e.clientY;
+    let targetX = e.offsetX;
+    let targetY = e.offsetY;
 
     if (e.touches) {
-        targetX = e.touches[0].clientX;
-        targetY = e.touches[0].clientY;
+        targetX = e.touches[0].offsetX;
+        targetY = e.touches[0].offsetY;
     }
 
     let relativeLeft = (targetX - 0.5 * container.offsetWidth - MAIN_VIDEO_POS.left) / MAIN_VIDEO_POS.width;
