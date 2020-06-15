@@ -139,7 +139,9 @@ function makeRatioSize(element, ratio, isMain) {
         MAIN_VIDEO_POS.top = targetTop;
         MAIN_VIDEO_POS.left = targetLeft;
 
-        document.querySelector('#controlsContainer').style.bottom = targetTop-1 + 'px';
+        let controlBottom = targetTop-4;
+        if (controlBottom < 0) controlBottom = 0;
+        document.querySelector('#controlsContainer').style.bottom = controlBottom + 'px';
     }
 
     element.style.width = targetWidth + 'px';
