@@ -200,6 +200,15 @@ body {
     z-index: 25000;
 }
 
+#midScreenControlsContainer {
+    width: 40%;
+    height: 40%;
+}
+#playMidBtn {
+    width: 6rem;
+    height: 6rem;
+}
+
 #moveBtnContainer {
     border: 1px solid red;
 }

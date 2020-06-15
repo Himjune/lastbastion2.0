@@ -394,19 +394,20 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 var players_ready = false;
 function playersAreReadyNow() {
     document.querySelector('#playMainBtn').innerText = 'P';
-
+    document.querySelector('#playMidBtn').innerText = 'P';
+    
     players_ready = true;
 }
-
-document.querySelector('#playMainBtn').addEventListener('click', function (e) {
-    e.preventDefault();
+function playPause() {
 
     if (players_ready) {
         startPlayers();
     }
-})
 
+}
 
+document.querySelector('#playMainBtn').addEventListener('click', playPause())
+document.querySelector('#playMidBtn').addEventListener('click', playPause())
 
 document.querySelector('#fullMainBtn').addEventListener('click', function (e) {
     e.preventDefault();
