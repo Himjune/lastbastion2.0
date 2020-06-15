@@ -47,13 +47,13 @@ const yt_def_props = {
 */
 let param = util_get_query_param('yt');
 if (param !== '') yt_def_props.videoId = param;
+document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v='+yt_def_props.videoId;
 
 param = util_get_query_param('tw');
-if (param !== '') {
-    tw_def_props.channel = param;
+if (param !== '') tw_def_props.channel = param;
+document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/'+tw_def_props.channel;
+document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/'+param+'/chat?darkpopout&parent=himjune.github.io';
 
-    document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/'+param+'/chat?darkpopout&parent=himjune.github.io';
-}
 /*
     END INIT FROM PARAMS
 */
@@ -97,7 +97,7 @@ function startPlayers () {
     if (state.playing) {
         tw_player.pause();
         yt_player.pauseVideo();
-        
+
         state.playing = false;
     } else {
         tw_player.play();
