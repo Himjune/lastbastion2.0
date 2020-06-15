@@ -34,8 +34,26 @@ function checkClass(element, className) {
 }
 
 function checkFullscreen() {
-    return !((document.fullScreenElement !== undefined && document.fullScreenElement === null) || 
-    (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || 
-    (document.mozFullScreen !== undefined && !document.mozFullScreen) || 
-    (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen));
+    return !((document.fullScreenElement !== undefined && document.fullScreenElement === null) ||
+        (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) ||
+        (document.mozFullScreen !== undefined && !document.mozFullScreen) ||
+        (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen));
+}
+
+function util_get_query_param(param_name) {
+    let param_val = '' // '' will be returned if there is no such param
+
+    const hash_string = decodeURIComponent(parent.location.hash)
+    if (hash_string.length > 0) {
+        // starting from char 1 to skip first '#'
+        const param_strings = hash_string.substring(1).split('&')
+        param_strings.forEach(function (str) {
+            const cur_param_splited = str.split('=')
+            if (cur_param_splited[0] === param_name) {
+                param_val = cur_param_splited[1]
+            }
+        })
+    }
+
+    return param_val
 }

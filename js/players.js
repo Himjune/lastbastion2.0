@@ -7,7 +7,7 @@ const state = {
 const tw_def_props = {
     width: 400,
     height: 300,
-    channel: "gamelifeow",
+    channel: "outbreak",
     layout: "video",
     theme: "dark",
     autoplay: true,
@@ -24,6 +24,22 @@ const yt_def_props = {
         'onStateChange': onPlayerStateChange
     }
 }
+
+/*
+    INIT FROM PARAMS
+*/
+let param = util_get_query_param('yt');
+if (param !== '') yt_def_props.videoId = param;
+
+param = util_get_query_param('tw');
+if (param !== '') {
+    tw_def_props.channel = param;
+
+    document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/'+param+'/chat?darkpopout&parent=himjune.github.io';
+}
+/*
+    END INIT FROM PARAMS
+*/
 
 var yt_player;
 var tw_player = new Twitch.Player('twContainer', tw_def_props);
