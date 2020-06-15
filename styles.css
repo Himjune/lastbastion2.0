@@ -200,10 +200,6 @@ body {
     z-index: 25000;
 }
 
-#midScreenControlsContainer {
-    width: 40%;
-    height: 40%;
-}
 .mid-screen-btns {
     width: 12rem;
     height: 12rem;
