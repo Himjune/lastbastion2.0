@@ -28,7 +28,8 @@ const tw_def_props = {
     layout: "video",
     theme: "dark",
     autoplay: false,
-    parent: ["himjune.github.io"]
+    parent: ["himjune.github.io"],
+    controls: false
 }
 
 const yt_def_props = {
