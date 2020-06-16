@@ -268,9 +268,13 @@ body {
     -webkit-transform: translate(-50%, -50%) !important;
     -o-transform: translate(-50%, -50%) !important;
 }
-.sub-video-container .iconify path {
-    fill: white;
-    stroke: #1E6900;
-    stroke-width: 1px;
-    stroke-linejoin: round;
+
+#subResizeBtn .iconify {
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: 0px;
+    right: 0px;
+
+    transform: none !important;
 }
