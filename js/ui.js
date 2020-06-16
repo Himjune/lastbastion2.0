@@ -394,7 +394,6 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 var players_ready = false;
 function playersAreReadyNow() {
     document.querySelector('#playMainBtn').innerText = 'P';
-    document.querySelector('#playMidBtn').innerText = 'P';
     
     players_ready = true;
 }

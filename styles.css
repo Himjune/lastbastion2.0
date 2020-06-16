@@ -245,7 +245,7 @@ body {
 }
 
 /* buttons */
-.sub-container-buttons {
+.control-buttons {
     position: relative;
 
     opacity: 0.9;
@@ -257,7 +257,7 @@ body {
     background-color: transparent;
     border: 1px solid blue;
 }
-.sub-video-container .iconify {
+.control-buttons .iconify {
     color: white;
     position: absolute;
     top: 50%;
@@ -278,3 +278,4 @@ body {
 
     transform: none !important;
 }
+
