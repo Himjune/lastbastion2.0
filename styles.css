@@ -141,6 +141,7 @@ body {
     right: 0.5rem;
 }
 .main-controls-buttons {
+    display: inline-block;
     width: 2rem;
     height: 2rem;
 }
