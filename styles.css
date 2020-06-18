@@ -270,6 +270,7 @@ body {
 }
 
 .sub-controls-buttons {
+    display: inline-block;
     width: 2rem;
     height: 2rem;
 }
