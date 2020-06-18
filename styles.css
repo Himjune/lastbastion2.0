@@ -306,3 +306,6 @@ body {
 .playing .play-icon {
     visibility: hidden;
 }
+.playing #midScreenControlsContainer {
+    visibility: hidden;
+}
