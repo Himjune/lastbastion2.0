@@ -403,6 +403,7 @@ function playPause() {
 
     if (players_ready) {
         toggleClass(document.querySelector('#playerContainer','playing'));
+        toggleClass(document.querySelector('#playerContainer','paused'));
         startPlayers();
     }
 

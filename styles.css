@@ -298,3 +298,10 @@ body {
 .loading .loaded-icon {
     visibility: hidden;
 }
+
+.paused .pause-icon {
+    visibility: hidden;
+}
+.plaing .play-icon {
+    visibility: hidden;
+}
