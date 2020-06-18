@@ -302,6 +302,6 @@ body {
 .paused .pause-icon {
     visibility: hidden;
 }
-.plaing .play-icon {
+.playing .play-icon {
     visibility: hidden;
 }
