@@ -279,7 +279,7 @@ body {
     transform: none !important;
 }
 
-.loaded .loaded-icon {
+.loaded .loading-icon {
     visibility: hidden;
 }
 .loading .loaded-icon {
