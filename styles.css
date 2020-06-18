@@ -269,6 +269,11 @@ body {
     -o-transform: translate(-50%, -50%) !important;
 }
 
+.sub-controls-buttons {
+    width: 2rem;
+    height: 2rem;
+}
+
 #subResizeBtn .iconify {
     position: absolute;
     top: auto;
