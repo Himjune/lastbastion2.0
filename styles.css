@@ -275,6 +275,13 @@ body {
     height: 2rem;
 }
 
+#subResizeBtn {
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: 0px;
+    right: 0px;
+}
 #subResizeBtn .iconify {
     position: absolute;
     top: auto;
