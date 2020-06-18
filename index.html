@@ -19,7 +19,7 @@
 
 <body>
     <div id="fullContainer">
-        <div id="playerContainer" class="chat-opened">
+        <div id="playerContainer" class="chat-opened loading">
             <div id="playPauseButton" class="main-controls"></div>
     
             <div class="video-16-9-container main-video-container yt-video-container">
@@ -65,15 +65,17 @@
             </div>
     
             <div id="midScreenControlsContainer" class="main-controls centered-block">
-                <button id="playMidBtn" class="loading main-controls-buttons mid-screen-btns control-buttons">
-                    <span class="iconify" data-icon="websymbol:clock" data-inline="false" data-width="100%"></span>
+                <button id="playMidBtn" class="main-controls-buttons mid-screen-btns control-buttons">
+                    <span class="iconify loading-icon" data-icon="websymbol:clock" data-inline="false" data-width="100%"></span>
+                    <span class="iconify loaded-icon" data-icon="jam:play-square" data-inline="false" data-width="100%"></span>
                 </button>
             </div>
                     
             <div id="controlsContainer" class="main-controls">
                 <div class="left-main-buttons main-buttons-group">
-                    <button id="playMainBtn" class="loading main-controls-buttons control-buttons">
-                        <span class="iconify" data-icon="websymbol:clock" data-inline="false" data-width="100%"></span>
+                    <button id="playMainBtn" class="main-controls-buttons control-buttons">
+                        <span class="iconify loading-icon" data-icon="websymbol:clock" data-inline="false" data-width="100%"></span>
+                        <span class="iconify loaded-icon" data-icon="jam:play-square" data-inline="false" data-width="100%"></span>
                     </button>
                     <button id="ytVolMainBtn" class="main-controls-buttons">yV</button>
                     <button id="twVolMainBtn" class="main-controls-buttons">tV</button>

@@ -393,7 +393,9 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 */
 var players_ready = false;
 function playersAreReadyNow() {
-    document.querySelector('#playMainBtn').innerText = 'P';
+    let playerContainer = document.querySelector('#playerContainer')
+    toggleClass(playerContainer,'loading');
+    toggleClass(playerContainer,'loaded');
     
     players_ready = true;
 }
