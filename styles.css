@@ -40,6 +40,8 @@ body {
 #chatBtn {
     position: absolute;
 
+    transform: rotate(270deg);
+
     top: 0.5rem;
     right: 0.5rem;
 
@@ -48,6 +50,7 @@ body {
 }
 #chatBtn.chat-opened {
     left: calc(100% - 22.5rem);
+    transform: rotate(90deg);
 }
 
 #chatContainer {
@@ -146,7 +149,8 @@ body {
     height: 2rem;
 }
 
-#syncDelayMainBtn {
+#syncDelayDisplay {
+    top: -50%;
     display: inline-block;
     height: 100%;
     width: 5rem;
