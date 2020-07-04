@@ -533,21 +533,29 @@ function toggleFullScreen() {
         else twSetVolume(volume);
     }
 
+    function ytMuteBtn(e) {
+        let volBtn = document.querySelector('#ytVolMainBtn');
+        toggleClass(volBtn, 'muted');
+        console.log('mute', volBtn);
+        ytMute();
+
+        return 0;
+    }
+    function twMuteBtn(e) {
+        let volBtn = document.querySelector('#twVolMainBtn');
+        toggleClass(volBtn, 'muted');
+        console.log('mute', volBtn);
+        twMute();
+
+        return 0;
+    }
+
     function handleVolChange (e) {
         let is_yt = (e.target.id.slice(0,2) === 'yt');
         console.log(e.target, e.target.id.slice(0,2), is_yt)
         let volBtn;
         if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
         else volBtn = document.querySelector('#twVolMainBtn');
-
-        if (checkClass(e.target, 'volume-btn')) {
-            toggleClass(volBtn, 'muted');
-            console.log('mute', volBtn);
-            if (is_yt) ytMute();
-            else twMute();
-
-            return 0;
-        }
 
         removeClass(volBtn, 'vhig');
         removeClass(volBtn, 'vlow');
@@ -568,10 +576,10 @@ function toggleFullScreen() {
     }
 
     document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#ytVolMainBtn').addEventListener('click', handleVolChange);
+    document.querySelector('#ytVolMainBtn').addEventListener('click', ytMuteBtn);
     
     document.querySelector('#twVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#twVolMainBtn').addEventListener('click', handleVolChange);
+    document.querySelector('#twVolMainBtn').addEventListener('click', twMuteBtn);
 
 /*
     END VOLUME
