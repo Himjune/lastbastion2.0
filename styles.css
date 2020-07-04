@@ -371,10 +371,10 @@ body {
 .muted .vmut-icon {
     visibility: visible;
 }
-.mutrd .vlow-icon {
+.muted .vlow-icon {
     visibility: hidden !important;
 }
-.mutrd .vhig-icon {
+.muted .vhig-icon {
     visibility: hidden !important;
 }
 
