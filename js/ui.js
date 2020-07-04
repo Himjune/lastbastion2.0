@@ -542,9 +542,10 @@ function toggleFullScreen() {
         return 0;
     }
     function twMuteBtn(e) {
+        
         let volBtn = document.querySelector('#twVolMainBtn');
         toggleClass(volBtn, 'muted');
-        console.log('mute', volBtn);
+        console.log('mute', e.target, volBtn);
         twMute();
 
         return 0;
