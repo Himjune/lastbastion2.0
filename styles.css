@@ -342,3 +342,38 @@ body {
 .playing #midScreenControlsContainer {
     visibility: hidden;
 }
+
+.volume-control-block {
+    position: absolute;
+    left: 0px;
+    bottom: 2rem;
+    width: 100%;
+    height: 300%;
+
+    border-radius: 0.25rem 0.25rem 0 0;
+    
+    background-color: gray;
+    opacity: 0.95;
+}
+.volume-control-block.hidden {
+    visibility: hidden;
+}
+.volume-control-block input {
+    width: 100%;
+    height: 96%;
+    -webkit-appearance: slider-vertical;
+    writing-mode: bt-lr;
+}
+
+.volume-icon {
+    visibility: hidden;
+}
+.muted .vmut-icon {
+    visibility: visible;
+}
+.vlow .vlow-icon {
+    visibility: visible;
+}
+.vhig .vhig-icon {
+    visibility: visible;
+}

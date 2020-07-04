@@ -478,3 +478,46 @@ function toggleFullScreen() {
     END FULLSCREEN
 */
 
+/*
+    VOLUME
+*/
+    let hideYtVolTimer = 0;
+    let hideTwVolTimer = 0;
+    const HIDE_TIME = 2000;
+    
+    document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
+        clearTimeout(hideYtVolTimer);
+    });
+    document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', () => {
+        hideYtVolTimer = setTimeout(() => {
+            let inputBlock = document.querySelector('#ytVolInputBlock');
+            toggleClass(inputBlock,'hidden');
+        }, HIDE_TIME);
+    });
+
+    document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
+        let inputBlock = document.querySelector('#ytVolInputBlock');
+        if (checkClass(inputBlock,'hidden')) {
+            toggleClass(inputBlock,'hidden');
+            hideYtVolTimer = setTimeout(() => {
+                toggleClass(inputBlock,'hidden');
+            }, HIDE_TIME);
+        }
+    })
+    document.querySelector('#ytVolMainBtn').addEventListener('click', () => {
+
+    })
+
+    function handleVolChange (e) {
+        let val = e.target.value;
+
+        if (val < 2) {
+            val = 2;
+            e.target.value = 2;
+        }
+    }
+    document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
+
+/*
+    END VOLUME
+*/
