@@ -535,14 +535,14 @@ function toggleFullScreen() {
 
     function handleVolChange (e) {
         let is_yt = (e.target.id.slice(0,2) === 'yt');
-
+        console.log(e.target, e.target.id.slice(0,2), is_yt)
         let volBtn;
         if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
         else volBtn = document.querySelector('#twVolMainBtn');
 
         if (checkClass(e.target, 'volume-btn')) {
             toggleClass(volBtn, 'muted');
-
+            console.log('mute', volBtn);
             if (is_yt) ytMute();
             else twMute();
 
