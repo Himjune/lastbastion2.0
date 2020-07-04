@@ -371,6 +371,13 @@ body {
 .muted .vmut-icon {
     visibility: visible;
 }
+.mutrd .vlow-icon {
+    visibility: hidden !important;
+}
+.mutrd .vhig-icon {
+    visibility: hidden !important;
+}
+
 .vlow .vlow-icon {
     visibility: visible;
 }

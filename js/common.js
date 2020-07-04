@@ -39,6 +39,15 @@ function checkClass(element, className) {
     return res;
 }
 
+function removeClass(element, className) {
+    if (checkClass(element, className))
+        toggleClass(element, className);
+}
+function setClass(element, className) {
+    if (!checkClass(element, className))
+        toggleClass(element, className);
+}
+
 function checkFullscreen() {
     return !((document.fullScreenElement !== undefined && document.fullScreenElement === null) ||
         (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) ||

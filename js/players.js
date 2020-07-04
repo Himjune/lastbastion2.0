@@ -100,6 +100,21 @@ function onPlayerStateChange(event) {
 }
 
 
+function twSetVolume(volume) {
+    volume = parseFloat(volume)/100.0;
+    tw_player.setVolume(volume);
+}
+function ytSetVolume(volume) {
+    volume = parseInt(volume);
+    yt_player.setVolume(volume);
+}
+function twMute() {
+    tw_player.setMuted(!tw_player.getMuted());
+}
+function ytMute() {
+    if (yt_player.isMuted()) yt_player.unMute();
+    else yt_player.mute();
+}
 
 function startPlayers () {
     if (state.playing) {

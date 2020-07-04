@@ -485,6 +485,7 @@ function toggleFullScreen() {
     let hideTwVolTimer = 0;
     const HIDE_TIME = 2000;
     
+    // yt-volume-cintrols
     document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
         clearTimeout(hideYtVolTimer);
     });
@@ -504,19 +505,73 @@ function toggleFullScreen() {
             }, HIDE_TIME);
         }
     })
-    document.querySelector('#ytVolMainBtn').addEventListener('click', () => {
 
+    // tw-volume-cintrols
+    document.querySelector('#twVolInputBlock').addEventListener('mouseenter', () => {
+        clearTimeout(hideTwVolTimer);
+    });
+    document.querySelector('#twVolInputBlock').addEventListener('mouseleave', () => {
+        hideTwVolTimer = setTimeout(() => {
+            let inputBlock = document.querySelector('#twVolInputBlock');
+            toggleClass(inputBlock,'hidden');
+        }, HIDE_TIME);
+    });
+
+    document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
+        let inputBlock = document.querySelector('#twVolInputBlock');
+        if (checkClass(inputBlock,'hidden')) {
+            toggleClass(inputBlock,'hidden');
+            hideTwVolTimer = setTimeout(() => {
+                toggleClass(inputBlock,'hidden');
+            }, HIDE_TIME);
+        }
     })
 
-    function handleVolChange (e) {
-        let val = e.target.value;
-
-        if (val < 2) {
-            val = 2;
-            e.target.value = 2;
-        }
+    // set-volumes-common
+    function setVolume(volume, is_yt) {
+        if (is_yt) ytSetVolume(volume);
+        else twSetVolume(volume);
     }
+
+    function handleVolChange (e) {
+        let is_yt = (e.target.id.slice(0,2) === 'yt');
+
+        let volBtn;
+        if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
+        else volBtn = document.querySelector('#twVolMainBtn');
+
+        if (checkClass(e.target, 'volume-btn')) {
+            toggleClass(volBtn, 'muted');
+
+            if (is_yt) ytMute();
+            else twMute();
+
+            return 0;
+        }
+
+        removeClass(volBtn, 'vhig');
+        removeClass(volBtn, 'vlow');
+
+        let val = e.target.value;
+        let slider = e.target;
+       
+        if (val <= 2) {
+            val = 2;
+            slider.value = 2;
+
+            setClass(volBtn, 'vlow');
+        } else
+            setClass(volBtn, 'vhig');
+        
+        if (is_yt) setYtVolume(val);
+        else setTwVolume(val);
+    }
+
     document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
+    document.querySelector('#ytVolMainBtn').addEventListener('click', handleVolChange);
+    
+    document.querySelector('#twVolInput').addEventListener('change', handleVolChange);
+    document.querySelector('#twVolMainBtn').addEventListener('click', handleVolChange);
 
 /*
     END VOLUME
