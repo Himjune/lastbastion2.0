@@ -563,8 +563,8 @@ function toggleFullScreen() {
         } else
             setClass(volBtn, 'vhig');
         
-        if (is_yt) setYtVolume(val);
-        else setTwVolume(val);
+        if (is_yt) ytSetVolume(val);
+        else twSetVolume(val);
     }
 
     document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
