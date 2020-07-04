@@ -534,6 +534,8 @@ function toggleFullScreen() {
     }
 
     function ytMuteBtn(e) {
+        if (e.target.id === 'ytVolInput') return 0;
+        
         let volBtn = document.querySelector('#ytVolMainBtn');
         toggleClass(volBtn, 'muted');
         console.log('mute', volBtn);
@@ -542,7 +544,8 @@ function toggleFullScreen() {
         return 0;
     }
     function twMuteBtn(e) {
-        
+        if (e.target.id === 'twVolInput') return 0;
+
         let volBtn = document.querySelector('#twVolMainBtn');
         toggleClass(volBtn, 'muted');
         console.log('mute', e, volBtn);
@@ -552,6 +555,7 @@ function toggleFullScreen() {
     }
 
     function handleVolChange (e) {
+        e.stopPropagation();
         let is_yt = (e.target.id.slice(0,2) === 'yt');
         console.log(e.target, e.target.id.slice(0,2), is_yt)
         let volBtn;
