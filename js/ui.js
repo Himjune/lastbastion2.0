@@ -545,7 +545,7 @@ function toggleFullScreen() {
         
         let volBtn = document.querySelector('#twVolMainBtn');
         toggleClass(volBtn, 'muted');
-        console.log('mute', e.target, volBtn);
+        console.log('mute', e, volBtn);
         twMute();
 
         return 0;
