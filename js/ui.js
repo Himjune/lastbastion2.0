@@ -563,8 +563,8 @@ function toggleFullScreen() {
         let val = e.target.value;
         let slider = e.target;
        
-        if (val <= 2) {
-            val = 2;
+        if (val <= 1) {
+            val = 1;
             slider.value = 2;
 
             setClass(volBtn, 'vlow');
