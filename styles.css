@@ -110,6 +110,11 @@ body {
     visibility: hidden;
 }
 
+
+.mid-screen-controls {
+    z-index: 15000;
+}
+
 .main-controls {
     z-index: 15000;
 }
@@ -176,6 +181,12 @@ body {
     border-color: purple;
 }
 
+.controls-hidden .main-controls{
+    display: none !important;
+}
+.controls-hidden .sub-controls{
+    display: none !important;
+}
 
 #syncDelayDisplay {
     top: -55%;
