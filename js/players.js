@@ -43,11 +43,45 @@ const yt_def_props = {
     }
 }
 
+
 /*
     INIT FROM PARAMS
 */
+const playlist = [
+    {
+      link: 'Xz7fnyN-7fw',
+      date: Date.UTC(2020, 6, 3, 18, 30, 0)
+    },
+    {
+      link: 'LkJgdJG_i8M',
+      date: Date.UTC(2020, 6, 4, 1, 30, 0)
+    },
+    {
+      link: 'JbLMRpS66YU',
+      date: Date.UTC(2020, 6, 4, 18, 0, 0)
+    },
+    {
+      link: 'OTDHDrhBP1w',
+      date: Date.UTC(2020, 6, 5, 7, 30, 0)
+    },
+    {
+      link: 'oh92uvQ7DZI',
+      date: Date.UTC(2020, 6, 5, 18, 0, 0)
+    }
+]
 let param = util_get_query_param('yt');
-if (param !== '') yt_def_props.videoId = param;
+if (param === '') {
+    let cur = Date.now()
+    let idx = 0;
+    while (idx < playlist.length && cur > playlist[idx].date) {
+      idx++;
+    }
+    idx = idx-1;
+  
+    videoId = playlist[idx].link;
+    console.log('YtFound:', cur, idx, playlist[idx].date, playlist[idx].link);
+}
+yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v='+yt_def_props.videoId;
 
 param = util_get_query_param('tw');
