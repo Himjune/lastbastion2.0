@@ -83,24 +83,51 @@
                         <span class="iconify loaded-icon pause-icon" data-icon="jam:pause" data-inline="false" data-width="100%"></span>
                     </div>
                     <div id="ytVolMainBtn" class="main-controls-buttons volume-btn control-buttons vlow">
-                        <div class="main-controls-buttons-bg yt-button-bg"></div>
-                        <span class="iconify volume-icon vmut-icon" data-icon="jam:volume-mute-square" data-inline="false" data-width="100%"></span>
-                        <span class="iconify volume-icon vlow-icon" data-icon="jam:volume-square" data-inline="false" data-width="100%"></span>
-                        <span class="iconify volume-icon vhig-icon" data-icon="jam:volume-up-square" data-inline="false" data-width="100%"></span>
+                        <div id="ytVolBtnContainer" class="volume-btn-container">
+                            <div class="main-controls-buttons-bg yt-button-bg"></div>
+                            <span class="iconify volume-icon vmut-icon" data-icon="jam:volume-mute-square" data-inline="false" data-width="100%"></span>
+                            <span class="iconify volume-icon vlow-icon" data-icon="jam:volume-square" data-inline="false" data-width="100%"></span>
+                            <span class="iconify volume-icon vhig-icon" data-icon="jam:volume-up-square" data-inline="false" data-width="100%"></span>
+                        </div>
+
                         <div id="ytVolInputBlock" class="volume-control-block hidden">
+                            <div id="ytVolUpBtn" class='volume-up-btn'>
+                                <div class="volume-small-btn-icon">
+                                    <span class="iconify" data-icon="jam:plus-circle-f" data-inline="false" data-width="100%"></span>
+                                </div>
+                            </div>
                             <input id="ytVolInput" type="range" min="0" max="100" value="2" orient="vertical"></input>
+                            <div id="ytVolDnBtn" class='volume-dn-btn'>
+                                <div class="volume-small-btn-icon">
+                                    <span class="iconify" data-icon="jam:minus-circle-f" data-inline="false" data-width="100%"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="twVolMainBtn" class="main-controls-buttons volume-btn control-buttons vhig">
-                        <div class="main-controls-buttons-bg tw-button-bg"></div>
-                        <span class="iconify volume-icon vmut-icon" data-icon="jam:volume-mute-square" data-inline="false" data-width="100%"></span>
-                        <span class="iconify volume-icon vlow-icon" data-icon="jam:volume-square" data-inline="false" data-width="100%"></span>
-                        <span class="iconify volume-icon vhig-icon" data-icon="jam:volume-up-square" data-inline="false" data-width="100%"></span>
+                        <div id="twVolBtnContainer" class="volume-btn-container">
+                            <div class="main-controls-buttons-bg tw-button-bg"></div>
+                            <span class="iconify volume-icon vmut-icon" data-icon="jam:volume-mute-square" data-inline="false" data-width="100%"></span>
+                            <span class="iconify volume-icon vlow-icon" data-icon="jam:volume-square" data-inline="false" data-width="100%"></span>
+                            <span class="iconify volume-icon vhig-icon" data-icon="jam:volume-up-square" data-inline="false" data-width="100%"></span>
+                        </div>
+                        
                         <div id="twVolInputBlock" class="volume-control-block hidden">
+                            <div id="twVolUpBtn" class='volume-up-btn'>
+                                <div class="volume-small-btn-icon">
+                                    <span class="iconify" data-icon="jam:plus-circle-f" data-inline="false" data-width="100%"></span>
+                                </div>
+                            </div>
                             <input id="twVolInput" type="range" min="0" max="100" orient="vertical"></input>
+                            <div id="twVolDnBtn" class='volume-dn-btn'>
+                                <div class="volume-small-btn-icon">
+                                    <span class="iconify" data-icon="jam:minus-circle-f" data-inline="false" data-width="100%"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="center-main-buttons main-buttons-group">
                     <div id="syncDBackMainBtn" class="main-controls-buttons control-buttons">
                         <div class="main-controls-buttons-bg"></div>

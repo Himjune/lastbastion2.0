@@ -153,7 +153,7 @@ function makeRatioSize(element, ratio, isMain) {
 }
 
 function handleRatioContainers() {
-    console.log('handleM');
+    //console.log('handleM');
     // MAIN
     let container = document.querySelector('.main-video-container');
     placeMainVideoContainer(container);
@@ -437,16 +437,16 @@ function toggleFullScreen() {
         is_fullscreen = true;
 
         if (elem.requestFullscreen) {
-            console.log('fs-general');
+            //console.log('fs-general');
             elem.requestFullscreen();
         } else if (elem.mozRequestFullScreen) { /* Firefox */
-            console.log('fs-ff');
+            //console.log('fs-ff');
             elem.mozRequestFullScreen();
         } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-            console.log('fs-wk');
+            //console.log('fs-wk');
             elem.webkitRequestFullscreen();
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
-            console.log('fs-ms');
+            //console.log('fs-ms');
             elem.msRequestFullscreen();
         }
 
@@ -534,30 +534,54 @@ function toggleFullScreen() {
     }
 
     function ytMuteBtn(e) {
-        if (e.target.id === 'ytVolInput') return 0;
         
         let volBtn = document.querySelector('#ytVolMainBtn');
         toggleClass(volBtn, 'muted');
-        console.log('mute', volBtn);
+        //console.log('mute', volBtn);
         ytMute();
 
         return 0;
     }
     function twMuteBtn(e) {
-        if (e.target.id === 'twVolInput') return 0;
 
         let volBtn = document.querySelector('#twVolMainBtn');
         toggleClass(volBtn, 'muted');
-        console.log('mute', e, volBtn);
+        //console.log('mute', e, volBtn);
         twMute();
 
         return 0;
     }
 
+    function handleVolPatch (e) {
+        let is_yt = (e.currentTarget.id.slice(0,2) === 'yt');
+
+        let is_up = checkClass(e.currentTarget, 'volume-up-btn');
+        //console.log(is_up, e.target);
+
+        let slider; 
+        if (is_yt) slider = document.querySelector('#ytVolInput');
+        else slider = document.querySelector('#twVolInput');
+
+        let curVol = parseInt(slider.value);
+
+        if (is_up) curVol++;
+        else curVol--;
+
+        if (curVol < 1) curVol = 1;
+        if (curVol > 100) curVol = 100;
+
+        slider.value = curVol;
+        setVolume(slider.value, is_yt)
+    }
+    document.querySelector('#ytVolUpBtn').addEventListener('click', handleVolPatch);
+    document.querySelector('#ytVolDnBtn').addEventListener('click', handleVolPatch);
+    document.querySelector('#twVolUpBtn').addEventListener('click', handleVolPatch);
+    document.querySelector('#twVolDnBtn').addEventListener('click', handleVolPatch);
+
     function handleVolChange (e) {
         e.stopPropagation();
         let is_yt = (e.target.id.slice(0,2) === 'yt');
-        console.log(e.target, e.target.id.slice(0,2), is_yt)
+        //console.log(e.target, e.target.id.slice(0,2), is_yt)
         let volBtn;
         if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
         else volBtn = document.querySelector('#twVolMainBtn');
@@ -581,10 +605,10 @@ function toggleFullScreen() {
     }
 
     document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#ytVolMainBtn').addEventListener('click', ytMuteBtn);
+    document.querySelector('#ytVolBtnContainer').addEventListener('click', ytMuteBtn);
     
     document.querySelector('#twVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#twVolMainBtn').addEventListener('click', twMuteBtn);
+    document.querySelector('#twVolBtnContainer').addEventListener('click', twMuteBtn);
 
 /*
     END VOLUME
