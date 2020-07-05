@@ -618,7 +618,7 @@ function toggleFullScreen() {
     CONTROLS HIDING
 */
 
-    const HIDE_CONTROLS_TIME = 4000;
+    const HIDE_CONTROLS_TIME = 5000;
     let hideControlsTimer = 0;
     const playerElement = document.querySelector('#playerContainer');
 
@@ -642,13 +642,11 @@ function toggleFullScreen() {
         hideControlsTimer = setTimeout(() => {
             setClass(playerElement,'controls-hidden');
         }, HIDE_CONTROLS_TIME);
-
-        console.log('ctimerSet', hideControlsTimer);
     }
     playerElement.addEventListener('mousemove', showControls);
     playerElement.addEventListener('mouseenter', showControls);
     playerElement.addEventListener('touchstart', showControls);
-    
+
 /*
     END CONTROLS HIDING
 */
