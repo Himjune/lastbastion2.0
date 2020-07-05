@@ -40,12 +40,16 @@ function checkClass(element, className) {
 }
 
 function removeClass(element, className) {
-    if (checkClass(element, className))
+    if (checkClass(element, className)) {
         toggleClass(element, className);
+        return true;
+    } else return false;
 }
 function setClass(element, className) {
-    if (!checkClass(element, className))
+    if (!checkClass(element, className)) {
         toggleClass(element, className);
+        return true;
+    } else return false;
 }
 
 function checkFullscreen() {
