@@ -337,11 +337,11 @@ body {
     border-right-color:#f00;
     border-top-color:#fff;
     box-sizing:border-box;
-    height: 100%;
-    left: 0px;
+    height: 90%;
+    left: 5%;
     position: absolute;
-    top: 0px;
-    width: 100%;
+    top: 5%;
+    width: 90%;
     z-index:1;
 }
 .loader:before {
@@ -352,11 +352,11 @@ body {
     border-top-color:#6441a5;
     box-sizing:border-box;
     content:"";
-    height: 80%;
-    left:10%;
+    height: 70%;
+    left:15%;
     position:absolute;
-    top:10%;
-    width: 80%;
+    top:15%;
+    width: 70%;
 }
 .loader:after {
     animation:spin 5s infinite linear;
