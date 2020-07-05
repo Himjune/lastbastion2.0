@@ -288,7 +288,7 @@ body {
     z-index: 20001;
 }
 .paused .screen-saver {
-    opacity: 0.8;
+    opacity: 0.99;
 }
 .tw-video-container .screen-saver {
     background-color: #322052;
