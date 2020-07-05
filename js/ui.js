@@ -6,9 +6,9 @@ const MAIN_VIDEO_POS = {
 }
 
 const SUB_VIDEO_POS = {
-    width: 0.3,
+    width: 0.4,
     height: 0.3,
-    top: 0.1,
+    top: 0.05,
     left: 0
 }
 
