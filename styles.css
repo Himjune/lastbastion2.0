@@ -181,10 +181,10 @@ body {
     border-color: purple;
 }
 
-.controls-hidden .main-controls{
+.controls-hidden .main-controls {
     display: none !important;
 }
-.controls-hidden .sub-controls{
+.controls-hidden .sub-controls {
     display: none !important;
 }
 
@@ -196,6 +196,64 @@ body {
     background-color: lightgray;
 }
 
+#syncStartMainBtn .main-controls-buttons-bg {
+    background: linear-gradient(-45deg, #f00, lime, #6441a5, lime, #f00);
+    background-size: 500% 500%;
+    opacity: 0.99;
+	animation: gradient 8s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 250% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.sync-icon {
+    position: absolute;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+
+    top: 0;
+    left: 0;
+}
+
+.sync-stop {display: none;}
+.syncing .sync-start {display: none;}
+.syncing .sync-stop {display: none;}
+
+.sync-label {
+    position: absolute;
+
+    top: 0;
+    left: 2rem;
+
+    display: inline-block;
+
+    width: auto;
+    height: 100%;
+
+    white-space: nowrap;
+
+    padding: 0 0.2rem;
+    line-height: 2rem;
+
+    color: white;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+.sync-btns {
+    display: none;
+}
+.syncing .sync-btns {
+    display: inline-block;
+}
 
 .video-16-9-container {
     width: 100%;

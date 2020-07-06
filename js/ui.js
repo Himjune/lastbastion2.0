@@ -618,7 +618,7 @@ function toggleFullScreen() {
     CONTROLS HIDING
 */
 
-    const HIDE_CONTROLS_TIME = 5000;
+    const HIDE_CONTROLS_TIME = 5000000;
     let hideControlsTimer = 0;
     const playerElement = document.querySelector('#playerContainer');
 
@@ -629,7 +629,7 @@ function toggleFullScreen() {
             clearTimeout(hideControlsTimer);
         }
     }
-    playerElement.addEventListener('mouseleave', hideControls);
+    //playerElement.addEventListener('mouseleave', hideControls);
 
     function showControls() {
         let was_hidden = removeClass(playerElement,'controls-hidden');
@@ -649,4 +649,17 @@ function toggleFullScreen() {
 
 /*
     END CONTROLS HIDING
+*/
+
+/*
+    SYNCING
+*/
+
+    const syncBtnElement = document.querySelector('#syncStartMainBtn');
+    syncBtnElement.addEventListener('click', () => {
+        toggleClass(syncBtnElement, 'syncing');
+    })
+
+/*
+    END SYNCING
 */
