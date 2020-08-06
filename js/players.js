@@ -131,7 +131,7 @@ function onPlayerReady(event) {
     yt_player.setVolume(5);
     console.log('aYq');
     console.log('aaYq', yt_player.getAvailableQualityLevels());
-    //yt_player.setPlaybackQuality("tiny");
+    yt_player.setPlaybackQuality("large");
 
     state.yt_is_ready = true;
     tryReadyPlayers();
@@ -140,6 +140,7 @@ function onPlayerReady(event) {
 }
 function onPlayerStateChange(event) {
     console.log('onPlayerStateChange', event);
+    console.log('cYq', yt_player.getPlaybackQuality());
     console.log('aaaYq', yt_player.getAvailableQualityLevels());
 }
 function onPlaybackQualityChange(event) {
