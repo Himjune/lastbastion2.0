@@ -35,7 +35,7 @@ const tw_def_props = {
 const yt_def_props = {
     height: '360',
     width: '640',
-    playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1 },
+    playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1, 'modestbranding': 1, 'origin': 'himjune.github.io' },
     videoId: 'e1ayB3iFCS8',
     events: {
         'onReady': onPlayerReady,
