@@ -97,6 +97,7 @@ var yt_player;
 var tw_player = new Twitch.Player('twContainer', tw_def_props);
 
 tw_player.addEventListener(Twitch.Player.READY, () => {
+    tw_player.setQuality("160p");
     tw_player.setVolume(1.0);
     tw_player.setMuted(false);
 
@@ -127,6 +128,8 @@ let timer = setTimeout(startYt, 500);
 
 function onPlayerReady(event) {
     yt_player.setVolume(5);
+    yt_player.setPlaybackQuality("small");
+
     state.yt_is_ready = true;
     tryReadyPlayers();
 }
