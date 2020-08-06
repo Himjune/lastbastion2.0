@@ -133,11 +133,14 @@ function onPlayerReady(event) {
 
     state.yt_is_ready = true;
     tryReadyPlayers();
+
+    console.log('iYq', yt_player.getPlaybackQuality());
 }
 function onPlayerStateChange(event) {
 }
 function onPlaybackQualityChange(event) {
     console.log(event);
+    console.log('cYq', yt_player.getPlaybackQuality());
 }
 
 
