@@ -130,7 +130,7 @@ let timer = setTimeout(startYt, 500);
 function onPlayerReady(event) {
     yt_player.setVolume(5);
     console.log('aYq');
-    console.log('aYq', yt_player.getAvailableQualityLevels());
+    console.log('aaYq', yt_player.getAvailableQualityLevels());
     yt_player.setPlaybackQuality("tiny");
 
     state.yt_is_ready = true;
@@ -139,9 +139,11 @@ function onPlayerReady(event) {
     console.log('iYq', yt_player.getPlaybackQuality());
 }
 function onPlayerStateChange(event) {
+    console.log('onPlayerStateChange', event);
+    console.log('aaaYq', yt_player.getAvailableQualityLevels());
 }
 function onPlaybackQualityChange(event) {
-    console.log(event);
+    console.log('onPlaybackQualityChange', event);
     console.log('cYq', yt_player.getPlaybackQuality());
 }
 
