@@ -129,7 +129,8 @@ let timer = setTimeout(startYt, 500);
 
 function onPlayerReady(event) {
     yt_player.setVolume(5);
-    yt_player.setPlaybackQuality("small");
+    console.log('aYq', yt_player.getAvailableQualityLevels());
+    yt_player.setPlaybackQuality("tiny");
 
     state.yt_is_ready = true;
     tryReadyPlayers();
