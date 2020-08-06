@@ -39,7 +39,8 @@ const yt_def_props = {
     videoId: 'e1ayB3iFCS8',
     events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onPlaybackQualityChange': onPlaybackQualityChange
     }
 }
 
@@ -135,6 +136,10 @@ function onPlayerReady(event) {
 }
 function onPlayerStateChange(event) {
 }
+function onPlaybackQualityChange(event) {
+    console.log(event);
+}
+
 
 
 function twSetVolume(volume) {
