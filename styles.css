@@ -226,7 +226,8 @@ body {
 
 .sync-stop {display: none;}
 .syncing .sync-start {display: none;}
-.syncing .sync-stop {display: none;}
+.syncing .sync-stop {display: inline-block;}
+.syncing .sync-label {display: none;}
 
 .sync-label {
     position: absolute;
@@ -253,6 +254,9 @@ body {
 }
 .syncing .sync-btns {
     display: inline-block;
+}
+.syncing .sub-controls {
+    visibility:  hidden !important;
 }
 
 .video-16-9-container {
@@ -554,7 +558,3 @@ body {
 }
 
 
-
-.syncing .sub-controls {
-    visibility:  hidden !important;
-}
