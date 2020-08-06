@@ -48,27 +48,29 @@ const yt_def_props = {
 /*
     INIT FROM PARAMS
 */
+const mounth = 8-1;
+const fday = 7;
 const playlist = [
-    {
-      link: 'Xz7fnyN-7fw',
-      date: Date.UTC(2020, 6, 3, 18, 30, 0)
-    },
-    {
-      link: 'LkJgdJG_i8M',
-      date: Date.UTC(2020, 6, 4, 1, 30, 0)
-    },
-    {
-      link: 'JbLMRpS66YU',
-      date: Date.UTC(2020, 6, 4, 18, 0, 0)
-    },
-    {
-      link: 'OTDHDrhBP1w',
-      date: Date.UTC(2020, 6, 5, 7, 30, 0)
-    },
-    {
-      link: 'oh92uvQ7DZI',
-      date: Date.UTC(2020, 6, 5, 18, 0, 0)
-    }
+  {
+    link: 'NsMjV4-yuE4',
+    date: Date.UTC(2020, mounth, fday, 17, 30, 0)
+  },
+  {
+    link: '0VhlS3z3eiQ',
+    date: Date.UTC(2020, mounth, fday+1, 7, 0, 0)
+  },
+  {
+    link: 't_3REIRsDjg',
+    date: Date.UTC(2020, mounth, fday+1, 17, 30, 0)
+  },
+  {
+    link: 'D4A-UO3bwIE',
+    date: Date.UTC(2020, mounth, fday+2, 17, 30, 0)
+  },
+  {
+    link: 'tcfG8Yu6K5E',
+    date: Date.UTC(2020, mounth, fday+2, 17, 30, 0)
+  },
 ]
 let param = util_get_query_param('yt');
 if (param === '') {
