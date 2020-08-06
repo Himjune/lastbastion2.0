@@ -657,7 +657,7 @@ function toggleFullScreen() {
 
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
-        toggleClass(syncBtnElement, 'syncing');
+        toggleClass(playerElement, 'syncing');
     })
 
 /*

@@ -13,6 +13,8 @@ const state = {
 function switchSubPlayer () {
     if (state.sub) state.sub = 1;
     else state.sub = 0;
+
+    handleTwQuality();
 }
 
 function tryReadyPlayers () {
@@ -171,5 +173,17 @@ function startPlayers () {
         yt_player.playVideo();
         
         state.playing = true;
+    }
+}
+
+function startSyncing () {
+    tw_player.setQuality("480p");
+}
+
+function handleTwQuality () {
+    if (state.sub == 0) {
+        tw_player.setQuality("160p");
+    } else {
+        tw_player.setQuality("720p");
     }
 }

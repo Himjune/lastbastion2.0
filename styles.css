@@ -552,3 +552,9 @@ body {
     bottom: 0;
     right: 0;
 }
+
+
+
+.syncing .sub-controls {
+    visibility:  hidden !important;
+}
