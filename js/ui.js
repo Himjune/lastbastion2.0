@@ -672,7 +672,7 @@ function toggleFullScreen() {
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
         playerState.isSyncing = toggleClass(playerElement, 'syncing');
-
+        console.log('pSt:', playerState.isSyncing);
         if (playerState.isSyncing) {
             changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
         } else {
