@@ -19,8 +19,17 @@ const SUB_SYNC_VIDEO_POS = {
     left: 0
 }
 
-const state = {
-    isSyncing: false
+const playerState = {
+    isSyncing: false,
+    curSubPosition: SUB_VIDEO_POS,
+    prevSubPosition: SUB_VIDEO_POS,
+}
+
+function changeSubVideoPosition(position) {
+    playerState.prevSubPosition = playerState.curSubPosition;
+    playerState.curSubPosition = position;
+
+    placeSubVideoContainer(document.querySelector('.sub-video-container'));
 }
 
 function correctRelativeWidth(width) {
@@ -43,21 +52,6 @@ function placeMainVideoContainer(mainContainerElement) {
     mainContainerElement.style.height = "100%";
 }
 
-function enforceSubVideoContainer(position) {
-    subContainerElement = document.querySelector('.sub-video-container')
-
-    let targetWidth = Math.floor(MAIN_VIDEO_POS.width * position.width);
-    let targetHeight = Math.floor(MAIN_VIDEO_POS.height * position.height);
-
-    let targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * position.top);
-    let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * position.left);
-
-    subContainerElement.style.width = targetWidth + 'px';
-    subContainerElement.style.height = targetHeight + 'px';
-
-    subContainerElement.style.top = targetTop + 'px';
-    subContainerElement.style.left = targetLeft + 'px';
-}
 
 function placeSubVideoContainer(subContainerElement, isResizing = false) {
     let targetWidth = Math.floor(MAIN_VIDEO_POS.width * SUB_VIDEO_POS.width);
@@ -120,14 +114,6 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
             correctRelativeTop(targetTop);
         }
 
-    }
-
-    if (state.isSyncing) {
-        targetWidth = Math.floor(MAIN_VIDEO_POS.width * SUB_SYNC_VIDEO_POS.width);
-        targetHeight = Math.floor(MAIN_VIDEO_POS.height * SUB_SYNC_VIDEO_POS.height);
-
-        targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * SUB_SYNC_VIDEO_POS.top);
-        targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * SUB_SYNC_VIDEO_POS.left);
     }
 
     subContainerElement.style.width = targetWidth + 'px';
@@ -685,9 +671,13 @@ function toggleFullScreen() {
 
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
-        state.isSyncing = toggleClass(playerElement, 'syncing');
+        playerState.isSyncing = toggleClass(playerElement, 'syncing');
 
-        placeSubVideoContainer(document.querySelector('.sub-video-container'));
+        if (playerState.isSyncing) {
+            changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
+        } else {
+            changeSubVideoPosition(SUB_VIDEO_POS);
+        }
     })
 
 /*
