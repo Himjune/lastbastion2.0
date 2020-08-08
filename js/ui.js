@@ -13,14 +13,14 @@ const SUB_VIDEO_POS = {
 }
 
 const SUB_SYNC_VIDEO_POS = {
-    width: 0.99,
-    height: 0.99,
+    width: 0.99999,
+    height: 0.99999,
     top: 0.25,
     left: 0
 }
 
 const state = {
-    isSyncing: true
+    isSyncing: false
 }
 
 function correctRelativeWidth(width) {
