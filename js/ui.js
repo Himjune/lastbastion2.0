@@ -13,10 +13,14 @@ const SUB_VIDEO_POS = {
 }
 
 const SUB_SYNC_VIDEO_POS = {
-    width: 1,
-    height: 1,
+    width: 0.99,
+    height: 0.99,
     top: 0.25,
     left: 0
+}
+
+const state = {
+    isSyncing: true
 }
 
 function correctRelativeWidth(width) {
@@ -116,6 +120,14 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
             correctRelativeTop(targetTop);
         }
 
+    }
+
+    if (state.isSyncing) {
+        targetWidth = Math.floor(MAIN_VIDEO_POS.width * SUB_SYNC_VIDEO_POS.width);
+        targetHeight = Math.floor(MAIN_VIDEO_POS.height * SUB_SYNC_VIDEO_POS.height);
+
+        targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * SUB_SYNC_VIDEO_POS.top);
+        targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * SUB_SYNC_VIDEO_POS.left);
     }
 
     subContainerElement.style.width = targetWidth + 'px';
@@ -673,13 +685,9 @@ function toggleFullScreen() {
 
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
-        let is_going_syncing = toggleClass(playerElement, 'syncing');
+        state.isSyncing = toggleClass(playerElement, 'syncing');
 
-        if (is_going_syncing) {
-            enforceSubVideoContainer(SUB_SYNC_VIDEO_POS);
-        } else {
-            placeSubVideoContainer(document.querySelector('.sub-video-container'));
-        }
+        placeSubVideoContainer(document.querySelector('.sub-video-container'));
     })
 
 /*
