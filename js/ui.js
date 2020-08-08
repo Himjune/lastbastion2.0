@@ -54,13 +54,16 @@ function placeMainVideoContainer(mainContainerElement) {
 
 
 function placeSubVideoContainer(subContainerElement, isResizing = false) {
-    let targetWidth = Math.floor(MAIN_VIDEO_POS.width * SUB_VIDEO_POS.width);
-    let targetHeight = Math.floor(MAIN_VIDEO_POS.height * SUB_VIDEO_POS.height);
+    let curSubPosition = playerState.curSubPosition;
 
-    let targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * SUB_VIDEO_POS.top);
-    let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * SUB_VIDEO_POS.left);
+    let targetWidth = Math.floor(MAIN_VIDEO_POS.width * curSubPosition.width);
+    let targetHeight = Math.floor(MAIN_VIDEO_POS.height * curSubPosition.height);
+
+    let targetTop = Math.floor(MAIN_VIDEO_POS.top + MAIN_VIDEO_POS.height * curSubPosition.top);
+    let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * curSubPosition.left);
 
     let parent = subContainerElement.parentElement;
+    
     const MIN_WIDTH = 192;
     const MIN_HEIGHT = 108;
     const MINIMIZED = 40;
@@ -672,6 +675,7 @@ function toggleFullScreen() {
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
         playerState.isSyncing = toggleClass(playerElement, 'syncing');
+
         console.log('pSt:', playerState.isSyncing);
         if (playerState.isSyncing) {
             changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
