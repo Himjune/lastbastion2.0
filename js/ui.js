@@ -29,7 +29,7 @@ function changeSubVideoPosition(position) {
     playerState.prevSubPosition = playerState.curSubPosition;
     playerState.curSubPosition = position;
 
-    placeSubVideoContainer(document.querySelector('.sub-video-container'));
+    handleRatioContainers();
 }
 
 function correctRelativeWidth(width) {
@@ -63,7 +63,7 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     let targetLeft = Math.floor(MAIN_VIDEO_POS.left + MAIN_VIDEO_POS.width * curSubPosition.left);
 
     let parent = subContainerElement.parentElement;
-    
+
     const MIN_WIDTH = 192;
     const MIN_HEIGHT = 108;
     const MINIMIZED = 40;
