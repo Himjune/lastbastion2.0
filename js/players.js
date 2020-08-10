@@ -11,10 +11,14 @@ const state = {
 }
 
 function switchSubPlayer () {
+    console.log('bSw', state.sub);
     if (state.sub == 0) state.sub = 1;
     else state.sub = 0;
 
+    console.log('iSw', state.sub);
+
     handleTwQuality();
+    console.log('aSw', state.sub);
 }
 
 function tryReadyPlayers () {
