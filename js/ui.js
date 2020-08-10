@@ -6,14 +6,17 @@ const MAIN_VIDEO_POS = {
 }
 
 const SUB_VIDEO_POS = {
-    width: 0.4,
-    height: 0.3,
-    top: 0.05,
-    left: 0,
-    crop: 0,
-    offset: 0,
-    isMinimized: false
 }
+function resetPositionSettings() {
+    SUB_VIDEO_POS.width= 0.4,
+    SUB_VIDEO_POS.height = 0.3,
+    SUB_VIDEO_POS.top = 0.05,
+    SUB_VIDEO_POS.left = 0,
+    SUB_VIDEO_POS.crop = 0,
+    SUB_VIDEO_POS.offset = 0,
+    SUB_VIDEO_POS.isMinimized = false
+}
+resetPositionSettings();
 
 const SUB_SYNC_VIDEO_POS = {
     width: 0.99999,
