@@ -84,7 +84,6 @@ if (param === '') {
     idx = idx-1;
   
     videoId = playlist[idx].link;
-    console.log('YtFound:', cur, idx, playlist[idx].date, playlist[idx].link);
 }
 yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v='+yt_def_props.videoId;

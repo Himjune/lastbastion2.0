@@ -163,8 +163,6 @@ function makeRatioSize(element, ratio, isMain) {
         targetLeft = Math.floor((parent.offsetWidth - targetWidth) / 2);
     }
 
-    console.log(parent, targetWidth, targetHeight, parent.clientWidth, parent.clientHeight);
-
     if (isMain) {
         MAIN_VIDEO_POS.width = targetWidth;
         MAIN_VIDEO_POS.height = targetHeight;
