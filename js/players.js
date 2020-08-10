@@ -11,7 +11,7 @@ const state = {
 }
 
 function switchSubPlayer () {
-    if (state.sub) state.sub = 1;
+    if (state.sub == 0) state.sub = 1;
     else state.sub = 0;
 
     handleTwQuality();
