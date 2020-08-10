@@ -178,14 +178,15 @@ function startSyncing () {
     tw_player.setQuality("480p");
 }
 
-function handleTwQuality (forced = "") {
+function handleTwQuality (isMinimised = false, forced = "") {
     if (forced !== "") {
         tw_player.setQuality(forced);
         return;
     }
 
     if (state.sub == 0) {
-        tw_player.setQuality("480p");
+        if (isMinimised) tw_player.setQuality("160p");
+        else tw_player.setQuality("480p");
     } else {
         tw_player.setQuality("720p");
     }

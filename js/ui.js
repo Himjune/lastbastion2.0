@@ -333,11 +333,7 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 function toggleMinimization() {
     let container = document.querySelector('.sub-video-container');
     SUB_VIDEO_POS.isMinimized = toggleClass(container, 'sub-minimized');
-    if (SUB_VIDEO_POS.isMinimized) {
-        handleTwQuality("160p");
-    } else {
-        handleTwQuality();
-    }
+    handleTwQuality(SUB_VIDEO_POS.isMinimized);
 }
 
 function removeMinimization() {
