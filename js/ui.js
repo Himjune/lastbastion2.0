@@ -382,10 +382,9 @@ document.querySelector('#subMinimizeBtn').addEventListener('click', function (e)
 document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
+    removeMoveStartEvents();
     let subControlsContainer = document.querySelector('#subControlsContainer');
     subControlsContainer = subControlsContainer.parentNode.removeChild(subControlsContainer);
-
-    removeMoveStartEvents();
 
     let containers = document.querySelectorAll('.video-16-9-container');
     for (let index = 0; index < containers.length; index++) {
@@ -394,12 +393,11 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
         toggleClass(container, 'main-video-container');
         toggleClass(container, 'sub-video-container');
     }
-
-    registerMoveStartEvents();
-
     switchSubPlayer();
 
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
+    registerMoveStartEvents();
+
     handleRatioContainers();
 })
 
