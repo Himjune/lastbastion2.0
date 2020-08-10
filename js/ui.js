@@ -9,18 +9,23 @@ const SUB_VIDEO_POS = {
     width: 0.4,
     height: 0.3,
     top: 0.05,
-    left: 0
+    left: 0,
+    crop: 0,
+    offset: 0,
+    isMinimized: false
 }
 
 const SUB_SYNC_VIDEO_POS = {
     width: 0.99999,
     height: 0.99999,
     top: 0.25,
-    left: 0
+    left: 0,
+    crop: 0,
+    offset: 0
 }
 
 const playerState = {
-    isSyncing: false,
+    //isSyncing: false,
     curSubPosition: SUB_VIDEO_POS,
     prevSubPosition: SUB_VIDEO_POS,
 }
@@ -29,6 +34,10 @@ function changeSubVideoPosition(position) {
     playerState.prevSubPosition = playerState.curSubPosition;
     playerState.curSubPosition = position;
 
+    handleRatioContainers();
+}
+function resetSubVideoPosition() {
+    playerState.curSubPosition = playerState.prevSubPosition;
     handleRatioContainers();
 }
 
@@ -67,9 +76,8 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     const MIN_WIDTH = 192;
     const MIN_HEIGHT = 108;
     const MINIMIZED = 40;
-    const MOVE_BTN_MULT = 0.5;
 
-    if (checkClass(subContainerElement, 'sub-minimized')) {
+    if (curSubPosition.isMinimized) {
         targetWidth = MINIMIZED;
         targetHeight = MINIMIZED;
     } else {
@@ -121,7 +129,8 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
 
     subContainerElement.style.width = targetWidth + 'px';
     subContainerElement.style.height = targetHeight + 'px';
-
+    
+    const MOVE_BTN_MULT = 0.5;
     let moveBtnSide = Math.floor(targetWidth * MOVE_BTN_MULT);
     if (targetHeight * MOVE_BTN_MULT < moveBtnSide) moveBtnSide = Math.floor(targetHeight * MOVE_BTN_MULT);
     document.querySelector('#moveBtnContainer').style.width = moveBtnSide + 'px';
@@ -317,12 +326,17 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 /*
     MINIMIZED
 */
+function toggleMinimization() {
+    let container = document.querySelector('.sub-video-container');
+    SUB_VIDEO_POS.isMinimized = toggleClass(container, 'sub-minimized');
+}
+
 function removeMinimization() {
     let container = document.querySelector('.sub-video-container');
     container.removeEventListener('mousedown', startMove);
     container.removeEventListener('touchstart', startMove);
 
-    toggleClass(container, 'sub-minimized');
+    toggleMinimization();
 
     placeSubVideoContainer(container);
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
@@ -333,7 +347,7 @@ document.querySelector('#subMinimizeBtn').addEventListener('click', function (e)
 
     let container = document.querySelector('.sub-video-container');
 
-    toggleClass(container, 'sub-minimized')
+    toggleMinimization();
 
     if (SUB_VIDEO_POS.left < 0.001) SUB_VIDEO_POS.left = 0.001;
     if (SUB_VIDEO_POS.top < 0.001) SUB_VIDEO_POS.top = 0.001;
@@ -674,10 +688,9 @@ function toggleFullScreen() {
 
     const syncBtnElement = document.querySelector('#syncStartMainBtn');
     syncBtnElement.addEventListener('click', () => {
-        playerState.isSyncing = toggleClass(playerElement, 'syncing');
+        let isSyncing = toggleClass(playerElement, 'syncing');
 
-        console.log('pSt:', playerState.isSyncing);
-        if (playerState.isSyncing) {
+        if (isSyncing) {
             changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
         } else {
             changeSubVideoPosition(SUB_VIDEO_POS);
