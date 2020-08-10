@@ -191,5 +191,5 @@ function handleTwQuality (isMinimised = false, forced = "") {
         tw_player.setQuality("720p");
     }
 
-    console.log('bewTwQ', tw_player.getQuality())
+
 }

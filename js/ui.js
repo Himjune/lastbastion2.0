@@ -183,7 +183,7 @@ function makeRatioSize(element, ratio, isMain) {
 }
 
 function handleRatioContainers() {
-    //console.log('handleM');
+
     // MAIN
     let container = document.querySelector('.main-video-container');
     placeMainVideoContainer(container);
@@ -307,7 +307,7 @@ function stopMove(e) {
 }
 
 function startMove(e) {
-    console.log(e);
+
     e.preventDefault()
 
     let container = document.querySelector('#playerContainer');
@@ -487,16 +487,16 @@ function toggleFullScreen() {
         is_fullscreen = true;
 
         if (elem.requestFullscreen) {
-            //console.log('fs-general');
+
             elem.requestFullscreen();
         } else if (elem.mozRequestFullScreen) { /* Firefox */
-            //console.log('fs-ff');
+
             elem.mozRequestFullScreen();
         } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-            //console.log('fs-wk');
+
             elem.webkitRequestFullscreen();
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
-            //console.log('fs-ms');
+
             elem.msRequestFullscreen();
         }
 
@@ -587,7 +587,7 @@ function toggleFullScreen() {
         
         let volBtn = document.querySelector('#ytVolMainBtn');
         toggleClass(volBtn, 'muted');
-        //console.log('mute', volBtn);
+
         ytMute();
 
         return 0;
@@ -596,7 +596,7 @@ function toggleFullScreen() {
 
         let volBtn = document.querySelector('#twVolMainBtn');
         toggleClass(volBtn, 'muted');
-        //console.log('mute', e, volBtn);
+
         twMute();
 
         return 0;
@@ -606,7 +606,7 @@ function toggleFullScreen() {
         let is_yt = (e.currentTarget.id.slice(0,2) === 'yt');
 
         let is_up = checkClass(e.currentTarget, 'volume-up-btn');
-        //console.log(is_up, e.target);
+
 
         let slider; 
         if (is_yt) slider = document.querySelector('#ytVolInput');
@@ -631,7 +631,7 @@ function toggleFullScreen() {
     function handleVolChange (e) {
         e.stopPropagation();
         let is_yt = (e.target.id.slice(0,2) === 'yt');
-        //console.log(e.target, e.target.id.slice(0,2), is_yt)
+
         let volBtn;
         if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
         else volBtn = document.querySelector('#twVolMainBtn');
