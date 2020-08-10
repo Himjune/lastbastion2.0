@@ -190,4 +190,6 @@ function handleTwQuality (forced = "") {
     } else {
         tw_player.setQuality("720p");
     }
+
+    console.log('bewTwQ', tw_player.getQuality())
 }
