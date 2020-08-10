@@ -124,7 +124,7 @@ body {
 }
 
 .main-controls {
-    z-index: 15000;
+    z-index: 40000;
 }
 
 #controlsContainer {
