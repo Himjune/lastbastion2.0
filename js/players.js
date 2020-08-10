@@ -11,14 +11,10 @@ const state = {
 }
 
 function switchSubPlayer () {
-    console.log('bSw', state.sub);
     if (state.sub == 0) state.sub = 1;
     else state.sub = 0;
 
-    console.log('iSw', state.sub);
-
     handleTwQuality();
-    console.log('aSw', state.sub);
 }
 
 function tryReadyPlayers () {
@@ -183,13 +179,15 @@ function startSyncing () {
     tw_player.setQuality("480p");
 }
 
-function handleTwQuality () {
-    let set = false;
+function handleTwQuality (forced = "") {
+    if (forced !== "") {
+        tw_player.setQuality(forced);
+        return;
+    }
+
     if (state.sub == 0) {
-        set = true;
         tw_player.setQuality("160p");
     } else {
         tw_player.setQuality("720p");
     }
-    console.log(set, tw_player.getQuality())
 }

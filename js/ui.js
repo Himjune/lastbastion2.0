@@ -696,8 +696,10 @@ function toggleFullScreen() {
 
         if (isSyncing) {
             changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
+            handleTwQuality("480p");
         } else {
             changeSubVideoPosition(SUB_VIDEO_POS);
+            handleTwQuality();
         }
     })
 
