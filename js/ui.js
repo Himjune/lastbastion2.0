@@ -658,7 +658,7 @@ function toggleFullScreen() {
     CONTROLS HIDING
 */
 
-    const HIDE_CONTROLS_TIME = 5000000;
+    const HIDE_CONTROLS_TIME = 5000;
     let hideControlsTimer = 0;
     const playerElement = document.querySelector('#playerContainer');
 
