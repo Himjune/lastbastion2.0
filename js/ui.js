@@ -299,7 +299,11 @@ function stopMove(e) {
 
     container = document.querySelector('#playerContainer');
     container.removeEventListener('mousemove', subContainerMove)
+    container.removeEventListener('mouseup', stopMove);
+    container.removeEventListener('mouseleave', stopMove);
+
     container.removeEventListener('touchmove', subContainerMove)
+    container.removeEventListener('touchend', stopMove);
 }
 
 function startMove(e) {
@@ -319,6 +323,7 @@ function startMove(e) {
 
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
+
 function registerMoveStartEvents() {
     document.querySelector('#subMoveBtn').addEventListener('mousedown', startMove);
     document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
