@@ -319,9 +319,15 @@ function startMove(e) {
 
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
-
-document.querySelector('#subMoveBtn').addEventListener('mousedown', startMove);
-document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
+function registerMoveStartEvents() {
+    document.querySelector('#subMoveBtn').addEventListener('mousedown', startMove);
+    document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
+}
+function removeMoveStartEvents() {
+    document.querySelector('#subMoveBtn').removeEventListener('mousedown', startMove);
+    document.querySelector('#subMoveBtn').removeEventListener('touchstart', startMove);
+}
+registerMoveStartEvents();
 
 /*
     END SUB MOVE
@@ -379,6 +385,8 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
     let subControlsContainer = document.querySelector('#subControlsContainer');
     subControlsContainer = subControlsContainer.parentNode.removeChild(subControlsContainer);
 
+    removeMoveStartEvents();
+
     let containers = document.querySelectorAll('.video-16-9-container');
     for (let index = 0; index < containers.length; index++) {
         const container = containers[index];
@@ -386,6 +394,8 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
         toggleClass(container, 'main-video-container');
         toggleClass(container, 'sub-video-container');
     }
+
+    registerMoveStartEvents();
 
     switchSubPlayer();
 
