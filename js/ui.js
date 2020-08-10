@@ -307,6 +307,7 @@ function stopMove(e) {
 }
 
 function startMove(e) {
+    console.log(e);
     e.preventDefault()
 
     let container = document.querySelector('#playerContainer');
