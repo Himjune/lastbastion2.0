@@ -669,7 +669,7 @@ function toggleFullScreen() {
             clearTimeout(hideControlsTimer);
         }
     }
-    //playerElement.addEventListener('mouseleave', hideControls);
+    playerElement.addEventListener('mouseleave', hideControls);
 
     function showControls() {
         let was_hidden = removeClass(playerElement,'controls-hidden');
