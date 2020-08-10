@@ -2,7 +2,8 @@ const MAIN_VIDEO_POS = {
     width: 1280,
     height: 720,
     top: 0,
-    left: 0
+    left: 0,
+    offset: 0
 }
 
 const SUB_VIDEO_POS = {
@@ -12,19 +13,17 @@ function resetPositionSettings() {
     SUB_VIDEO_POS.height = 0.3,
     SUB_VIDEO_POS.top = 0.05,
     SUB_VIDEO_POS.left = 0,
-    SUB_VIDEO_POS.crop = 0,
     SUB_VIDEO_POS.offset = 0,
     SUB_VIDEO_POS.isMinimized = false
 }
 resetPositionSettings();
 
 const SUB_SYNC_VIDEO_POS = {
-    width: 0.99999,
-    height: 0.99999,
-    top: 0.25,
+    width: 1,
+    height: 1,
+    top: 0,
     left: 0,
-    crop: 0,
-    offset: 0
+    offset: 0.25
 }
 
 const playerState = {
@@ -140,6 +139,8 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
 
     subContainerElement.style.top = targetTop + 'px';
     subContainerElement.style.left = targetLeft + 'px';
+
+    subContainerElement.querySelector('.offset-container').style.top = curSubPosition.offset*100+'%';
 }
 
 function makeRatioSize(element, ratio, isMain) {
@@ -161,6 +162,8 @@ function makeRatioSize(element, ratio, isMain) {
         targetTop = 0;
         targetLeft = Math.floor((parent.offsetWidth - targetWidth) / 2);
     }
+
+    console.log(parent, targetWidth, targetHeight, parent.clientWidth, parent.clientHeight);
 
     if (isMain) {
         MAIN_VIDEO_POS.width = targetWidth;
