@@ -113,9 +113,32 @@ body {
     background-image: url(img/sombra_pattern.png);
     background-repeat: repeat;
 }
+.sub-video-container.sub-minimized #subMinimizeBtn{
+    visibility: hidden !important;
+}
+.sub-video-container.sub-minimized #subSwitchBtn{
+    visibility: hidden !important;
+}
+.sub-video-container.sub-minimized #subResizeBtn{
+    visibility: hidden !important;
+}
 
-.sub-video-container.sub-minimized .sub-container-buttons{
-    visibility: hidden;
+.sub-video-container.sub-minimized:after{
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    background-size: cover;
+    z-index: 20002;
+}
+.sub-video-container.sub-minimized.tw-video-container:after{
+    background-image: url(img/twLogo.png);
+}
+.sub-video-container.sub-minimized.yt-video-container:after{
+    background-image: url(img/ytLogo.png);
+}
+.sub-video-container.sub-minimized:after:hover{
+    background-size: 0px;
 }
 
 
