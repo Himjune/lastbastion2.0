@@ -180,9 +180,12 @@ function startSyncing () {
 }
 
 function handleTwQuality () {
+    let set = false;
     if (state.sub == 0) {
+        set = true;
         tw_player.setQuality("160p");
     } else {
         tw_player.setQuality("720p");
     }
+    console.log(set, tw_player.getQuality())
 }
