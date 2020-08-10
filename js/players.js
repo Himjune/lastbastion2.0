@@ -186,7 +186,7 @@ function handleTwQuality (forced = "") {
     }
 
     if (state.sub == 0) {
-        tw_player.setQuality("160p");
+        tw_player.setQuality("480p");
     } else {
         tw_player.setQuality("720p");
     }

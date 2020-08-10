@@ -333,6 +333,11 @@ document.querySelector('#subMoveBtn').addEventListener('touchstart', startMove);
 function toggleMinimization() {
     let container = document.querySelector('.sub-video-container');
     SUB_VIDEO_POS.isMinimized = toggleClass(container, 'sub-minimized');
+    if (SUB_VIDEO_POS.isMinimized) {
+        handleTwQuality("160p");
+    } else {
+        handleTwQuality();
+    }
 }
 
 function removeMinimization() {
@@ -696,10 +701,8 @@ function toggleFullScreen() {
 
         if (isSyncing) {
             changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
-            handleTwQuality("480p");
         } else {
             changeSubVideoPosition(SUB_VIDEO_POS);
-            handleTwQuality();
         }
     })
 
