@@ -80,6 +80,7 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     const MIN_HEIGHT = 108;
     const MINIMIZED = 40;
 
+    handleTwQuality(curSubPosition.isMinimized);
     if (curSubPosition.isMinimized) {
         setClass(subContainerElement, 'sub-minimized');
         targetWidth = MINIMIZED;
@@ -348,7 +349,6 @@ registerMoveStartEvents();
 function toggleMinimization() {
     let container = document.querySelector('.sub-video-container');
     SUB_VIDEO_POS.isMinimized = toggleClass(container, 'sub-minimized');
-    handleTwQuality(SUB_VIDEO_POS.isMinimized);
 }
 
 function removeMinimization() {
