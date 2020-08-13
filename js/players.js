@@ -103,7 +103,7 @@ if (param === '') {
     idx = idx - 1;
     if (idx < 0) idx = 0;
 
-    videoId = actPL[idx].link;
+    param = actPL[idx].link;
 }
 
 yt_def_props.videoId = param;
