@@ -81,9 +81,11 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     const MINIMIZED = 40;
 
     if (curSubPosition.isMinimized) {
+        setClass(subContainerElement, 'sub-minimized');
         targetWidth = MINIMIZED;
         targetHeight = MINIMIZED;
     } else {
+        removeClass(subContainerElement, 'sub-minimized');
         if (targetWidth < MIN_WIDTH) {
             targetWidth = MIN_WIDTH;
             correctRelativeWidth(MIN_WIDTH);
