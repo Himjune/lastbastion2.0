@@ -23,7 +23,8 @@ const SUB_SYNC_VIDEO_POS = {
     height: 1,
     top: 0,
     left: 0,
-    offset: 0.25
+    offset: 0.25,
+    isMinimized: false
 }
 
 const playerState = {
