@@ -10,14 +10,14 @@ const state = {
     yt_quality: ""
 }
 
-function switchSubPlayer () {
+function switchSubPlayer() {
     if (state.sub == 0) state.sub = 1;
     else state.sub = 0;
 
     handleTwQuality();
 }
 
-function tryReadyPlayers () {
+function tryReadyPlayers() {
     if (state.yt_is_ready && state.tw_is_ready) {
         playersAreReadyNow();
     }
@@ -50,48 +50,69 @@ const yt_def_props = {
 /*
     INIT FROM PARAMS
 */
-const mounth = 8-1;
-const fday = 7;
+const mounth = 8 - 1;
+const fday = 14;
+const mor = 7, eve = 17;
 const playlist = [
-  {
-    link: 'NsMjV4-yuE4',
-    date: Date.UTC(2020, mounth, fday, 17, 30, 0)
-  },
-  {
-    link: '0VhlS3z3eiQ',
-    date: Date.UTC(2020, mounth, fday+1, 7, 0, 0)
-  },
-  {
-    link: 't_3REIRsDjg',
-    date: Date.UTC(2020, mounth, fday+1, 17, 30, 0)
-  },
-  {
-    link: 'D4A-UO3bwIE',
-    date: Date.UTC(2020, mounth, fday+2, 17, 30, 0)
-  },
-  {
-    link: 'tcfG8Yu6K5E',
-    date: Date.UTC(2020, mounth, fday+2, 17, 30, 0)
-  },
+    {
+        used: true,
+        link: 'Z9hsP7aPWW4',
+        date: Date.UTC(2020, mounth, fday, mor, 0, 0)
+    },
+    {
+        used: true,
+        link: 'B2viLYzyCus',
+        date: Date.UTC(2020, mounth, fday, eve, 0, 0)
+    },
+    {
+        used: true,
+        link: 'HGD1_-yGlpU',
+        date: Date.UTC(2020, mounth, fday + 1, mor, 0, 0)
+    },
+    {
+        used: true,
+        link: 'LN7tVZVYKy8',
+        date: Date.UTC(2020, mounth, fday + 1, eve, 0, 0)
+    },
+    {
+        used: true,
+        link: 'WiZDCYNJg6k',
+        date: Date.UTC(2020, mounth, fday + 2, mor, 0, 0)
+    },
+    {
+        used: true,
+        link: 'kobNbPXYro0',
+        date: Date.UTC(2020, mounth, fday + 2, eve, 0, 0)
+    },
 ]
+
+
 let param = util_get_query_param('yt');
 if (param === '') {
     let cur = Date.now()
     let idx = 0;
-    while (idx < playlist.length && cur > playlist[idx].date) {
-      idx++;
+
+    let actPL = playlist.filter((val) => {
+        return (val.used);
+    })
+
+    while (idx < actPL.length && cur > actPL[idx].date) {
+        idx++;
     }
-    idx = idx-1;
-  
-    videoId = playlist[idx].link;
+
+    idx = idx - 1;
+    if (idx < 0) idx = 0;
+
+    videoId = actPL[idx].link;
 }
+
 yt_def_props.videoId = param;
-document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v='+yt_def_props.videoId;
+document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
 param = util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
-document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/'+tw_def_props.channel;
-document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/'+param+'/chat?darkpopout&parent=himjune.github.io';
+document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
+document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
 
 /*
     END INIT FROM PARAMS
@@ -145,7 +166,7 @@ function onPlaybackQualityChange(event) {
 
 
 function twSetVolume(volume) {
-    volume = parseFloat(volume)/100.0;
+    volume = parseFloat(volume) / 100.0;
     tw_player.setVolume(volume);
 }
 function ytSetVolume(volume) {
@@ -160,7 +181,7 @@ function ytMute() {
     else yt_player.mute();
 }
 
-function startPlayers () {
+function startPlayers() {
     if (state.playing) {
         tw_player.pause();
         yt_player.pauseVideo();
@@ -169,16 +190,16 @@ function startPlayers () {
     } else {
         tw_player.play();
         yt_player.playVideo();
-        
+
         state.playing = true;
     }
 }
 
-function startSyncing () {
+function startSyncing() {
     tw_player.setQuality("480p");
 }
 
-function handleTwQuality (isMinimised = false, forced = "") {
+function handleTwQuality(isMinimised = false, forced = "") {
     if (forced !== "") {
         tw_player.setQuality(forced);
         return;
