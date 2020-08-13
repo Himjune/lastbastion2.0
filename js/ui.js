@@ -9,12 +9,12 @@ const MAIN_VIDEO_POS = {
 const SUB_VIDEO_POS = {
 }
 function resetPositionSettings() {
-    SUB_VIDEO_POS.width= 0.4,
-    SUB_VIDEO_POS.height = 0.3,
-    SUB_VIDEO_POS.top = 0.05,
-    SUB_VIDEO_POS.left = 0,
-    SUB_VIDEO_POS.offset = 0,
-    SUB_VIDEO_POS.isMinimized = false
+    SUB_VIDEO_POS.width = 0.4,
+        SUB_VIDEO_POS.height = 0.3,
+        SUB_VIDEO_POS.top = 0.05,
+        SUB_VIDEO_POS.left = 0,
+        SUB_VIDEO_POS.offset = 0,
+        SUB_VIDEO_POS.isMinimized = false
 }
 resetPositionSettings();
 
@@ -131,7 +131,7 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
 
     subContainerElement.style.width = targetWidth + 'px';
     subContainerElement.style.height = targetHeight + 'px';
-    
+
     const MOVE_BTN_MULT = 0.5;
     let moveBtnSide = Math.floor(targetWidth * MOVE_BTN_MULT);
     if (targetHeight * MOVE_BTN_MULT < moveBtnSide) moveBtnSide = Math.floor(targetHeight * MOVE_BTN_MULT);
@@ -140,7 +140,7 @@ function placeSubVideoContainer(subContainerElement, isResizing = false) {
     subContainerElement.style.top = targetTop + 'px';
     subContainerElement.style.left = targetLeft + 'px';
 
-    subContainerElement.querySelector('.offset-container').style.top = curSubPosition.offset*100+'%';
+    subContainerElement.querySelector('.offset-container').style.top = curSubPosition.offset * 100 + '%';
 }
 
 function makeRatioSize(element, ratio, isMain) {
@@ -169,7 +169,7 @@ function makeRatioSize(element, ratio, isMain) {
         MAIN_VIDEO_POS.top = targetTop;
         MAIN_VIDEO_POS.left = targetLeft;
 
-        let controlBottom = targetTop-4;
+        let controlBottom = targetTop - 4;
         if (controlBottom < 0) controlBottom = 0;
         document.querySelector('#controlsContainer').style.bottom = controlBottom + 'px';
     }
@@ -385,9 +385,7 @@ document.querySelector('#subMinimizeBtn').addEventListener('click', function (e)
     SWITCH
 */
 
-document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
-    e.preventDefault();
-
+function switchPlayers() {
     removeMoveStartEvents();
     let subControlsContainer = document.querySelector('#subControlsContainer');
     subControlsContainer = subControlsContainer.parentNode.removeChild(subControlsContainer);
@@ -405,6 +403,12 @@ document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
     registerMoveStartEvents();
 
     handleRatioContainers();
+}
+
+document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    switchPlayers();
 })
 
 /*
@@ -425,7 +429,7 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 
     const SCREEN_PART_MIN_FOR_PLAYER = 0.7;
 
-    if (isOpening && playerContainer.clientWidth < document.documentElement.clientWidth*SCREEN_PART_MIN_FOR_PLAYER) {
+    if (isOpening && playerContainer.clientWidth < document.documentElement.clientWidth * SCREEN_PART_MIN_FOR_PLAYER) {
         playerContainer.style.width = "100%";
     } else {
         playerContainer.removeAttribute('style');
@@ -444,16 +448,16 @@ document.querySelector('#chatBtn').addEventListener('click', function (e) {
 var players_ready = false;
 function playersAreReadyNow() {
     let playerContainer = document.querySelector('#playerContainer')
-    toggleClass(playerContainer,'loading');
-    toggleClass(playerContainer,'loaded');
-    
+    toggleClass(playerContainer, 'loading');
+    toggleClass(playerContainer, 'loaded');
+
     players_ready = true;
 }
 function playPause() {
 
     if (players_ready) {
-        toggleClass(document.querySelector('#playerContainer'),'playing');
-        toggleClass(document.querySelector('#playerContainer'),'paused');
+        toggleClass(document.querySelector('#playerContainer'), 'playing');
+        toggleClass(document.querySelector('#playerContainer'), 'paused');
         startPlayers();
     }
 
@@ -511,7 +515,7 @@ function toggleFullScreen() {
             document.msExitFullscreen();
         }
     }
-    
+
     is_fullscreen = checkFullscreen();
 
     if (is_fullscreen && !checkClass(elem, 'fullscreen')) {
@@ -519,7 +523,7 @@ function toggleFullScreen() {
     } else if (!is_fullscreen && checkClass(elem, 'fullscreen')) {
         toggleClass(elem, 'fullscreen');
     }
- 
+
     return is_fullscreen;
 }
 
@@ -531,134 +535,134 @@ function toggleFullScreen() {
 /*
     VOLUME
 */
-    let hideYtVolTimer = 0;
-    let hideTwVolTimer = 0;
-    const HIDE_TIME = 2000;
-    
-    // yt-volume-cintrols
-    document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
-        clearTimeout(hideYtVolTimer);
-    });
-    document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', () => {
-        hideYtVolTimer = setTimeout(() => {
-            let inputBlock = document.querySelector('#ytVolInputBlock');
-            toggleClass(inputBlock,'hidden');
-        }, HIDE_TIME);
-    });
+let hideYtVolTimer = 0;
+let hideTwVolTimer = 0;
+const HIDE_TIME = 2000;
 
-    document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
+// yt-volume-cintrols
+document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
+    clearTimeout(hideYtVolTimer);
+});
+document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', () => {
+    hideYtVolTimer = setTimeout(() => {
         let inputBlock = document.querySelector('#ytVolInputBlock');
-        if (checkClass(inputBlock,'hidden')) {
-            toggleClass(inputBlock,'hidden');
-            hideYtVolTimer = setTimeout(() => {
-                toggleClass(inputBlock,'hidden');
-            }, HIDE_TIME);
-        }
-    })
+        toggleClass(inputBlock, 'hidden');
+    }, HIDE_TIME);
+});
 
-    // tw-volume-cintrols
-    document.querySelector('#twVolInputBlock').addEventListener('mouseenter', () => {
-        clearTimeout(hideTwVolTimer);
-    });
-    document.querySelector('#twVolInputBlock').addEventListener('mouseleave', () => {
-        hideTwVolTimer = setTimeout(() => {
-            let inputBlock = document.querySelector('#twVolInputBlock');
-            toggleClass(inputBlock,'hidden');
+document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
+    let inputBlock = document.querySelector('#ytVolInputBlock');
+    if (checkClass(inputBlock, 'hidden')) {
+        toggleClass(inputBlock, 'hidden');
+        hideYtVolTimer = setTimeout(() => {
+            toggleClass(inputBlock, 'hidden');
         }, HIDE_TIME);
-    });
+    }
+})
 
-    document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
+// tw-volume-cintrols
+document.querySelector('#twVolInputBlock').addEventListener('mouseenter', () => {
+    clearTimeout(hideTwVolTimer);
+});
+document.querySelector('#twVolInputBlock').addEventListener('mouseleave', () => {
+    hideTwVolTimer = setTimeout(() => {
         let inputBlock = document.querySelector('#twVolInputBlock');
-        if (checkClass(inputBlock,'hidden')) {
-            toggleClass(inputBlock,'hidden');
-            hideTwVolTimer = setTimeout(() => {
-                toggleClass(inputBlock,'hidden');
-            }, HIDE_TIME);
-        }
-    })
+        toggleClass(inputBlock, 'hidden');
+    }, HIDE_TIME);
+});
 
-    // set-volumes-common
-    function setVolume(volume, is_yt) {
-        if (is_yt) ytSetVolume(volume);
-        else twSetVolume(volume);
+document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
+    let inputBlock = document.querySelector('#twVolInputBlock');
+    if (checkClass(inputBlock, 'hidden')) {
+        toggleClass(inputBlock, 'hidden');
+        hideTwVolTimer = setTimeout(() => {
+            toggleClass(inputBlock, 'hidden');
+        }, HIDE_TIME);
     }
+})
 
-    function ytMuteBtn(e) {
-        
-        let volBtn = document.querySelector('#ytVolMainBtn');
-        toggleClass(volBtn, 'muted');
+// set-volumes-common
+function setVolume(volume, is_yt) {
+    if (is_yt) ytSetVolume(volume);
+    else twSetVolume(volume);
+}
 
-        ytMute();
+function ytMuteBtn(e) {
 
-        return 0;
-    }
-    function twMuteBtn(e) {
+    let volBtn = document.querySelector('#ytVolMainBtn');
+    toggleClass(volBtn, 'muted');
 
-        let volBtn = document.querySelector('#twVolMainBtn');
-        toggleClass(volBtn, 'muted');
+    ytMute();
 
-        twMute();
+    return 0;
+}
+function twMuteBtn(e) {
 
-        return 0;
-    }
+    let volBtn = document.querySelector('#twVolMainBtn');
+    toggleClass(volBtn, 'muted');
 
-    function handleVolPatch (e) {
-        let is_yt = (e.currentTarget.id.slice(0,2) === 'yt');
+    twMute();
 
-        let is_up = checkClass(e.currentTarget, 'volume-up-btn');
+    return 0;
+}
+
+function handleVolPatch(e) {
+    let is_yt = (e.currentTarget.id.slice(0, 2) === 'yt');
+
+    let is_up = checkClass(e.currentTarget, 'volume-up-btn');
 
 
-        let slider; 
-        if (is_yt) slider = document.querySelector('#ytVolInput');
-        else slider = document.querySelector('#twVolInput');
+    let slider;
+    if (is_yt) slider = document.querySelector('#ytVolInput');
+    else slider = document.querySelector('#twVolInput');
 
-        let curVol = parseInt(slider.value);
+    let curVol = parseInt(slider.value);
 
-        if (is_up) curVol++;
-        else curVol--;
+    if (is_up) curVol++;
+    else curVol--;
 
-        if (curVol < 1) curVol = 1;
-        if (curVol > 100) curVol = 100;
+    if (curVol < 1) curVol = 1;
+    if (curVol > 100) curVol = 100;
 
-        slider.value = curVol;
-        setVolume(slider.value, is_yt)
-    }
-    document.querySelector('#ytVolUpBtn').addEventListener('click', handleVolPatch);
-    document.querySelector('#ytVolDnBtn').addEventListener('click', handleVolPatch);
-    document.querySelector('#twVolUpBtn').addEventListener('click', handleVolPatch);
-    document.querySelector('#twVolDnBtn').addEventListener('click', handleVolPatch);
+    slider.value = curVol;
+    setVolume(slider.value, is_yt)
+}
+document.querySelector('#ytVolUpBtn').addEventListener('click', handleVolPatch);
+document.querySelector('#ytVolDnBtn').addEventListener('click', handleVolPatch);
+document.querySelector('#twVolUpBtn').addEventListener('click', handleVolPatch);
+document.querySelector('#twVolDnBtn').addEventListener('click', handleVolPatch);
 
-    function handleVolChange (e) {
-        e.stopPropagation();
-        let is_yt = (e.target.id.slice(0,2) === 'yt');
+function handleVolChange(e) {
+    e.stopPropagation();
+    let is_yt = (e.target.id.slice(0, 2) === 'yt');
 
-        let volBtn;
-        if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
-        else volBtn = document.querySelector('#twVolMainBtn');
+    let volBtn;
+    if (is_yt) volBtn = document.querySelector('#ytVolMainBtn');
+    else volBtn = document.querySelector('#twVolMainBtn');
 
-        removeClass(volBtn, 'vhig');
-        removeClass(volBtn, 'vlow');
+    removeClass(volBtn, 'vhig');
+    removeClass(volBtn, 'vlow');
 
-        let val = e.target.value;
-        let slider = e.target;
-       
-        if (val <= 1) {
-            val = 1;
-            slider.value = 2;
+    let val = e.target.value;
+    let slider = e.target;
 
-            setClass(volBtn, 'vlow');
-        } else
-            setClass(volBtn, 'vhig');
-        
-        if (is_yt) ytSetVolume(val);
-        else twSetVolume(val);
-    }
+    if (val <= 1) {
+        val = 1;
+        slider.value = 2;
 
-    document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#ytVolBtnContainer').addEventListener('click', ytMuteBtn);
-    
-    document.querySelector('#twVolInput').addEventListener('change', handleVolChange);
-    document.querySelector('#twVolBtnContainer').addEventListener('click', twMuteBtn);
+        setClass(volBtn, 'vlow');
+    } else
+        setClass(volBtn, 'vhig');
+
+    if (is_yt) ytSetVolume(val);
+    else twSetVolume(val);
+}
+
+document.querySelector('#ytVolInput').addEventListener('change', handleVolChange);
+document.querySelector('#ytVolBtnContainer').addEventListener('click', ytMuteBtn);
+
+document.querySelector('#twVolInput').addEventListener('change', handleVolChange);
+document.querySelector('#twVolBtnContainer').addEventListener('click', twMuteBtn);
 
 /*
     END VOLUME
@@ -668,34 +672,34 @@ function toggleFullScreen() {
     CONTROLS HIDING
 */
 
-    const HIDE_CONTROLS_TIME = 5000;
-    let hideControlsTimer = 0;
-    const playerElement = document.querySelector('#playerContainer');
+const HIDE_CONTROLS_TIME = 5000;
+let hideControlsTimer = 0;
+const playerElement = document.querySelector('#playerContainer');
 
-    function hideControls() {
-        let was_shown = setClass(playerElement,'controls-hidden');
+function hideControls() {
+    let was_shown = setClass(playerElement, 'controls-hidden');
 
-        if (was_shown) {
-            clearTimeout(hideControlsTimer);
-        }
+    if (was_shown) {
+        clearTimeout(hideControlsTimer);
     }
-    playerElement.addEventListener('mouseleave', hideControls);
+}
+playerElement.addEventListener('mouseleave', hideControls);
 
-    function showControls() {
-        let was_hidden = removeClass(playerElement,'controls-hidden');
+function showControls() {
+    let was_hidden = removeClass(playerElement, 'controls-hidden');
 
-        // reset timer if we had it set
-        if (!was_hidden) {
-            clearTimeout(hideControlsTimer);
-        }
-    
-        hideControlsTimer = setTimeout(() => {
-            setClass(playerElement,'controls-hidden');
-        }, HIDE_CONTROLS_TIME);
+    // reset timer if we had it set
+    if (!was_hidden) {
+        clearTimeout(hideControlsTimer);
     }
-    playerElement.addEventListener('mousemove', showControls);
-    playerElement.addEventListener('mouseenter', showControls);
-    playerElement.addEventListener('touchstart', showControls);
+
+    hideControlsTimer = setTimeout(() => {
+        setClass(playerElement, 'controls-hidden');
+    }, HIDE_CONTROLS_TIME);
+}
+playerElement.addEventListener('mousemove', showControls);
+playerElement.addEventListener('mouseenter', showControls);
+playerElement.addEventListener('touchstart', showControls);
 
 /*
     END CONTROLS HIDING
@@ -705,16 +709,16 @@ function toggleFullScreen() {
     SYNCING
 */
 
-    const syncBtnElement = document.querySelector('#syncStartMainBtn');
-    syncBtnElement.addEventListener('click', () => {
-        let isSyncing = toggleClass(playerElement, 'syncing');
+const syncBtnElement = document.querySelector('#syncStartMainBtn');
+syncBtnElement.addEventListener('click', () => {
+    let isSyncing = toggleClass(playerElement, 'syncing');
 
-        if (isSyncing) {
-            changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
-        } else {
-            changeSubVideoPosition(SUB_VIDEO_POS);
-        }
-    })
+    if (isSyncing) {
+        changeSubVideoPosition(SUB_SYNC_VIDEO_POS);
+    } else {
+        changeSubVideoPosition(SUB_VIDEO_POS);
+    }
+})
 
 /*
     END SYNCING
