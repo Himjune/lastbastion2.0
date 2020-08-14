@@ -303,19 +303,27 @@ function watchDog() {
     } else {
         // need to speed up
         if  (timingStats.ytPlayerTime < timingStats.ytTarget) {
+            console.log('speedUp');
             if (targetDiffAbs > HUGE_DIFF) {
+                console.log('seekToFast');
                 yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
+                console.log('veryToFast');
                 yt_player.setPlaybackRate(2);
             } else {
+                console.log('slowToFast');
                 yt_player.setPlaybackRate(1.5);
             }
         } else {    // need to slow down
+            console.log('slowDown');
             if (targetDiffAbs > HUGE_DIFF) {
+                console.log('seekToBack');
                 yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
+                console.log('fastToBack');
                 yt_player.setPlaybackRate(0.25);
             } else {
+                console.log('slowToBack');
                 yt_player.setPlaybackRate(0.5);
             }
         }
