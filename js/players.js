@@ -167,6 +167,9 @@ function onPlayerStateChange(event) {
 
     if (state == 1) {
         timingStats.curYtStart = Date.now();
+        
+        if (timingStats.curYtFix == 0)
+            timingStats.curYtFix = yt_player.getCurrentTime() * 1000;
     }
 }
 function onPlaybackQualityChange(event) {
@@ -197,13 +200,13 @@ function startPlayers() {
         yt_player.pauseVideo();
 
         state.playing = false;
+        timingStats.curYtFix = 0;
     } else {
         tw_player.play();
         yt_player.playVideo();
 
         state.playing = true;
         timingStats.curRunTime = Date.now();
-        timingStats.curYtFix = yt_player.getCurrentTime();
     }
 }
 
@@ -266,7 +269,7 @@ function watchDog() {
     timingStats.extUTCts = Date.now();
     timingStats.curTwPlaying = tw_player.getCurrentTime() * 1000;
     timingStats.curTwResult = timingStats.extUTC + timingStats.curTwPlaying;
-    timingStats.curYtPlaying = yt_player.getCurrentTime();
+    timingStats.curYtPlaying = yt_player.getCurrentTime() * 1000;
 
 
     document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
@@ -279,4 +282,6 @@ function watchDog() {
     document.querySelector('#statsCYtS').innerText = tsString(timingStats.curYtStart);
     document.querySelector('#statsCYtP').innerText = timingStats.curYtPlaying;
     document.querySelector('#statsCYtF').innerText = timingStats.curYtFix;
+    document.querySelector('#statsCYtR').innerText = tsString(timingStats.curYtPlaying-timingStats.curYtFix+timingStats.curRunTime);
+
 }
