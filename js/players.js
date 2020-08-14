@@ -169,7 +169,7 @@ function onPlayerStateChange(event) {
         timingStats.curYtStart = Date.now();
         
         if (timingStats.curYtFix == 0)
-            timingStats.curYtFix = yt_player.getCurrentTime() * 1000;
+            timingStats.curYtFix = yt_player.getCurrentTime() * 1000 + timingStats.curYtStart - timingStats.curRunTime; // try compensate delay between pressing play-btn and starting playing video
     }
 }
 function onPlaybackQualityChange(event) {
