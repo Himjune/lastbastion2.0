@@ -49,9 +49,8 @@ body {
     height: 2rem;
     
     border-radius: 15%;
-    opacity: 0.4;
-    background-color: lime;
-    border: 3px solid limegreen
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 3px solid rgba(50, 205, 50, 0.2);
 }
 #chatBtn.chat-opened {
     left: calc(100% - 22.5rem);
