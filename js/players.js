@@ -151,11 +151,12 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
     console.log('onPlayerStateChange', event.data, event);
 
-    let playerState = event.data;
+    let ytPlayerState = event.data;
 
-    if (state == 1) {
-        timingStats.ytStartTS = Date.now();
-        timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
+    if (ytPlayerState == 1) {
+        if (timingStats.ytPlayerTimeFixed == 0)
+            timingStats.ytStartTS = Date.now();
+            timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
     }
 }
 function onPlaybackQualityChange(event) {
