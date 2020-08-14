@@ -166,10 +166,9 @@ function onPlayerStateChange(event) {
     let state = event.data;
 
     if (state == 1) {
-        timingStats.curYtStart = Date.now();
-        
         if (timingStats.curYtFix == 0)
-            timingStats.curYtFix = yt_player.getCurrentTime() * 1000 + timingStats.curYtStart - timingStats.curRunTime; // try compensate delay between pressing play-btn and starting playing video
+            timingStats.curYtStart = Date.now();
+            timingStats.curYtFix = yt_player.getCurrentTime() * 1000; // try compensate delay between pressing play-btn and starting playing video
     }
 }
 function onPlaybackQualityChange(event) {
@@ -282,6 +281,6 @@ function watchDog() {
     document.querySelector('#statsCYtS').innerText = tsString(timingStats.curYtStart);
     document.querySelector('#statsCYtP').innerText = timingStats.curYtPlaying;
     document.querySelector('#statsCYtF').innerText = timingStats.curYtFix;
-    document.querySelector('#statsCYtR').innerText = tsString(timingStats.curYtPlaying-timingStats.curYtFix+timingStats.curRunTime);
+    document.querySelector('#statsCYtR').innerText = tsString(timingStats.curYtPlaying-timingStats.curYtFix+timingStats.curYtStart);
 
 }
