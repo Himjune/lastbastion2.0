@@ -154,9 +154,8 @@ function onPlayerStateChange(event) {
     let playerState = event.data;
 
     if (state == 1) {
-        if (timingStats.ytPlayerTimeFixed == 0)
-            timingStats.ytStartTS = Date.now();
-            timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
+        timingStats.ytStartTS = Date.now();
+        timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
     }
 }
 function onPlaybackQualityChange(event) {
