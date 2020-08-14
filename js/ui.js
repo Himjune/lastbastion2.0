@@ -737,7 +737,7 @@ function updateSyncDisplay(newDelay) {
 
     element.innerHTML = inline;
 }
-updateSyncDisplay(timingStats.curYtDelay/1000);
+updateSyncDisplay(0);
 
 document.querySelector('#syncDBackMainBtn').addEventListener('click', () => {
     let newDelay = updateYtDelay(-1.0);
