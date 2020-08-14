@@ -268,7 +268,7 @@ function watchDog() {
     timingStats.extUTC = Date.now();
     timingStats.extUTCts = Date.now();
     timingStats.curTwPlaying = tw_player.getCurrentTime() * 1000;
-    timingStats.curTwResult = timingStats.extUTC + timingStats.curTwPlaying;
+    timingStats.curTwResult = timingStats.curTwStart + timingStats.curTwPlaying;
     timingStats.curYtPlaying = yt_player.getCurrentTime() * 1000;
 
 
