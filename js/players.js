@@ -161,7 +161,13 @@ function onPlayerReady(event) {
     tryReadyPlayers();
 }
 function onPlayerStateChange(event) {
-    console.log('onPlayerStateChange', event);
+    console.log('onPlayerStateChange', event.data, event);
+
+    let state = event.data;
+
+    if (state == 1) {
+        timingStats.curYtStart = Date.now();
+    }
 }
 function onPlaybackQualityChange(event) {
     console.log('onPlaybackQualityChange', event);
@@ -196,6 +202,7 @@ function startPlayers() {
         yt_player.playVideo();
 
         state.playing = true;
+        timingStats.curRunTime = Date.now();
     }
 }
 
@@ -217,15 +224,26 @@ function handleTwQuality(isMinimised = false, forced = "") {
     }
 }
 
-
+// Here everything should be in milliseconds
 const timingStats = {
     extUTC: 0,
     extUTCts: 0,
+
+    curRunTime: 0,
     
     curTwStart: 0,
     curTwPlaying: 0,
     curTwResult: 0,
+
+    curYtStart: 0,
+    curYtPlaying: 0,
 }
+
+function tsString(ts) {
+    let cDate = new Date(ts);
+    return ts + ' { '+cDate.toUTCString()+' }'
+}
+
 function watchDog() {
 
     /* time update
@@ -244,14 +262,16 @@ function watchDog() {
     timingStats.extUTCts = Date.now();
     timingStats.curTwPlaying = tw_player.getCurrentTime() * 1000;
     timingStats.curTwResult = timingStats.extUTC + timingStats.curTwPlaying;
+    timingStats.curYtPlaying = yt_player.getCurrentTime();
 
-    let cDate = new Date(timingStats.extUTC);
-    let cTwSta = new Date(timingStats.curTwStart);
-    let cTwRes = new Date(timingStats.extUTC);
 
-    document.querySelector('#statsUTC').innerText = timingStats.extUTC + ' { '+cDate.toUTCString()+' }';
-    document.querySelector('#statsCTwS').innerText = timingStats.curTwStart + ' { '+cTwSta.toUTCString()+' }';
+    document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
+    document.querySelector('#statsManRun').innerText = tsString(timingStats.curRunTime);
+
+    document.querySelector('#statsCTwS').innerText = tsString(timingStats.curTwStart);
     document.querySelector('#statsCTwP').innerText = timingStats.curTwPlaying;
-    document.querySelector('#statsCTwR').innerText = timingStats.curTwResult + ' { '+cTwRes.toUTCString()+' }';
+    document.querySelector('#statsCTwR').innerText = tsString(timingStats.curTwResult);
 
+    document.querySelector('#statsCYtS').innerText = tsString(timingStats.curYtStart);
+    document.querySelector('#statsCYtP').innerText = timingStats.curYtPlaying;
 }

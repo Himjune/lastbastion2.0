@@ -597,7 +597,6 @@ body {
 
     color: white;
     background-color: black;
-}
-#stats td {
-    min-width: 6rem;
+
+    display: none;
 }
