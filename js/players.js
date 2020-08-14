@@ -268,7 +268,7 @@ function watchDog() {
     
     let curTwPlaying = tw_player.getCurrentTime() * 1000;
     if (curTwPlaying > 0) {
-        if (twFix < timingStats.curTwPlaying)
+        if (curTwPlaying < timingStats.curTwPlaying || timingStats.curTwPlaying == 0)
             timingStats.curTwStart = Date.now();
         timingStats.curTwPlaying = curTwPlaying;
     }
