@@ -27,20 +27,20 @@ const SUB_SYNC_VIDEO_POS = {
     isMinimized: false
 }
 
-const playerState = {
+const uiState = {
     //isSyncing: false,
     curSubPosition: SUB_VIDEO_POS,
     prevSubPosition: SUB_VIDEO_POS,
 }
 
 function changeSubVideoPosition(position) {
-    playerState.prevSubPosition = playerState.curSubPosition;
-    playerState.curSubPosition = position;
+    uiState.prevSubPosition = uiState.curSubPosition;
+    uiState.curSubPosition = position;
 
     handleRatioContainers();
 }
 function resetSubVideoPosition() {
-    playerState.curSubPosition = playerState.prevSubPosition;
+    uiState.curSubPosition = uiState.prevSubPosition;
     handleRatioContainers();
 }
 
@@ -66,7 +66,7 @@ function placeMainVideoContainer(mainContainerElement) {
 
 
 function placeSubVideoContainer(subContainerElement, isResizing = false) {
-    let curSubPosition = playerState.curSubPosition;
+    let curSubPosition = uiState.curSubPosition;
 
     let targetWidth = Math.floor(MAIN_VIDEO_POS.width * curSubPosition.width);
     let targetHeight = Math.floor(MAIN_VIDEO_POS.height * curSubPosition.height);
@@ -715,6 +715,8 @@ playerElement.addEventListener('touchstart', showControls);
 const syncBtnElement = document.querySelector('#syncStartMainBtn');
 syncBtnElement.addEventListener('click', () => {
     let isSyncing = toggleClass(playerElement, 'syncing');
+
+
 
     if (isSyncing) {
         changeSubVideoPosition(SUB_SYNC_VIDEO_POS);

@@ -1,4 +1,4 @@
-const state = {
+const playerState = {
     sub: 0,             // 0 - tw and 1 - yt
 
     playing: false,
@@ -11,14 +11,14 @@ const state = {
 }
 
 function switchSubPlayer() {
-    if (state.sub == 0) state.sub = 1;
-    else state.sub = 0;
+    if (playerState.sub == 0) playerState.sub = 1;
+    else playerState.sub = 0;
 
     handleTwQuality();
 }
 
 function tryReadyPlayers() {
-    if (state.yt_is_ready && state.tw_is_ready) {
+    if (playerState.yt_is_ready && playerState.tw_is_ready) {
         playersAreReadyNow();
 
         setInterval(watchDog, 1000);
@@ -127,7 +127,7 @@ tw_player.addEventListener(Twitch.Player.READY, () => {
     tw_player.setVolume(1.0);
     tw_player.setMuted(false);
 
-    state.tw_is_ready = true;
+    playerState.tw_is_ready = true;
     tryReadyPlayers();
 
     console.log('readyEvent');
@@ -155,15 +155,15 @@ let timer = setTimeout(startYt, 500);
 function onPlayerReady(event) {
     yt_player.setVolume(5);
 
-    state.yt_is_ready = true;
+    playerState.yt_is_ready = true;
     tryReadyPlayers();
 }
 function onPlayerStateChange(event) {
     console.log('onPlayerStateChange', event.data, event);
 
-    let state = event.data;
+    let playerState = event.data;
 
-    if (state == 1) {
+    if (playerState == 1) {
         timingStats.ytStartTS = Date.now();
         timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
     }
@@ -191,18 +191,18 @@ function ytMute() {
 }
 
 function startPlayers() {
-    if (state.playing) {
+    if (playerState.playing) {
         tw_player.pause();
         yt_player.pauseVideo();
 
-        state.playing = false;
+        playerState.playing = false;
         timingStats.ytPlayerTimeFixed = 0;
         timingStats.twStartTS = 0
     } else {
         tw_player.play();
         yt_player.playVideo();
 
-        state.playing = true;
+        playerState.playing = true;
         timingStats.pressPlayTS = Date.now();
     }
 }
@@ -217,7 +217,7 @@ function handleTwQuality(isMinimised = false, forced = "") {
         return;
     }
 
-    if (state.sub == 0) {
+    if (playerState.sub == 0) {
         if (isMinimised) tw_player.setQuality("160p");
         else tw_player.setQuality("480p");
     } else {
