@@ -291,7 +291,7 @@ function watchDog() {
         Managing YouTube Playback
     */
 
-    const DELAY_THRESHOLD = 200; // ms
+    const DELAY_THRESHOLD = 300; // ms
     const HUGE_DIFF = 10000;
     const BIG_DIFF = 2000;
 
