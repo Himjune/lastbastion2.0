@@ -220,12 +220,18 @@ body {
 }
 
 #syncDelayDisplay {
-    top: -1.1rem;
+    position: relative;
     display: inline-block;
     width: 10rem;
+    height: 2.5rem;
+    top: -0.25rem;
+
+    text-align: center;
     background-color: lightgray;
 }
-
+.divider-button {
+    width: 0.5rem;
+}
 #syncStartMainBtn .main-controls-buttons-bg {
     background: linear-gradient(-45deg, #f00, lime, #6441a5, lime, #f00);
     background-size: 500% 500%;

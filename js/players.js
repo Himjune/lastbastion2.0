@@ -164,9 +164,9 @@ function onPlayerStateChange(event) {
     let state = event.data;
 
     if (state == 1) {
-        if (timingStats.curYtFix == 0)
-            timingStats.curYtStart = Date.now();
-            timingStats.curYtFix = Math.floor(yt_player.getCurrentTime() * 1000); 
+        if (timingStats.ytPlayerTimeFixed == 0)
+            timingStats.ytStartTS = Date.now();
+            timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
     }
 }
 function onPlaybackQualityChange(event) {
@@ -197,14 +197,14 @@ function startPlayers() {
         yt_player.pauseVideo();
 
         state.playing = false;
-        timingStats.curYtFix = 0;
-        timingStats.curTwStart = 0
+        timingStats.ytPlayerTimeFixed = 0;
+        timingStats.twStartTS = 0
     } else {
         tw_player.play();
         yt_player.playVideo();
 
         state.playing = true;
-        timingStats.curRunTime = Date.now();
+        timingStats.pressPlayTS = Date.now();
     }
 }
 
@@ -231,17 +231,23 @@ const timingStats = {
     extUTC: 0,
     extUTCts: 0,
 
-    curRunTime: 0,
+    pressPlayTS: 0,
     
-    curTwStart: 0,
-    curTwPlaying: 0,
-    curTwResult: 0,
+    twStartTS: 0,
+    twPlayingDuration: 0,
+    twPlayTimeTS: 0,
 
-    curYtStart: 0,
-    curYtPlaying: 0,
-    curYtFix: 0,
+    ytStartTS: 0,
+    ytPlayerTime: 0,
+    ytPlayerTimeFixed: 0,
 
-    curYtDelay: 0,
+    ytDelay: 0,
+    ytTarget: 0,
+}
+
+function updateYtDelay(diff) {
+    timingStats.ytDelay += diff*1000;
+    return timingStats.ytDelay/1000;
 }
 
 function tsString(ts) {
@@ -265,28 +271,71 @@ function watchDog() {
     
     timingStats.extUTC = Date.now();
     timingStats.extUTCts = Date.now();
-    timingStats.curYtPlaying = Math.floor(yt_player.getCurrentTime() * 1000);
+    timingStats.ytPlayerTime = Math.floor(yt_player.getCurrentTime() * 1000);
+    if (timingStats.ytTarget == 0 ) timingStats.ytTarget = timingStats.ytPlayerTime;
     
-    let curTwPlaying = Math.floor(tw_player.getCurrentTime() * 1000);
-    if (curTwPlaying > 0) {
-        if (timingStats.curTwStart == 0)
-            timingStats.curTwStart = Date.now()-curTwPlaying;
-        timingStats.curTwPlaying = curTwPlaying;
+    let twPlayingDuration = Math.floor(tw_player.getCurrentTime() * 1000);
+    if (twPlayingDuration > 0) {
+        if (timingStats.twStartTS == 0)
+            timingStats.twStartTS = Date.now()-twPlayingDuration;
+        timingStats.twPlayingDuration = twPlayingDuration;
     }
     
-    timingStats.curTwResult = timingStats.curTwStart + timingStats.curTwPlaying;
+    timingStats.twPlayTimeTS = timingStats.twStartTS + timingStats.twPlayingDuration;
 
+                            // initialYtPlayerTime + (diff between curTwTime and ytStart = how much tw played) + delay
+    timingStats.ytTarget = timingStats.ytPlayerTimeFixed + timingStats.twPlayTimeTS - timingStats.ytStartTS + timingStats.ytDelay;
+
+
+    /*
+        Managing YouTube Playback
+    */
+
+    const DELAY_THRESHOLD = 200; // ms
+    const HUGE_DIFF = 10000;
+    const BIG_DIFF = 2000;
+
+    let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
+    let targetDiffAbs = Math.abs(targetDiff);
+
+    if (targetDiffAbs < DELAY_THRESHOLD) {
+        yt_player.setPlaybackRate(1);
+    } else {
+        // need to speed up
+        if  (timingStats.ytPlayerTime < timingStats.ytTarget) {
+            if (targetDiffAbs > HUGE_DIFF) {
+                yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
+            } else if (targetDiffAbs > BIG_DIFF) {
+                yt_player.setPlaybackRate(2);
+            } else {
+                yt_player.setPlaybackRate(1.5);
+            }
+        } else {    // need to slow down
+            if (targetDiffAbs > HUGE_DIFF) {
+                yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
+            } else if (targetDiffAbs > BIG_DIFF) {
+                yt_player.setPlaybackRate(0.25);
+            } else {
+                yt_player.setPlaybackRate(0.5);
+            }
+        }
+    }
+
+    
+    /*
+        Stats display
+    */
 
     document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
-    document.querySelector('#statsManRun').innerText = tsString(timingStats.curRunTime);
+    document.querySelector('#statsManRun').innerText = tsString(timingStats.pressPlayTS);
 
-    document.querySelector('#statsCTwS').innerText = tsString(timingStats.curTwStart);
-    document.querySelector('#statsCTwP').innerText = timingStats.curTwPlaying + '{'+Math.floor(timingStats.curTwPlaying/60000)+'m'+Math.floor(timingStats.curTwPlaying/1000)+'s'+'}';
-    document.querySelector('#statsCTwR').innerText = tsString(timingStats.curTwResult);
+    document.querySelector('#statsCTwS').innerText = tsString(timingStats.twStartTS);
+    document.querySelector('#statsCTwP').innerText = timingStats.twPlayingDuration + '{'+Math.floor(timingStats.twPlayingDuration/60000)+'m'+Math.floor(timingStats.twPlayingDuration/1000)+'s'+'}';
+    document.querySelector('#statsCTwR').innerText = tsString(timingStats.twPlayTimeTS);
 
-    document.querySelector('#statsCYtS').innerText = tsString(timingStats.curYtStart);
-    document.querySelector('#statsCYtP').innerText = timingStats.curYtPlaying;
-    document.querySelector('#statsCYtF').innerText = timingStats.curYtFix;
-    document.querySelector('#statsCYtR').innerText = tsString(timingStats.curYtPlaying-timingStats.curYtFix+timingStats.curYtStart);
+    document.querySelector('#statsCYtS').innerText = tsString(timingStats.ytStartTS);
+    document.querySelector('#statsCYtP').innerText = timingStats.ytPlayerTime;
+    document.querySelector('#statsCYtF').innerText = timingStats.ytPlayerTimeFixed;
+    document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
 
 }

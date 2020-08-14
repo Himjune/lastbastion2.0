@@ -723,6 +723,39 @@ syncBtnElement.addEventListener('click', () => {
     }
 })
 
+function updateSyncDisplay(newDelay) {
+    let element = document.querySelector('#syncDelayDisplay');
+    let inline = 'YouTube ';
+    
+    if (newDelay > 0.0) {
+        inline += 'ускорен на ';
+    } else {
+        inline += 'задержан на ';
+    }
+
+    inline += Math.abs(newDelay).toFixed(1) + 'с';
+
+    element.innerHTML = inline;
+}
+updateSyncDisplay(timingStats.curYtDelay);
+
+document.querySelector('#syncDBackMainBtn').addEventListener('click', () => {
+    let newDelay = updateYtDelay(-1.0);
+    updateSyncDisplay(newDelay);
+})
+document.querySelector('#syncBackMainBtn').addEventListener('click', () => {
+    let newDelay = updateYtDelay(-0.1);
+    updateSyncDisplay(newDelay);
+})
+document.querySelector('#syncForwMainBtn').addEventListener('click', () => {
+    let newDelay = updateYtDelay(0.1);
+    updateSyncDisplay(newDelay);
+})
+document.querySelector('#syncDForwMainBtn').addEventListener('click', () => {
+    let newDelay = updateYtDelay(1.0);
+    updateSyncDisplay(newDelay);
+})
+
 /*
     END SYNCING
 */
