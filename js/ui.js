@@ -40,7 +40,7 @@ function switchSubPlayer() {
 }
 
 function changeSubVideoPosition(position) {
-    if (position.sub != curSubPosition.sub) switchPlayers();
+    if (position.sub != uiState.curSubPosition.sub) switchPlayers();
 
     uiState.prevSubPosition = uiState.curSubPosition;
     uiState.curSubPosition = position;
