@@ -198,7 +198,7 @@ function startPlayers() {
 
         state.playing = false;
         timingStats.curYtFix = 0;
-        timingStats.curTwPlaying = 0
+        timingStats.curTwStart = 0
     } else {
         tw_player.play();
         yt_player.playVideo();
@@ -269,7 +269,7 @@ function watchDog() {
     
     let curTwPlaying = Math.floor(tw_player.getCurrentTime() * 1000);
     if (curTwPlaying > 0) {
-        if (timingStats.curTwPlaying == 0)
+        if (timingStats.curTwStart == 0)
             timingStats.curTwStart = Date.now()-curTwPlaying;
         timingStats.curTwPlaying = curTwPlaying;
     }
