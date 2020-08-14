@@ -706,9 +706,11 @@ function showControls() {
         clearTimeout(hideControlsTimer);
     }
 
+    let hideTime = HIDE_CONTROLS_TIME;
+    if (checkClass(playerElement, 'syncing')) hideTime = 4*HIDE_CONTROLS_TIME;
     hideControlsTimer = setTimeout(() => {
         setClass(playerElement, 'controls-hidden');
-    }, HIDE_CONTROLS_TIME);
+    }, hideTime);
 }
 playerElement.addEventListener('mousemove', showControls);
 playerElement.addEventListener('mouseenter', showControls);
