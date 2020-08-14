@@ -11,7 +11,7 @@ function tryReadyPlayers() {
     if (playerState.yt_is_ready && playerState.tw_is_ready) {
         playersAreReadyNow();
 
-        setInterval(watchDog, 1000);
+        setInterval(watchDog, 500);
     }
 }
 
