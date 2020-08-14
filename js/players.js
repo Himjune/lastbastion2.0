@@ -346,5 +346,5 @@ function watchDog() {
     document.querySelector('#statsCYtF').innerText = timingStats.ytPlayerTimeFixed;
     document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
 
-    document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yTar:' + timingStats.ytTarget + ' / tDiff:' + targetDiff + '{'+targetDiffAbs+'}';
+    document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yPlay:' + timingStats.ytPlayerTime + ' / yTar:' + timingStats.ytTarget + '{'+targetDiff+'}';
 }
