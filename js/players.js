@@ -111,7 +111,7 @@ if (param === '') {
 yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
-param = 'anakq' //util_get_query_param('tw');
+param = 'yznsa' //util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
 document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
@@ -291,7 +291,7 @@ function watchDog() {
     */
 
     const DELAY_THRESHOLD = 300; // ms
-    const HUGE_DIFF = 10000;
+    const HUGE_DIFF = 50000;
     const BIG_DIFF = 2000;
 
     let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
@@ -345,5 +345,6 @@ function watchDog() {
     document.querySelector('#statsCYtF').innerText = timingStats.ytPlayerTimeFixed;
     document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
 
+    document.querySelector('#statsCYtTR').innerText = tsString(timingStats.ytTarget-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
     document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yPlay:' + timingStats.ytPlayerTime + ' / yTar:' + timingStats.ytTarget + '{'+targetDiff+'}';
 }
