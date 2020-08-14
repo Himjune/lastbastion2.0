@@ -290,8 +290,8 @@ function watchDog() {
         Managing YouTube Playback
     */
 
-    const DELAY_THRESHOLD = 300; // ms
-    const HUGE_DIFF = 50000;
+    const DELAY_THRESHOLD = 500; // ms
+    const HUGE_DIFF = 60000;
     const BIG_DIFF = 2000;
 
     let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;

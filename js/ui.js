@@ -744,11 +744,11 @@ document.querySelector('#syncDBackMainBtn').addEventListener('click', () => {
     updateSyncDisplay(newDelay);
 })
 document.querySelector('#syncBackMainBtn').addEventListener('click', () => {
-    let newDelay = updateYtDelay(-0.1);
+    let newDelay = updateYtDelay(-0.5);
     updateSyncDisplay(newDelay);
 })
 document.querySelector('#syncForwMainBtn').addEventListener('click', () => {
-    let newDelay = updateYtDelay(0.1);
+    let newDelay = updateYtDelay(0.5);
     updateSyncDisplay(newDelay);
 })
 document.querySelector('#syncDForwMainBtn').addEventListener('click', () => {
