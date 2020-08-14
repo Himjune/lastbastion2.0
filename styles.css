@@ -598,9 +598,12 @@ body {
     color: white;
     background-color: black;
 }
+#stats tr {
+    min-height: 1rem;
+}
 #stats .iStat {
     color: rosybrown;
 }
-.stats-hidden td {
+.stats-hidden .stat-line {
     display: none;
 }
