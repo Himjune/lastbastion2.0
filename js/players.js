@@ -321,7 +321,7 @@ function watchDog() {
         }
     }
 
-    
+
     /*
         Stats display
     */
@@ -338,4 +338,5 @@ function watchDog() {
     document.querySelector('#statsCYtF').innerText = timingStats.ytPlayerTimeFixed;
     document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
 
+    document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + '|' + timingStats.ytTarget + '/' + targetDiff + '{'+ (timingStats.ytPlayerTime - timingStats.ytTarget)+'}';
 }
