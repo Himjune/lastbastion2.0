@@ -9,12 +9,13 @@ const MAIN_VIDEO_POS = {
 const SUB_VIDEO_POS = {
 }
 function resetPositionSettings() {
-    SUB_VIDEO_POS.width = 0.4,
-        SUB_VIDEO_POS.height = 0.3,
-        SUB_VIDEO_POS.top = 0.05,
-        SUB_VIDEO_POS.left = 0,
-        SUB_VIDEO_POS.offset = 0,
-        SUB_VIDEO_POS.isMinimized = false
+    SUB_VIDEO_POS.width = 0.4;
+    SUB_VIDEO_POS.height = 0.3;
+    SUB_VIDEO_POS.top = 0.05;
+    SUB_VIDEO_POS.left = 0;
+    SUB_VIDEO_POS.offset = 0;
+    SUB_VIDEO_POS.isMinimized = false;
+    SUB_VIDEO_POS.sub = TW_CODE;
 }
 resetPositionSettings();
 
@@ -24,7 +25,8 @@ const SUB_SYNC_VIDEO_POS = {
     top: 0,
     left: 0,
     offset: 0.25,
-    isMinimized: false
+    isMinimized: false,
+    sub: YT_CODE,
 }
 
 const uiState = {
@@ -33,7 +35,13 @@ const uiState = {
     prevSubPosition: SUB_VIDEO_POS,
 }
 
+function switchSubPlayer() {
+    handleTwQuality();
+}
+
 function changeSubVideoPosition(position) {
+    if (position.sub != curSubPosition.sub) switchPlayers();
+
     uiState.prevSubPosition = uiState.curSubPosition;
     uiState.curSubPosition = position;
 
@@ -400,7 +408,7 @@ function switchPlayers() {
         toggleClass(container, 'main-video-container');
         toggleClass(container, 'sub-video-container');
     }
-    switchSubPlayer();
+    handleTwQuality();
 
     document.querySelector('.sub-video-container').appendChild(subControlsContainer);
     registerMoveStartEvents();
@@ -715,8 +723,6 @@ playerElement.addEventListener('touchstart', showControls);
 const syncBtnElement = document.querySelector('#syncStartMainBtn');
 syncBtnElement.addEventListener('click', () => {
     let isSyncing = toggleClass(playerElement, 'syncing');
-
-
 
     if (isSyncing) {
         changeSubVideoPosition(SUB_SYNC_VIDEO_POS);

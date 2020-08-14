@@ -1,20 +1,10 @@
+const TW_CODE = 0;
+const YT_CODE = 1;
 const playerState = {
-    sub: 0,             // 0 - tw and 1 - yt
-
     playing: false,
 
     tw_is_ready: false,
-    yt_is_ready: false,
-
-    tw_quality: "",
-    yt_quality: ""
-}
-
-function switchSubPlayer() {
-    if (playerState.sub == 0) playerState.sub = 1;
-    else playerState.sub = 0;
-
-    handleTwQuality();
+    yt_is_ready: false
 }
 
 function tryReadyPlayers() {
@@ -217,7 +207,7 @@ function handleTwQuality(isMinimised = false, forced = "") {
         return;
     }
 
-    if (playerState.sub == 0) {
+    if (uiState.curSubPosition.sub == 0) {
         if (isMinimised) tw_player.setQuality("160p");
         else tw_player.setQuality("480p");
     } else {
