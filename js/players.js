@@ -134,8 +134,6 @@ tw_player.addEventListener(Twitch.Player.READY, () => {
 });
 tw_player.addEventListener(Twitch.Player.PLAYING, () => {
     console.log('playingEvent');
-
-    timingStats.curTwStart = Date.now();
 });
 tw_player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, () => {
     console.log('PLAYBACK_BLOCKED');
@@ -266,9 +264,16 @@ function watchDog() {
     
     timingStats.extUTC = Date.now();
     timingStats.extUTCts = Date.now();
-    timingStats.curTwPlaying = tw_player.getCurrentTime() * 1000;
-    timingStats.curTwResult = timingStats.curTwStart + timingStats.curTwPlaying;
     timingStats.curYtPlaying = yt_player.getCurrentTime() * 1000;
+    
+    let curTwPlaying = tw_player.getCurrentTime() * 1000;
+    if (curTwPlaying > 0) {
+        if (twFix < timingStats.curTwPlaying)
+            timingStats.curTwStart = Date.now();
+        timingStats.curTwPlaying = curTwPlaying;
+    }
+    
+    timingStats.curTwResult = timingStats.curTwStart + timingStats.curTwPlaying;
 
 
     document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
