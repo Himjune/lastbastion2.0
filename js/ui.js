@@ -726,3 +726,7 @@ syncBtnElement.addEventListener('click', () => {
 /*
     END SYNCING
 */
+
+document.querySelector('#stats').addEventListener('click', () => {
+    toggleClass(document.querySelector('#stats'), 'stats-hidden');
+})

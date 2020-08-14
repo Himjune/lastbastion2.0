@@ -604,3 +604,6 @@ body {
 #stats .iStat {
     color: rosybrown;
 }
+.stats-hidden td {
+    display: none;
+}
