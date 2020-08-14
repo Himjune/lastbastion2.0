@@ -70,6 +70,8 @@ function placeMainVideoContainer(mainContainerElement) {
     mainContainerElement.style.top = "0px";
     mainContainerElement.style.width = "100%";
     mainContainerElement.style.height = "100%";
+
+    mainContainerElement.querySelector('.offset-container').style.top = '0%';
 }
 
 
