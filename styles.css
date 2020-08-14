@@ -598,9 +598,6 @@ body {
     color: white;
     background-color: black;
 }
-#stats tr {
-    min-height: 0.5rem;
-}
 #stats .iStat {
     color: rosybrown;
 }
