@@ -203,6 +203,7 @@ function startPlayers() {
 
         state.playing = true;
         timingStats.curRunTime = Date.now();
+        timingStats.curYtFix = yt_player.getCurrentTime();
     }
 }
 
@@ -237,6 +238,9 @@ const timingStats = {
 
     curYtStart: 0,
     curYtPlaying: 0,
+    curYtFix: 0,
+
+    curYtDelay: 0,
 }
 
 function tsString(ts) {
@@ -274,4 +278,5 @@ function watchDog() {
 
     document.querySelector('#statsCYtS').innerText = tsString(timingStats.curYtStart);
     document.querySelector('#statsCYtP').innerText = timingStats.curYtPlaying;
+    document.querySelector('#statsCYtF').innerText = timingStats.curYtFix;
 }
