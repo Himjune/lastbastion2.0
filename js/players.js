@@ -20,6 +20,8 @@ function switchSubPlayer() {
 function tryReadyPlayers() {
     if (state.yt_is_ready && state.tw_is_ready) {
         playersAreReadyNow();
+
+        setInterval(watchDog, 1000);
     }
 }
 
@@ -87,7 +89,7 @@ const playlist = [
 ]
 
 
-let param = util_get_query_param('yt');
+let param = 'eVcMequS9vE' //util_get_query_param('yt');
 if (param === '') {
     let cur = Date.now()
     let idx = 0;
@@ -109,7 +111,7 @@ if (param === '') {
 yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
-param = util_get_query_param('tw');
+param = 'anakq' //util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
 document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
@@ -132,6 +134,8 @@ tw_player.addEventListener(Twitch.Player.READY, () => {
 });
 tw_player.addEventListener(Twitch.Player.PLAYING, () => {
     console.log('playingEvent');
+
+    timingStats.curTwStart = Date.now();
 });
 tw_player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, () => {
     console.log('PLAYBACK_BLOCKED');
@@ -211,6 +215,43 @@ function handleTwQuality(isMinimised = false, forced = "") {
     } else {
         tw_player.setQuality("720p");
     }
+}
 
+
+const timingStats = {
+    extUTC: 0,
+    extUTCts: 0,
+    
+    curTwStart: 0,
+    curTwPlaying: 0,
+    curTwResult: 0,
+}
+function watchDog() {
+
+    /* time update
+    fetch('http://worldtimeapi.org/api/timezone/Etc/UTC')
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log('gotUTC', data);
+            timingStats.curUTC = data.unixtime;
+        });
+    */
+    //let cdate = new Date(timingStats.curUTC * 1000);
+    
+    timingStats.extUTC = Date.now();
+    timingStats.extUTCts = Date.now();
+    timingStats.curTwPlaying = tw_player.getCurrentTime() * 1000;
+    timingStats.curTwResult = timingStats.extUTC + timingStats.curTwPlaying;
+
+    let cDate = new Date(timingStats.extUTC);
+    let cTwSta = new Date(timingStats.curTwStart);
+    let cTwRes = new Date(timingStats.extUTC);
+
+    document.querySelector('#statsUTC').innerText = timingStats.extUTC + ' { '+cDate.toUTCString()+' }';
+    document.querySelector('#statsCTwS').innerText = timingStats.curTwStart + ' { '+cTwSta.toUTCString()+' }';
+    document.querySelector('#statsCTwP').innerText = timingStats.curTwPlaying;
+    document.querySelector('#statsCTwR').innerText = timingStats.curTwResult + ' { '+cTwRes.toUTCString()+' }';
 
 }

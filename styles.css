@@ -589,3 +589,15 @@ body {
 }
 
 
+#stats {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 60000;
+
+    color: white;
+    background-color: black;
+}
+#stats td {
+    min-width: 6rem;
+}
