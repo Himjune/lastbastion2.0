@@ -79,7 +79,7 @@ const playlist = [
 ]
 
 
-let param = 'eVcMequS9vE' //util_get_query_param('yt');
+let param = util_get_query_param('yt');
 if (param === '') {
     let cur = Date.now()
     let idx = 0;
@@ -101,7 +101,7 @@ if (param === '') {
 yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
-param = 'yznsa' //util_get_query_param('tw');
+param = util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
 document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
