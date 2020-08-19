@@ -577,16 +577,16 @@ function updVolumeBlock(id) {
 }
 
 // yt-volume-controls
-document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
+document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', (e) => {
     updVolumeBlock(YT_CODE);
 });
-document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', () => {
+document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', (e) => {
     hideVolumeBlock(YT_CODE);
 });
-document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
+document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', (e) => {
     showVolumeBlock(YT_CODE);
 });
-document.querySelector('#ytVolMainBtn').addEventListener('touchstart', () => {
+document.querySelector('#ytVolMainBtn').addEventListener('touchstart', (e) => {
     e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[YT_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
@@ -597,16 +597,16 @@ document.querySelector('#ytVolMainBtn').addEventListener('touchstart', () => {
 });
 
 // tw-volume-controls
-document.querySelector('#twVolInputBlock').addEventListener('mouseenter', () => {
+document.querySelector('#twVolInputBlock').addEventListener('mouseenter', (e) => {
     updVolumeBlock(TW_CODE);
 });
-document.querySelector('#twVolInputBlock').addEventListener('mouseleave', () => {
+document.querySelector('#twVolInputBlock').addEventListener('mouseleave', (e) => {
     hideVolumeBlock(TW_CODE);
 });
-document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
+document.querySelector('#twVolMainBtn').addEventListener('mouseenter', (e) => {
     showVolumeBlock(TW_CODE);
 });
-document.querySelector('#twVolMainBtn').addEventListener('touchstart', () => {
+document.querySelector('#twVolMainBtn').addEventListener('touchstart', (e) => {
     e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[TW_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
