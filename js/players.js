@@ -103,7 +103,7 @@ yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
 // get TW link
-let param = 'jake_ow';
+param = 'jake_ow';
 if (param === '') param = util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
