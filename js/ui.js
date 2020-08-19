@@ -40,7 +40,10 @@ function switchSubPlayer() {
 }
 
 function changeSubVideoPosition(position) {
-    if (position.sub != uiState.curSubPosition.sub) switchPlayers();
+    if (position.sub != uiState.curSubPosition.sub) {
+        console.log(position.sub, uiState.curSubPosition.sub);
+        switchPlayers();
+    }
 
     uiState.prevSubPosition = uiState.curSubPosition;
     uiState.curSubPosition = position;
@@ -420,6 +423,8 @@ function switchPlayers() {
 
 document.querySelector('#subSwitchBtn').addEventListener('click', function (e) {
     e.preventDefault();
+
+    uiState.curSubPosition.sub = 1 - uiState.curSubPosition.sub;  
 
     switchPlayers();
 })
