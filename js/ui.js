@@ -587,6 +587,7 @@ document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
     showVolumeBlock(YT_CODE);
 });
 document.querySelector('#ytVolMainBtn').addEventListener('touchstart', () => {
+    e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[YT_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
         showVolumeBlock(YT_CODE);
@@ -606,6 +607,7 @@ document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
     showVolumeBlock(TW_CODE);
 });
 document.querySelector('#twVolMainBtn').addEventListener('touchstart', () => {
+    e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[TW_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
         showVolumeBlock(TW_CODE);
