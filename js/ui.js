@@ -548,51 +548,71 @@ function toggleFullScreen() {
 /*
     VOLUME
 */
-let hideYtVolTimer = 0;
-let hideTwVolTimer = 0;
+let volHideTimers = [0,0];
+const volBlockIds = ['#twVolInputBlock','#ytVolInputBlock'];
 const HIDE_TIME = 2000;
 
-// yt-volume-cintrols
+function showVolumeBlock(id) {
+    let inputBlock = document.querySelector(volBlockIds[id]);
+    let playerId = id;
+    if (checkClass(inputBlock, 'hidden')) {
+        toggleClass(inputBlock, 'hidden');
+        volHideTimers[playerId] = setTimeout(() => {
+            toggleClass(inputBlock, 'hidden');
+            volHideTimers[playerId] = 0;
+        }, HIDE_TIME);
+    }
+}
+
+function hideVolumeBlock(id) {
+    volHideTimers[id] = setTimeout(() => {
+        let inputBlock = document.querySelector(volBlockIds[id]);
+        toggleClass(inputBlock, 'hidden');
+    }, HIDE_TIME);
+}
+
+function updVolumeBlock(id) {
+    clearTimeout(volHideTimers[id]);
+    volHideTimers[id] = 0;
+}
+
+// yt-volume-controls
 document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', () => {
-    clearTimeout(hideYtVolTimer);
+    updVolumeBlock(YT_CODE);
 });
 document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', () => {
-    hideYtVolTimer = setTimeout(() => {
-        let inputBlock = document.querySelector('#ytVolInputBlock');
-        toggleClass(inputBlock, 'hidden');
-    }, HIDE_TIME);
+    hideVolumeBlock(YT_CODE);
+});
+document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
+    showVolumeBlock(YT_CODE);
+});
+document.querySelector('#ytVolMainBtn').addEventListener('touchstart', () => {
+    let inputBlock = document.querySelector(volBlockIds[YT_CODE]);
+    if (checkClass(inputBlock, 'hidden')) {
+        showVolumeBlock(YT_CODE);
+    } else {
+        ytMuteBtn(e);
+    }
 });
 
-document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', () => {
-    let inputBlock = document.querySelector('#ytVolInputBlock');
-    if (checkClass(inputBlock, 'hidden')) {
-        toggleClass(inputBlock, 'hidden');
-        hideYtVolTimer = setTimeout(() => {
-            toggleClass(inputBlock, 'hidden');
-        }, HIDE_TIME);
-    }
-})
-
-// tw-volume-cintrols
+// tw-volume-controls
 document.querySelector('#twVolInputBlock').addEventListener('mouseenter', () => {
-    clearTimeout(hideTwVolTimer);
+    updVolumeBlock(TW_CODE);
 });
 document.querySelector('#twVolInputBlock').addEventListener('mouseleave', () => {
-    hideTwVolTimer = setTimeout(() => {
-        let inputBlock = document.querySelector('#twVolInputBlock');
-        toggleClass(inputBlock, 'hidden');
-    }, HIDE_TIME);
+    hideVolumeBlock(TW_CODE);
 });
-
 document.querySelector('#twVolMainBtn').addEventListener('mouseenter', () => {
-    let inputBlock = document.querySelector('#twVolInputBlock');
+    showVolumeBlock(TW_CODE);
+});
+document.querySelector('#twVolMainBtn').addEventListener('touchstart', () => {
+    let inputBlock = document.querySelector(volBlockIds[TW_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
-        toggleClass(inputBlock, 'hidden');
-        hideTwVolTimer = setTimeout(() => {
-            toggleClass(inputBlock, 'hidden');
-        }, HIDE_TIME);
+        showVolumeBlock(TW_CODE);
+    } else {
+        twMuteBtn(e);
     }
-})
+});
 
 // set-volumes-common
 function setVolume(volume, is_yt) {
