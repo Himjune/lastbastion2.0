@@ -18,7 +18,7 @@ function tryReadyPlayers() {
 const tw_def_props = {
     width: 400,
     height: 300,
-    channel: "outbreak",
+    channel: "",
     layout: "video",
     theme: "dark",
     autoplay: false,
@@ -30,7 +30,7 @@ const yt_def_props = {
     height: '360',
     width: '640',
     playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1, 'modestbranding': 1, 'origin': 'himjune.github.io' },
-    videoId: 'e1ayB3iFCS8',
+    videoId: '',
     events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange,
@@ -78,8 +78,9 @@ const playlist = [
     },
 ]
 
-
-let param = util_get_query_param('yt');
+// get YT link
+let param = 'eVcMequS9vE';
+if (param === '') param = util_get_query_param('yt');
 if (param === '') {
     let cur = Date.now()
     let idx = 0;
@@ -101,7 +102,9 @@ if (param === '') {
 yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
-param = util_get_query_param('tw');
+// get TW link
+let param = 'jake_ow';
+if (param === '') param = util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
 document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
