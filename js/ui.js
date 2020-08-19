@@ -577,8 +577,12 @@ function updVolumeBlock(id) {
 }
 
 // yt-volume-controls
+document.querySelector('#ytVolInputBlock').addEventListener('touchend', (e) => {
+    e.stopPropagation();
+});
 document.querySelector('#ytVolMainBtn').addEventListener('touchend', (e) => {
     e.preventDefault();
+
     let inputBlock = document.querySelector(volBlockIds[YT_CODE]);
     if (checkClass(inputBlock, 'hidden')) {
         showVolumeBlock(YT_CODE);
@@ -588,7 +592,7 @@ document.querySelector('#ytVolMainBtn').addEventListener('touchend', (e) => {
 });
 document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', (e) => {
     updVolumeBlock(YT_CODE);
-});
+},);
 document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', (e) => {
     hideVolumeBlock(YT_CODE);
 });
@@ -597,6 +601,9 @@ document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', (e) => {
 });
 
 // tw-volume-controls
+document.querySelector('#twVolInputBlock').addEventListener('touchend', (e) => {
+    e.stopPropagation();
+});
 document.querySelector('#twVolMainBtn').addEventListener('touchend', (e) => {
     e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[TW_CODE]);
