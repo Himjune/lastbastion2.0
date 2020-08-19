@@ -577,15 +577,6 @@ function updVolumeBlock(id) {
 }
 
 // yt-volume-controls
-document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', (e) => {
-    updVolumeBlock(YT_CODE);
-});
-document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', (e) => {
-    hideVolumeBlock(YT_CODE);
-});
-document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', (e) => {
-    showVolumeBlock(YT_CODE);
-});
 document.querySelector('#ytVolMainBtn').addEventListener('touchend', (e) => {
     e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[YT_CODE]);
@@ -595,17 +586,17 @@ document.querySelector('#ytVolMainBtn').addEventListener('touchend', (e) => {
         ytMuteBtn(e);
     }
 });
+document.querySelector('#ytVolInputBlock').addEventListener('mouseenter', (e) => {
+    updVolumeBlock(YT_CODE);
+});
+document.querySelector('#ytVolInputBlock').addEventListener('mouseleave', (e) => {
+    hideVolumeBlock(YT_CODE);
+});
+document.querySelector('#ytVolMainBtn').addEventListener('mouseenter', (e) => {
+    showVolumeBlock(YT_CODE);
+});
 
 // tw-volume-controls
-document.querySelector('#twVolInputBlock').addEventListener('mouseenter', (e) => {
-    updVolumeBlock(TW_CODE);
-});
-document.querySelector('#twVolInputBlock').addEventListener('mouseleave', (e) => {
-    hideVolumeBlock(TW_CODE);
-});
-document.querySelector('#twVolMainBtn').addEventListener('mouseenter', (e) => {
-    showVolumeBlock(TW_CODE);
-});
 document.querySelector('#twVolMainBtn').addEventListener('touchend', (e) => {
     e.preventDefault();
     let inputBlock = document.querySelector(volBlockIds[TW_CODE]);
@@ -614,6 +605,15 @@ document.querySelector('#twVolMainBtn').addEventListener('touchend', (e) => {
     } else {
         twMuteBtn(e);
     }
+});
+document.querySelector('#twVolInputBlock').addEventListener('mouseenter', (e) => {
+    updVolumeBlock(TW_CODE);
+});
+document.querySelector('#twVolInputBlock').addEventListener('mouseleave', (e) => {
+    hideVolumeBlock(TW_CODE);
+});
+document.querySelector('#twVolMainBtn').addEventListener('mouseenter', (e) => {
+    showVolumeBlock(TW_CODE);
 });
 
 // set-volumes-common
