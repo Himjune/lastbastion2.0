@@ -550,7 +550,7 @@ function toggleFullScreen() {
 */
 let volHideTimers = [0,0];
 const volBlockIds = ['#twVolInputBlock','#ytVolInputBlock'];
-const HIDE_TIME = 2000;
+const HIDE_TIME = 3000;
 
 function showVolumeBlock(id) {
     let inputBlock = document.querySelector(volBlockIds[id]);
