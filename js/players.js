@@ -79,7 +79,7 @@ const playlist = [
 ]
 
 // get YT link
-let param = 'eVcMequS9vE';
+let param = '';
 if (param === '') param = util_get_query_param('yt');
 if (param === '') {
     let cur = Date.now()
@@ -103,7 +103,7 @@ yt_def_props.videoId = param;
 document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v=' + yt_def_props.videoId;
 
 // get TW link
-param = 'outbreak';
+param = '';
 if (param === '') param = util_get_query_param('tw');
 if (param !== '') tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
