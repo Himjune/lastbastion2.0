@@ -1,10 +1,13 @@
 const TW_CODE = 0;
 const YT_CODE = 1;
+
 const playerState = {
     playing: false,
 
     tw_is_ready: false,
-    yt_is_ready: false
+    yt_is_ready: false,
+
+    tw_is_online: true,
 }
 
 function tryReadyPlayers() {
@@ -105,7 +108,8 @@ document.querySelector('#goYtMainBtn').href = 'https://www.youtube.com/watch?v='
 // get TW link
 param = '';
 if (param === '') param = util_get_query_param('tw');
-if (param !== '') tw_def_props.channel = param;
+if (param === '') param = 'outbreak';
+tw_def_props.channel = param;
 document.querySelector('#goTwMainBtn').href = 'https://www.twitch.tv/' + tw_def_props.channel;
 document.querySelector('#chat_embed').src = 'https://www.twitch.tv/embed/' + param + '/chat?darkpopout&parent=himjune.github.io';
 
@@ -133,6 +137,14 @@ tw_player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, () => {
 });
 tw_player.addEventListener(Twitch.Player.PAUSE, () => {
     console.log('PAUSE');
+});
+tw_player.addEventListener(Twitch.Player.ONLINE, () => {
+    console.log('ONLINE');
+    playerState.tw_is_ready = true;
+});
+tw_player.addEventListener(Twitch.Player.OFFLINE, () => {
+    console.log('OFFLINE');
+    playerState.tw_is_ready = false;
 });
 
 function startYt() {
@@ -291,7 +303,7 @@ function watchDog() {
     let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
     let targetDiffAbs = Math.abs(targetDiff);
 
-    if (targetDiffAbs < DELAY_THRESHOLD) {
+    if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
     } else {
         // need to speed up
