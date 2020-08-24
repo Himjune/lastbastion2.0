@@ -140,11 +140,11 @@ tw_player.addEventListener(Twitch.Player.PAUSE, () => {
 });
 tw_player.addEventListener(Twitch.Player.ONLINE, () => {
     console.log('ONLINE');
-    playerState.tw_is_ready = true;
+    playerState.tw_is_online = true;
 });
 tw_player.addEventListener(Twitch.Player.OFFLINE, () => {
-    playerState.tw_is_ready = false;
-    console.log('OFFLINE', playerState.tw_is_ready);
+    playerState.tw_is_online = false;
+    console.log('OFFLINE', playerState.tw_is_online);
 });
 
 function startYt() {
