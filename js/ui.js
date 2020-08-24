@@ -771,12 +771,12 @@ syncBtnElement.addEventListener('click', () => {
 
 function updateSyncDisplay(newDelay) {
     let element = document.querySelector('#syncDelayDisplay');
-    let inline = 'YouTube ';
+    let inline = '';
     
     if (newDelay > 0.0) {
-        inline += 'ускорен на ';
+        inline += 'Ускорение: ';
     } else {
-        inline += 'задержан на ';
+        inline += 'Задержака: ';
     }
 
     inline += Math.abs(newDelay).toFixed(1) + 'с';
