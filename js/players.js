@@ -240,6 +240,10 @@ const timingStats = {
     extUTC: 0,
     extUTCts: 0,
 
+    netUTC: 0,
+    netUTCts: 0,
+    netUTCreq: 0,
+
     pressPlayTS: 0,
     
     twStartTS: 0,
@@ -267,15 +271,18 @@ function tsString(ts) {
 function watchDog() {
 
     /* time update
+    */
+   
+   timingStats.netUTCreq = Date.now();
     fetch('http://worldtimeapi.org/api/timezone/Etc/UTC')
         .then((response) => {
             return response.json();
         })
         .then((data) => {
             console.log('gotUTC', data);
-            timingStats.curUTC = data.unixtime;
+            timingStats.netUTC = data.unixtime*1000;
+            timingStats.netUTCts = Date.now();
         });
-    */
     //let cdate = new Date(timingStats.curUTC * 1000);
     
     timingStats.extUTC = Date.now();
@@ -342,6 +349,10 @@ function watchDog() {
     /*
         Stats display
     */
+
+    document.querySelector('#statsNetUTC').innerText = tsString(timingStats.netUTC);
+    document.querySelector('#statsNetUTCts').innerText = tsString(timingStats.netUTCts);
+    document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq);
 
     document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
     document.querySelector('#statsManRun').innerText = tsString(timingStats.pressPlayTS);
