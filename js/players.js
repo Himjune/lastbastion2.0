@@ -148,7 +148,7 @@ tw_player.addEventListener(Twitch.Player.ONLINE, () => {
 tw_player.addEventListener(Twitch.Player.OFFLINE, () => {
     playerState.tw_is_online = false;
     console.log('OFFLINE', playerState.tw_is_online);
-    maxTwOffline();
+    minTwOffline();
 });
 
 function startYt() {
