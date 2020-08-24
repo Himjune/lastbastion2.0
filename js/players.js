@@ -303,33 +303,32 @@ function watchDog() {
     let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
     let targetDiffAbs = Math.abs(targetDiff);
 
-    console.log('twState', playerState);
     if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
     } else {
         // need to speed up
         if  (timingStats.ytPlayerTime < timingStats.ytTarget) {
-            console.log('speedUp');
+            //console.log('speedUp');
             if (targetDiffAbs > HUGE_DIFF) {
-                console.log('seekToFast');
+                //console.log('seekToFast');
                 yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
-                console.log('veryToFast');
+                //console.log('veryToFast');
                 yt_player.setPlaybackRate(2);
             } else {
-                console.log('slowToFast');
+                //console.log('slowToFast');
                 yt_player.setPlaybackRate(1.5);
             }
         } else {    // need to slow down
-            console.log('slowDown');
+            //console.log('slowDown');
             if (targetDiffAbs > HUGE_DIFF) {
-                console.log('seekToBack');
+                //console.log('seekToBack');
                 yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
-                console.log('fastToBack');
+                //console.log('fastToBack');
                 yt_player.setPlaybackRate(0.25);
             } else {
-                console.log('slowToBack');
+                //console.log('slowToBack');
                 yt_player.setPlaybackRate(0.5);
             }
         }
