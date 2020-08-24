@@ -243,6 +243,7 @@ const timingStats = {
     netUTC: 0,
     netUTCts: 0,
     netUTCreq: 0,
+    netUTCdiff: 0,
 
     pressPlayTS: 0,
     
@@ -282,6 +283,7 @@ function watchDog() {
             console.log('gotUTC', data);
             timingStats.netUTC = data.unixtime*1000;
             timingStats.netUTCts = Date.now();
+            timingStats.netUTCdiff = timingStats.netUTCts-timingStats.netUTCreq;
         });
     //let cdate = new Date(timingStats.curUTC * 1000);
     
@@ -352,7 +354,7 @@ function watchDog() {
 
     document.querySelector('#statsNetUTC').innerText = tsString(timingStats.netUTC);
     document.querySelector('#statsNetUTCts').innerText = tsString(timingStats.netUTCts);
-    document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq);
+    document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq) + ' | diff: ' + timingStats.netUTCdiff;
 
     document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
     document.querySelector('#statsManRun').innerText = tsString(timingStats.pressPlayTS);
