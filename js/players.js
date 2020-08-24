@@ -303,6 +303,7 @@ function watchDog() {
     let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
     let targetDiffAbs = Math.abs(targetDiff);
 
+    console.log('twState', playerState);
     if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
     } else {
