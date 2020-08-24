@@ -141,6 +141,7 @@ tw_player.addEventListener(Twitch.Player.PAUSE, () => {
 tw_player.addEventListener(Twitch.Player.ONLINE, () => {
     console.log('ONLINE');
     playerState.tw_is_online = true;
+    tw_player.play();
 });
 tw_player.addEventListener(Twitch.Player.OFFLINE, () => {
     playerState.tw_is_online = false;
