@@ -359,6 +359,17 @@ registerMoveStartEvents();
 /*
     MINIMIZED
 */
+function minTwOffline() {
+    curPos = uiState.curSubPosition;
+    if (curPos.sub == TW_CODE && !curPos.isMinimized)
+        handleMinimization();
+}
+function maxTwOnline() {
+    curPos = uiState.curSubPosition;
+    if (curPos.sub == TW_CODE && curPos.isMinimized)
+        handleMinimization();
+}
+
 function toggleMinimization() {
     let container = document.querySelector('.sub-video-container');
     SUB_VIDEO_POS.isMinimized = toggleClass(container, 'sub-minimized');
@@ -375,9 +386,7 @@ function removeMinimization() {
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
 }
 
-document.querySelector('#subMinimizeBtn').addEventListener('click', function (e) {
-    e.preventDefault();
-
+function handleMinimization() {
     let container = document.querySelector('.sub-video-container');
 
     toggleMinimization();
@@ -391,7 +400,12 @@ document.querySelector('#subMinimizeBtn').addEventListener('click', function (e)
     container.addEventListener('touchstart', startMove);
     placeSubVideoContainer(container);
     makeRatioSize(container.querySelectorAll('.video-16-9')[0], 0.5625, false);
-})
+}
+
+document.querySelector('#subMinimizeBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    handleMinimization();
+});
 
 /*
     END MINIMIZED
