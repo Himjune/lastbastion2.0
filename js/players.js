@@ -274,7 +274,7 @@ function watchDog() {
     */
    
    timingStats.netUTCreq = Date.now();
-    fetch('http://worldtimeapi.org/api/timezone/Etc/UTC')
+    fetch('https://worldtimeapi.org/api/timezone/Etc/UTC')
         .then((response) => {
             return response.json();
         })
