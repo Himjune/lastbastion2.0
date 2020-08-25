@@ -356,6 +356,8 @@ function watchDog() {
 }
 
 function updateTimeStats() {
+    let targetDiff = timingStats.ytPlayerTime - timingStats.ytTarget;
+    
     document.querySelector('#statsNetUTC').innerText = tsString(timingStats.netUTC);
     document.querySelector('#statsNetUTCts').innerText = tsString(timingStats.netUTCts);
     document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq) + ' | diff: ' + timingStats.netUTCdiff;
