@@ -284,7 +284,7 @@ function handleSync() {
     let twPlayingDuration = Math.floor(tw_player.getCurrentTime() * 1000);
     if (twPlayingDuration > 0) {
         if (timingStats.twStartTS == 0)
-            timingStats.twStartTS = Date.now() - twPlayingDuration;
+            timingStats.twStartTS = timingStats.netUTC - twPlayingDuration;
         timingStats.twPlayingDuration = twPlayingDuration;
     }
 
@@ -375,8 +375,6 @@ function watchDog() {
             timingStats.corUTC = timingStats.netUTC - Math.floor(timingStats.netUTCdiff / 2);
             if (playerState.playing) handleSync();
         });
-
-
 
     setTimeout(updateTimeStats, 50);
 }
