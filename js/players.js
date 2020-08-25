@@ -262,6 +262,7 @@ const timingStats = {
     ytDelay: 0,
     ytTarget: 0,
 
+    isStable: false,
     tarTW: 0,
     tarYT: 0,
 }
@@ -310,9 +311,13 @@ function handleSync() {
 
     if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
-        timingStats.tarTW = timingStats.twPlayTimeTS;
-        timingStats.tarYT = timingStats.ytPlayerTime;
+        if (!timingStats.isStable) {
+            timingStats.isStable = true;
+            timingStats.tarTW = timingStats.twPlayTimeTS;
+            timingStats.tarYT = timingStats.ytPlayerTime;
+        }
     } else {
+        timingStats.isStable = false;
         // need to speed up
         if (timingStats.ytPlayerTime < timingStats.ytTarget) {
             //console.log('speedUp');
