@@ -354,10 +354,10 @@ function watchDog() {
             return {date: response.headers.get('date'), body: response.json()};
         })
         .then((resp) => {
-            console.log('gotTimings', resp.date, resp.body);
             extTimings = resp.body;
 
-            //timingStats.netUTC = data.unixtime * 1000;
+            timingStats.netUTC = Date.parse(resp.date);
+            console.log('reqDate', Date.parse(resp.date));
             timingStats.netUTCts = Date.now();
     
             timingStats.netUTCdiff = timingStats.netUTCts - timingStats.netUTCreq;
