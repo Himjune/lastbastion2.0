@@ -339,7 +339,7 @@ function handleSync() {
 
 var extTimings = {
     "is_valid": false,
-    "tw_timing":  0,
+    "tw_timing": 0,
     "yt_timing": 0
 }
 
@@ -347,23 +347,33 @@ function watchDog() {
 
     /* time update
     */
+    let reqHeaders = new Headers();
+    reqHeaders.append('pragma', 'no-cache');
+    reqHeaders.append('cache-control', 'no-store');
+
+    let reqCfg = {
+        method: 'GET',
+        headers: reqHeaders,
+    };
+
+    let reqURL = new Request('https://himjune.github.io/lastbastion2.0/api/timings.json');
 
     timingStats.netUTCreq = Date.now();
-    fetch('https://himjune.github.io/lastbastion2.0/api/timings.json')
+    fetch(reqURL, reqCfg)
         .then((response) => {
-            return {date: response.headers.get('date'), body: response.json()};
+            return { date: response.headers.get('date'), body: response.json() };
         })
         .then((resp) => {
             extTimings = resp.body;
 
-            timingStats.netUTC = Date.parse(resp.date);
-            console.log('reqDate', Date.parse(resp.date));
+            timingStats.netUTC = Date.parse(resp.date.split(', ')[1]);
+            console.log('reqDate', timingStats.netUTC);
             timingStats.netUTCts = Date.now();
-    
+
             timingStats.netUTCdiff = timingStats.netUTCts - timingStats.netUTCreq;
             timingStats.locUTCdiff = timingStats.locUTC - timingStats.netUTC;
 
-            timingStats.corUTC = timingStats.netUTC - Math.floor(timingStats.netUTCdiff/2);
+            timingStats.corUTC = timingStats.netUTC - Math.floor(timingStats.netUTCdiff / 2);
             if (playerState.playing) handleSync();
         });
 
