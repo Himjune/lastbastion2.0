@@ -349,7 +349,7 @@ function watchDog() {
     */
 
     timingStats.netUTCreq = Date.now();
-    fetch('https://worldtimeapi.org/api/timezone/Etc/UTC')
+    fetch('https://himjune.github.io/lastbastion2.0/api/timings.json')
         .then((response) => {
             return {headers: response.headers, body: response.json()};
         })
