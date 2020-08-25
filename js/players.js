@@ -351,7 +351,7 @@ function watchDog() {
     timingStats.netUTCreq = Date.now();
     fetch('https://himjune.github.io/lastbastion2.0/api/timings.json')
         .then((response) => {
-            console.log("vrd", response.headers);
+            console.log("vrd", response.headers.entries());
             return {headers: response.headers, body: response.json()};
         })
         .then((data) => {
