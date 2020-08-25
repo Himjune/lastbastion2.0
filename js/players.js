@@ -354,7 +354,7 @@ function watchDog() {
             return {headers: response.headers, body: response.json()};
         })
         .then((data) => {
-            console.log('gotTimings', data.headers, data.body);
+            console.log('gotTimings', data.headers.date, data.body);
             extTimings = data.body;
             console.log(extTimings);
 
