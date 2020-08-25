@@ -365,9 +365,8 @@ function watchDog() {
         })
         .then((resp) => {
             extTimings = resp.body;
-
+                                                       // Tue, 25 Aug 2020 16:03:35 GMT
             timingStats.netUTC = Date.parse(resp.date.split(', ')[1]);
-            console.log('reqDate', timingStats.netUTC);
             timingStats.netUTCts = Date.now();
 
             timingStats.netUTCdiff = timingStats.netUTCts - timingStats.netUTCreq;
