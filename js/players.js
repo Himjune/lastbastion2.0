@@ -175,7 +175,7 @@ function onPlayerStateChange(event) {
     if (ytPlayerState == 1) {
         if (timingStats.ytPlayerTimeFixed == 0)
             timingStats.ytStartTS = Date.now();
-            timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000); 
+        timingStats.ytPlayerTimeFixed = Math.floor(yt_player.getCurrentTime() * 1000);
     }
 }
 function onPlaybackQualityChange(event) {
@@ -239,14 +239,16 @@ function handleTwQuality(isMinimised = false, forced = "") {
 const timingStats = {
     extUTC: 0,
     extUTCts: 0,
+    extUTCdiff: 0,
 
     netUTC: 0,
     netUTCts: 0,
     netUTCreq: 0,
     netUTCdiff: 0,
+    corUTC: 0,
 
     pressPlayTS: 0,
-    
+
     twStartTS: 0,
     twPlayingDuration: 0,
     twPlayTimeTS: 0,
@@ -260,48 +262,50 @@ const timingStats = {
 }
 
 function updateYtDelay(diff) {
-    timingStats.ytDelay += diff*1000;
-    return timingStats.ytDelay/1000;
+    timingStats.ytDelay += diff * 1000;
+    return timingStats.ytDelay / 1000;
 }
 
 function tsString(ts) {
     let cDate = new Date(ts);
-    return ts + ' { '+cDate.toUTCString()+' }'
+    return ts + ' { ' + cDate.toUTCString() + ' }'
 }
 
 function watchDog() {
 
     /* time update
     */
-   
-   timingStats.netUTCreq = Date.now();
+
+    timingStats.netUTCreq = Date.now();
     fetch('https://worldtimeapi.org/api/timezone/Etc/UTC')
         .then((response) => {
             return response.json();
         })
         .then((data) => {
             console.log('gotUTC', data);
-            timingStats.netUTC = data.unixtime*1000;
+            timingStats.netUTC = data.unixtime * 1000;
             timingStats.netUTCts = Date.now();
-            timingStats.netUTCdiff = timingStats.netUTCts-timingStats.netUTCreq;
+            timingStats.netUTCdiff = timingStats.netUTCts - timingStats.netUTCreq;
+
+            timingStats.extUTCdiff = timingStats.extUTC - timingStats.netUTC;
         });
     //let cdate = new Date(timingStats.curUTC * 1000);
-    
+
     timingStats.extUTC = Date.now();
     timingStats.extUTCts = Date.now();
     timingStats.ytPlayerTime = Math.floor(yt_player.getCurrentTime() * 1000);
-    if (timingStats.ytTarget == 0 ) timingStats.ytTarget = timingStats.ytPlayerTime;
-    
+    if (timingStats.ytTarget == 0) timingStats.ytTarget = timingStats.ytPlayerTime;
+
     let twPlayingDuration = Math.floor(tw_player.getCurrentTime() * 1000);
     if (twPlayingDuration > 0) {
         if (timingStats.twStartTS == 0)
-            timingStats.twStartTS = Date.now()-twPlayingDuration;
+            timingStats.twStartTS = Date.now() - twPlayingDuration;
         timingStats.twPlayingDuration = twPlayingDuration;
     }
-    
+
     timingStats.twPlayTimeTS = timingStats.twStartTS + timingStats.twPlayingDuration;
 
-                            // initialYtPlayerTime + (diff between curTwTime and ytStart = how much tw played) + delay
+    // initialYtPlayerTime + (diff between curTwTime and ytStart = how much tw played) + delay
     timingStats.ytTarget = timingStats.ytPlayerTimeFixed + timingStats.twPlayTimeTS - timingStats.ytStartTS + timingStats.ytDelay;
 
 
@@ -313,18 +317,18 @@ function watchDog() {
     const HUGE_DIFF = 60000;
     const BIG_DIFF = 2000;
 
-    let targetDiff = timingStats.ytPlayerTime-timingStats.ytTarget;
+    let targetDiff = timingStats.ytPlayerTime - timingStats.ytTarget;
     let targetDiffAbs = Math.abs(targetDiff);
 
     if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
     } else {
         // need to speed up
-        if  (timingStats.ytPlayerTime < timingStats.ytTarget) {
+        if (timingStats.ytPlayerTime < timingStats.ytTarget) {
             //console.log('speedUp');
             if (targetDiffAbs > HUGE_DIFF) {
                 //console.log('seekToFast');
-                yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
+                yt_player.seekTo(Math.floor(timingStats.ytTarget / 1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
                 //console.log('veryToFast');
                 yt_player.setPlaybackRate(2);
@@ -336,7 +340,7 @@ function watchDog() {
             //console.log('slowDown');
             if (targetDiffAbs > HUGE_DIFF) {
                 //console.log('seekToBack');
-                yt_player.seekTo(Math.floor(timingStats.ytTarget/1000), true);
+                yt_player.seekTo(Math.floor(timingStats.ytTarget / 1000), true);
             } else if (targetDiffAbs > BIG_DIFF) {
                 //console.log('fastToBack');
                 yt_player.setPlaybackRate(0.25);
@@ -348,26 +352,27 @@ function watchDog() {
     }
 
 
-    /*
-        Stats display
-    */
+    setTimeout(updateTimeStats, 1);
+}
 
+function updateTimeStats() {
     document.querySelector('#statsNetUTC').innerText = tsString(timingStats.netUTC);
     document.querySelector('#statsNetUTCts').innerText = tsString(timingStats.netUTCts);
     document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq) + ' | diff: ' + timingStats.netUTCdiff;
 
-    document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC);
+    document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC) + ' | diff: ' + timingStats.extUTCdiff;;
     document.querySelector('#statsManRun').innerText = tsString(timingStats.pressPlayTS);
 
     document.querySelector('#statsCTwS').innerText = tsString(timingStats.twStartTS);
-    document.querySelector('#statsCTwP').innerText = timingStats.twPlayingDuration + '{'+Math.floor(timingStats.twPlayingDuration/60000)+'m'+Math.floor(timingStats.twPlayingDuration/1000)+'s'+'}';
+    document.querySelector('#statsCTwP').innerText = timingStats.twPlayingDuration + '{' + Math.floor(timingStats.twPlayingDuration / 60000) + 'm' + Math.floor(timingStats.twPlayingDuration / 1000) + 's' + '}';
     document.querySelector('#statsCTwR').innerText = tsString(timingStats.twPlayTimeTS);
 
     document.querySelector('#statsCYtS').innerText = tsString(timingStats.ytStartTS);
     document.querySelector('#statsCYtP').innerText = timingStats.ytPlayerTime;
     document.querySelector('#statsCYtF').innerText = timingStats.ytPlayerTimeFixed;
-    document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
+    document.querySelector('#statsCYtR').innerText = tsString(timingStats.ytPlayerTime - timingStats.ytPlayerTimeFixed + timingStats.ytStartTS);
 
-    document.querySelector('#statsCYtTR').innerText = tsString(timingStats.ytTarget-timingStats.ytPlayerTimeFixed+timingStats.ytStartTS);
-    document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yPlay:' + timingStats.ytPlayerTime + ' / yTar:' + timingStats.ytTarget + '{'+targetDiff+'}';
+    document.querySelector('#statsCYtTR').innerText = tsString(timingStats.ytTarget - timingStats.ytPlayerTimeFixed + timingStats.ytStartTS);
+    document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yPlay:' + timingStats.ytPlayerTime + ' / yTar:' + timingStats.ytTarget + '{' + targetDiff + '}';
+
 }
