@@ -353,10 +353,9 @@ function watchDog() {
         .then((response) => {
             return {date: response.headers.get('date'), body: response.json()};
         })
-        .then((data) => {
-            console.log('gotTimings', data.date, data.body);
-            extTimings = data.body;
-            console.log(extTimings);
+        .then((resp) => {
+            console.log('gotTimings', resp.date, resp.body);
+            extTimings = resp.body;
 
             //timingStats.netUTC = data.unixtime * 1000;
             timingStats.netUTCts = Date.now();
