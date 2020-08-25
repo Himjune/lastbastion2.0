@@ -16,6 +16,7 @@ const WDOG_INT = 500;
 function tryReadyPlayers() {
     if (playerState.yt_is_ready && playerState.tw_is_ready) {
         playersAreReadyNow();
+        playerState.watchDogInt = setInterval(watchDog, WDOG_INT);
     }
 }
 
@@ -209,15 +210,12 @@ function startPlayers() {
         playerState.playing = false;
         timingStats.ytPlayerTimeFixed = 0;
         timingStats.twStartTS = 0
-
-        clearInterval(playerState.watchDogInt);
     } else {
         tw_player.play();
         yt_player.playVideo();
 
         playerState.playing = true;
         timingStats.pressPlayTS = Date.now();
-        playerState.watchDogInt = setInterval(watchDog, WDOG_INT);
     }
 }
 
@@ -241,9 +239,9 @@ function handleTwQuality(isMinimised = false, forced = "") {
 
 // Here everything should be in milliseconds
 const timingStats = {
-    extUTC: 0,
-    extUTCts: 0,
-    extUTCdiff: 0,
+    locUTC: 0,
+    locUTCts: 0,
+    locUTCdiff: 0,
 
     netUTC: 0,
     netUTCts: 0,
@@ -278,8 +276,8 @@ function tsString(ts) {
 function handleSync() {
     //let cdate = new Date(timingStats.curUTC * 1000);
 
-    timingStats.extUTC = Date.now();
-    timingStats.extUTCts = Date.now();
+    timingStats.locUTC = Date.now();
+    timingStats.locUTCts = Date.now();
     timingStats.ytPlayerTime = Math.floor(yt_player.getCurrentTime() * 1000);
     if (timingStats.ytTarget == 0) timingStats.ytTarget = timingStats.ytPlayerTime;
 
@@ -339,6 +337,12 @@ function handleSync() {
     }
 }
 
+var extTimings = {
+    "is_valid": false,
+    "tw_timing":  0,
+    "yt_timing": 0
+}
+
 function watchDog() {
 
     /* time update
@@ -347,17 +351,21 @@ function watchDog() {
     timingStats.netUTCreq = Date.now();
     fetch('https://worldtimeapi.org/api/timezone/Etc/UTC')
         .then((response) => {
-            return response.json();
+            return {headers: response.headers, body: response.json()};
         })
         .then((data) => {
-            console.log('gotUTC', data);
-            timingStats.netUTC = data.unixtime * 1000;
+            console.log('gotTimings', data.headers, data.body);
+            extTimings = data.body;
+            console.log(extTimings);
+
+            //timingStats.netUTC = data.unixtime * 1000;
             timingStats.netUTCts = Date.now();
+    
             timingStats.netUTCdiff = timingStats.netUTCts - timingStats.netUTCreq;
+            timingStats.locUTCdiff = timingStats.locUTC - timingStats.netUTC;
 
-            timingStats.extUTCdiff = timingStats.extUTC - timingStats.netUTC;
-
-            handleSync();
+            timingStats.corUTC = timingStats.netUTC - Math.floor(timingStats.netUTCdiff/2);
+            if (playerState.playing) handleSync();
         });
 
 
@@ -372,7 +380,7 @@ function updateTimeStats() {
     document.querySelector('#statsNetUTCts').innerText = tsString(timingStats.netUTCts);
     document.querySelector('#statsNetUTCreq').innerText = tsString(timingStats.netUTCreq) + ' | diff: ' + timingStats.netUTCdiff;
 
-    document.querySelector('#statsUTC').innerText = tsString(timingStats.extUTC) + ' | diff: ' + timingStats.extUTCdiff;;
+    document.querySelector('#statsUTC').innerText = tsString(timingStats.locUTC) + ' | diff: ' + timingStats.locUTCdiff;;
     document.querySelector('#statsManRun').innerText = tsString(timingStats.pressPlayTS);
 
     document.querySelector('#statsCTwS').innerText = tsString(timingStats.twStartTS);
