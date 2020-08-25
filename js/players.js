@@ -261,6 +261,9 @@ const timingStats = {
 
     ytDelay: 0,
     ytTarget: 0,
+
+    tarTW: 0,
+    tarYT: 0,
 }
 
 function updateYtDelay(diff) {
@@ -307,6 +310,8 @@ function handleSync() {
 
     if (targetDiffAbs < DELAY_THRESHOLD || !playerState.tw_is_online) {
         yt_player.setPlaybackRate(1);
+        timingStats.tarTW = timingStats.twPlayTimeTS;
+        timingStats.tarYT = timingStats.ytPlayerTime;
     } else {
         // need to speed up
         if (timingStats.ytPlayerTime < timingStats.ytTarget) {
@@ -401,4 +406,5 @@ function updateTimeStats() {
     document.querySelector('#statsCYtTR').innerText = tsString(timingStats.ytTarget - timingStats.ytPlayerTimeFixed + timingStats.ytStartTS);
     document.querySelector('#statsCYtT').innerText = yt_player.getPlaybackRate() + ' | yPlay:' + timingStats.ytPlayerTime + ' / yTar:' + timingStats.ytTarget + '{' + targetDiff + '}';
 
+    document.querySelector('#statsTargets').innerText = ' | tw: ' + tsString(timingStats.tarTW) + ' | yt: ' + timingStats.tarYT;
 }
